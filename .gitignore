@@ -1,0 +1,16 @@
+# Eclipse
+.metadata/
+
+# Logs
+*.log
+
+# Builds
+bin/
+build/
+target/
+
+# Node (si tienes frontend)
+node_modules/
+
+# Windows
+Thumbs.db

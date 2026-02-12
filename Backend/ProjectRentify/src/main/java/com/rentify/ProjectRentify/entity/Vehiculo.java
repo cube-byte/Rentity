@@ -1,4 +1,4 @@
-package com.rentity.rentifyproject.entity;
+package com.rentify.ProjectRentify.entity;
 
 import java.math.BigDecimal;
 

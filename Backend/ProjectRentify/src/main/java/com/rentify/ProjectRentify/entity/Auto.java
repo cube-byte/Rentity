@@ -33,5 +33,5 @@ public class Auto {
 	private String color;
 	private long kilometraje;
 	private String estado;
-	
+	private Ubicacion ubicacion;
 }

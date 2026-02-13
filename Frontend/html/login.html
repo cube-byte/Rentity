@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viajes - Inicio de Sesión</title>
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+    <div class="background-overlay"></div>
+
+    <div class="login-container">
+        <div class="login-box">
+            <div class="login-header">
+                <div class="img-logo">
+                    <img src="../recursos/img/Rentity-Logo.png" alt="">
+                </div>
+                <h1>RENTITY</h1>
+                <p>Tu próxima aventura comienza aquí</p>
+            </div>
+
+            <form class="login-form">
+                <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder="Correo electrónico" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="password" id="password" name="password" placeholder="Contraseña" required>
+                </div>
+
+                <button type="submit" class="login-btn">
+                    INGRESAR
+                </button>
+
+                <div class="signup-link">
+                    ¿No tienes cuenta? <a href="./">Crear cuenta</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('.login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('¡Inicio de sesión exitoso!');
+        });
+    </script>
+</body>
+</html>

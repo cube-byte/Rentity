@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Rentity</title>
+    <link rel="stylesheet" href="../css/register.css">
+</head>
+<body>
+    <div class="background-overlay"></div>
+
+    <div class="register-container">
+        <div class="register-box">
+            <div class="register-header">
+                <div class="img-logo">
+                    <img src="../recursos/img/Rentity-Logo.png" alt="">
+                </div>
+                <h1>RENTITY</h1>
+                <p>Comienza tu aventura con nosotros</p>
+            </div>
+
+            <form class="register-form">
+                <!-- Información Personal -->
+                <div class="form-section">
+                    <h3>Información Personal</h3>
+                    
+                    <div class="form-group">
+                        <input type="text" id="nombre" name="nombre" placeholder="Nombre completo" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <select id="tipo-documento" name="tipo-documento" required>
+                                <option value="">Tipo de documento</option>
+                                <option value="dni">DNI</option>
+                                <option value="pasaporte">Pasaporte</option>
+                                <option value="ce">Carné de Extranjería</option>
+                            </select>
+                        </div>
+                        <div class="form-group half">
+                            <input type="text" id="numero-documento" name="numero-documento" placeholder="Número de documento" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="date" id="fecha-nacimiento" name="fecha-nacimiento" placeholder="Fecha de nacimiento" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="tel" id="telefono" name="telefono" placeholder="Teléfono" required>
+                    </div>
+                </div>
+
+                <!-- Licencia de Conducir -->
+                <div class="form-section">
+                    <h3>Licencia de Conducir</h3>
+                    
+                    <div class="form-group">
+                        <input type="text" id="licencia" name="licencia" placeholder="Número de licencia de conducir" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <input type="date" id="licencia-emision" name="licencia-emision" placeholder="Fecha de emisión" required>
+                        </div>
+                        <div class="form-group half">
+                            <input type="date" id="licencia-vencimiento" name="licencia-vencimiento" placeholder="Fecha de vencimiento" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <select id="clase-licencia" name="clase-licencia" required>
+                            <option value="">Clase de licencia</option>
+                            <option value="A-I">A-I (Motocicleta)</option>
+                            <option value="A-II">A-II (Motocicleta)</option>
+                            <option value="B-I">B-I (Automóvil)</option>
+                            <option value="B-II">B-II (Automóvil)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Cuenta -->
+                <div class="form-section">
+                    <h3>Cuenta</h3>
+                    
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Correo electrónico" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" id="password" name="password" placeholder="Contraseña" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirmar contraseña" required>
+                    </div>
+                </div>
+
+                <!-- Términos y Condiciones -->
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="terminos" name="terminos" required>
+                        <span>Acepto los <a href="#">términos y condiciones</a> y la <a href="#">política de privacidad</a></span>
+                    </label>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="newsletter" name="newsletter">
+                        <span>Deseo recibir ofertas y promociones</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="register-btn">
+                    CREAR CUENTA
+                </button>
+
+                <div class="login-link">
+                    ¿Ya tienes cuenta? <a href="#">Iniciar sesión</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('.register-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            
+            if (password !== confirmPassword) {
+                alert('Las contraseñas no coinciden');
+                return;
+            }
+            
+            const terminos = document.getElementById('terminos').checked;
+            if (!terminos) {
+                alert('Debes aceptar los términos y condiciones');
+                return;
+            }
+            
+            // Validar fecha de vencimiento de licencia
+            const vencimiento = new Date(document.getElementById('licencia-vencimiento').value);
+            const hoy = new Date();
+            
+            if (vencimiento < hoy) {
+                alert('La licencia de conducir está vencida');
+                return;
+            }
+            
+            alert('¡Registro exitoso!');
+        });
+    </script>
+</body>
+</html>

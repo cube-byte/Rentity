@@ -91,11 +91,8 @@ public class Ubicacion {
 		this.pais = pais;
 	}
 
-	/*
 	@OneToMany(mappedBy = "ubicacion")
-    private List<Departamento> departamentos;  // Aqui la clase de autos o vehiculos de acuerdo
-    											  a lo que se necesite en lugar de departametos
-	  */
+    private List<Auto> auto;
 	
     
     

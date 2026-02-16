@@ -2,6 +2,8 @@ package com.rentify.ProjectRentify.entity;
 
 
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,7 +18,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="tb_vehiculo")
+@Table(name="tb_auto")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,7 +29,7 @@ public class Auto {
 	@Column(name="id_auto")
 	private long auto;
 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(unique = true)
 	private String placa;
 	
     @ManyToOne
@@ -36,6 +38,15 @@ public class Auto {
 	
 	private String color;
 	private long kilometraje;
+	
+	
+	private LocalDateTime fecha_registro;
+	
 	private String estado;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_ubicacion")
+	private Ubicacion ubicacion;
+
 	
 }

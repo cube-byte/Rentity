@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Usuarios - Rentify Admin</title>
+    <link rel="stylesheet" href="../../css/layout.css">
+    <link rel="stylesheet" href="../../css/admin.css">
+    <link rel="stylesheet" href="../../css/usuarios.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo">
+            <img src="../../recursos/img/Rentity-Logo.png" alt="Logo">
+            <h1><b>Rentify</b> Admin</h1>
+        </div>
+
+        <nav>
+            <a href="Dashboard.html">Dashboard</a>
+            <a href="Autos.html">Autos</a>
+            <a href="Reservas.html">Reservas</a>
+            <a href="Usuarios.html">Usuarios</a>
+            <a href="../user/login.html">Cerrar Sesión</a>
+        </nav>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="admin-container">
+        <div class="page-header">
+            <div>
+                <h2>Gestión de Usuarios</h2>
+                <p class="page-subtitle">Administra los usuarios del sistema</p>
+            </div>
+            <button class="btn-primary" onclick="abrirModalNuevo()">
+                + Nuevo Usuario
+            </button>
+        </div>
+
+        <!-- Filtros y búsqueda -->
+        <div class="filters-section">
+            <div class="search-box">
+                <input type="text" id="searchUsuarios" placeholder="Buscar por nombre, email o documento..." class="search-input">
+            </div>
+            <div class="filter-group">
+                <select id="filterRol" class="filter-select">
+                    <option value="">Todos los roles</option>
+                    <option value="CLIENTE">Cliente</option>
+                    <option value="ADMINISTRADOR">Administrador</option>
+                </select>
+                <select id="filterEstado" class="filter-select">
+                    <option value="">Todos los estados</option>
+                    <option value="true">Activos</option>
+                    <option value="false">Inactivos</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Tabla de usuarios -->
+        <div class="table-container">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre Completo</th>
+                        <th>Email</th>
+                        <th>Documento</th>
+                        <th>Teléfono</th>
+                        <th>Licencia</th>
+                        <th>Rol</th>
+                        <th>Estado</th>
+                        <th>Fecha Registro</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="usuariosTableBody">
+                    <tr>
+                        <td colspan="10" class="loading-cell">Cargando usuarios...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Paginación -->
+        <div class="pagination">
+            <button class="pagination-btn" id="btnPrevious" disabled>← Anterior</button>
+            <span class="pagination-info" id="paginationInfo">Página 1 de 1</span>
+            <button class="pagination-btn" id="btnNext">Siguiente →</button>
+        </div>
+
+    </main>
+
+    <!-- MODAL PARA CREAR/EDITAR USUARIO -->
+    <div id="modalUsuario" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Nuevo Usuario</h3>
+                <button class="modal-close" onclick="cerrarModal()">&times;</button>
+            </div>
+            
+            <form id="formUsuario" class="modal-body">
+                <input type="hidden" id="usuarioId">
+                
+                <!-- Información Personal -->
+                <div class="form-section">
+                    <h4>Información Personal</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nombres">Nombres *</label>
+                            <input type="text" id="nombres" required maxlength="50">
+                        </div>
+                        <div class="form-group">
+                            <label for="apellidos">Apellidos *</label>
+                            <input type="text" id="apellidos" required maxlength="50">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="documento">Documento *</label>
+                            <input type="text" id="documento" required maxlength="12" pattern="[0-9]{8,12}">
+                            <small class="form-hint">8-12 dígitos numéricos</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="licencia">Licencia de Conducir *</label>
+                            <input type="text" id="licencia" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="telefono">Teléfono *</label>
+                            <input type="tel" id="telefono" required maxlength="9" pattern="[0-9]{9}">
+                            <small class="form-hint">9 dígitos</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" required maxlength="100">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Configuración de Cuenta -->
+                <div class="form-section">
+                    <h4>Configuración de Cuenta</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="password">Contraseña <span id="passwordRequired">*</span></label>
+                            <input type="password" id="password" minlength="6">
+                            <small class="form-hint" id="passwordHint">Mínimo 6 caracteres</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="rol">Rol *</label>
+                            <select id="rol" required>
+                                <option value="">Seleccionar rol</option>
+                                <option value="CLIENTE">Cliente</option>
+                                <option value="ADMINISTRADOR">Administrador</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="activo" checked>
+                            <span>Usuario activo</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="cerrarModal()">Cancelar</button>
+                    <button type="submit" class="btn-primary" id="btnGuardar">Guardar Usuario</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL DE CONFIRMACIÓN PARA ELIMINAR -->
+    <div id="modalConfirmar" class="modal">
+        <div class="modal-content modal-small">
+            <div class="modal-header">
+                <h3>Confirmar Eliminación</h3>
+                <button class="modal-close" onclick="cerrarModalConfirmar()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas eliminar este usuario?</p>
+                <p class="text-warning">Esta acción no se puede deshacer.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="cerrarModalConfirmar()">Cancelar</button>
+                <button class="btn-danger" onclick="confirmarEliminar()">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../js/admin-usuarios.js"></script>
+
+</body>
+</html>

@@ -5,7 +5,8 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -21,8 +22,9 @@ import lombok.NoArgsConstructor;
 public class Vehiculo {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_vehiculo", unique = true, nullable = false)
-	private long vehiculo;
+	private Long vehiculo;
 	
 
 	private String marca;
@@ -36,7 +38,4 @@ public class Vehiculo {
 	private BigDecimal precio;
 	private String estado;
 	private String imagen;
-	
-    @OneToMany(mappedBy = "vehiculo")
-    private List<Auto> autos;
 }

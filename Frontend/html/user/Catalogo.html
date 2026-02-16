@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogo</title>
+    <link rel="stylesheet" href="/Frontend/css/layout.css">
+        <link rel="stylesheet" href="/Frontend/css/catalogo.css">
+</head>
+<body>
+    <header style="position: relative;">
+        <div class="logo">
+            <img src="/Frontend/recursos/img/Rentity-Logo.png" alt="">
+            <h1>RENTITY</h1>
+        </div>
+        <nav>
+            <a href="../index.html">Dashboard</a>
+            <a href="./catalogo.html">Vehiculos</a>
+            <a href="/fontend/html/nosotros.html">Nosotros</a>
+            <a href="/fontend/html/contacto.html">Contacto</a>
+            <a href="/fontend/html/tiendas.html">Tiendas</a>
+            <a href="">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                </svg>
+                <h2></h2> 
+            </a>
+        </nav>
+    </header>
+    <div class="catalog-banner">
+            <img src="/Frontend/recursos/img/banners/catalogo_banner.jpg" alt="">
+    </div>
+    <div class="container">
+        <div class="breadcrumb">
+            Inicio
+        </div>   
+        <div class="main-content">
+                    <aside class="sidebar">
+            <h2>MODELOS</h2>
+            
+            <!-- CATEGORIA -->
+            <div class="filter-section">
+                <div class="filter-header" onclick="toggleFilter(this)">
+                    <span>CATEGORIA</span>
+                    <span class="chevron">▼</span>
+                </div>
+                <div class="filter-options">
+                    <div class="filter-option">
+                        <input type="checkbox" id="cat-autos" value="AUTOS" onchange="aplicarFiltros()">
+                        <label for="cat-autos">Autos <span class="filter-count">(15)</span></label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="cat-suvs" value="SUVS" onchange="aplicarFiltros()">
+                        <label for="cat-suvs">SUVs <span class="filter-count">(23)</span></label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="cat-camionetas" value="CAMIONETAS" onchange="aplicarFiltros()">
+                        <label for="cat-camionetas">Camionetas <span class="filter-count">(12)</span></label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="cat-electricos" value="ELECTRICOS" onchange="aplicarFiltros()">
+                        <label for="cat-electricos">Eléctricos <span class="filter-count">(8)</span></label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MARCAS -->
+            <div class="filter-section">
+                <div class="filter-header" onclick="toggleFilter(this)">
+                    <span>MARCAS</span>
+                    <span class="chevron">▼</span>
+                </div>
+                <div class="filter-options">
+
+                </div>
+            </div>
+
+            <!-- AÑO -->
+            <div class="filter-section">
+                <div class="filter-header" onclick="toggleFilter(this)">
+                    <span>AÑO</span>
+                    <span class="chevron">▼</span>
+                </div>
+                <div class="filter-options">
+
+                </div>
+            </div>
+
+            <!-- CARROCERÍA -->
+            <div class="filter-section">
+                <div class="filter-header" onclick="toggleFilter(this)">
+                    <span>CARROCERÍA</span>
+                    <span class="chevron">▼</span>
+                </div>
+                <div class="filter-options">
+                    <div class="filter-option">
+                        <input type="checkbox" id="car-sedan" value="SEDAN" onchange="aplicarFiltros()">
+                        <label for="car-sedan">Sedán</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="car-suv" value="SUV" onchange="aplicarFiltros()">
+                        <label for="car-suv">SUV</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="car-hatchback" value="HATCHBACK" onchange="aplicarFiltros()">
+                        <label for="car-hatchback">Hatchback</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="car-pickup" value="PICKUP" onchange="aplicarFiltros()">
+                        <label for="car-pickup">Pick-up</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COMBUSTIBLE -->
+            <div class="filter-section">
+                <div class="filter-header" onclick="toggleFilter(this)">
+                    <span>COMBUSTIBLE</span>
+                    <span class="chevron">▼</span>
+                </div>
+                <div class="filter-options">
+                    <div class="filter-option">
+                        <input type="checkbox" id="comb-gasolina" value="GASOLINA" onchange="aplicarFiltros()">
+                        <label for="comb-gasolina">Gasolina</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="comb-diesel" value="DIESEL" onchange="aplicarFiltros()">
+                        <label for="comb-diesel">Diésel</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="comb-hibrido" value="HIBRIDO" onchange="aplicarFiltros()">
+                        <label for="comb-hibrido">Híbrido</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="comb-electrico" value="ELECTRICO" onchange="aplicarFiltros()">
+                        <label for="comb-electrico">Eléctrico</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BOTONES -->
+            <div class="filter-actions">
+                <button class="btn-limpiar" onclick="limpiarFiltros()">Limpiar Todo</button>
+            </div>
+        </aside>
+            <main class="catalog">
+                <div class="catalog-header">
+                    <select class="sort-select">
+                        <option>Recomendado</option>
+                        <option>Precio: Menor a Mayor</option>
+                        <option>Precio: Mayor a Menor</option>
+                        <option>Más Nuevo</option>
+                    </select>
+                </div>
+                <div class="cars-grid" id="lista-catalogo">
+                    <!--<div class="car-card">
+                        <div class="car-image">
+                            <img src="../img/items/car_Toyota_rav4 hybrid.jpg" alt="Sportage NQ5">
+                        </div>
+                        <div class="car-info">
+                            <h4 class="car-marca">TOYOTA</h4>
+                            <h3 class="car-modelo">RAV4 HYBRID</h3>
+                            
+                            <div class="color-options">
+                                <div class="color-dot color-white"></div>
+                                <div class="color-dot color-gray"></div>
+                                <div class="color-dot color-black"></div>
+                            </div>
+
+                            <div class="car-pricing">
+                                <div class="original-price">
+                                    USD 54,780 <span class="crossed-price">o S/182.580</span>
+                                </div>
+                                <div class="current-price">
+                                    Desde USD $32,780 o S/ 123.580
+                                </div>
+                            </div>
+
+                            <div class="car-buttons">
+                                <button class="button-v2 btn-primary">RESERVAR</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="car-card">
+                        <div class="car-image">
+                            <img src="../img/items/Car_Nissan_sentra.jpg" alt="Sportage NQ5">
+                        </div>
+                        <div class="car-info">
+                            <h4 class="car-marca">NISSAN</h4>
+                            <h3 class="car-modelo">SENTRA</h3>
+                            
+                            <div class="color-options">
+                                <div class="color-dot color-white"></div>
+                                <div class="color-dot color-gray"></div>
+                                <div class="color-dot color-black"></div>
+                            </div>
+
+                            <div class="car-pricing">
+                                <div class="original-price">
+                                    USD 28,120 <span class="crossed-price">o S/ 132.730</span>
+                                </div>
+                                <div class="current-price">
+                                    Desde US $24,430 o S/ 84.064
+                                </div>
+                            </div>
+
+                            <div class="car-buttons">
+                                <button class="button-v2 btn-primary">RESERVAR</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="car-card">
+                        <div class="car-image">
+                            <img src="../img/items/car_Mazda_mazda3.jpg" alt="Sportage NQ5">
+                        </div>
+                        <div class="car-info">
+                            <h4 class="car-marca">MAZDA</h4>
+                            <h3 class="car-modelo">Mazda 3 Sport</h3>
+                            
+                            <div class="color-options">
+                                <div class="color-dot color-white"></div>
+                                <div class="color-dot color-red"></div>
+                                <div class="color-dot color-black"></div>
+                                <div class="color-dot color-blue"></div>
+                            </div>
+
+                            <div class="car-pricing">
+                                <div class="original-price">
+                                    USD  32,200 <span class="crossed-price">o S/ 110.020</span>
+                                </div>
+                                <div class="current-price">
+                                    Desde US $26,190 O S/ 94.284
+                                </div>
+                            </div>
+
+                            <div class="car-buttons">
+                                <button class="button-v2 btn-primary">RESERVAR</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="car-card">
+                        <div class="car-image">
+                            <img src="../img/items/car_KIA_rio.jpg" alt="Sportage NQ5">
+                        </div>
+                        <div class="car-info">
+                            <h4 class="car-marca">KIA</h4>
+                            <h3 class="car-modelo">Rio Sedan</h3>
+                            
+                            <div class="color-options">
+                                <div class="color-dot color-white"></div>
+                                <div class="color-dot color-gray"></div>
+                                <div class="color-dot color-black"></div>
+                            </div>
+
+                            <div class="car-pricing">
+                                <div class="original-price">
+                                    USD 15,900 <span class="crossed-price">o S/ 62,100</span>
+                                </div>
+                                <div class="current-price">
+                                    Desde US $13,490 o S/ 53.286
+                                </div>
+                            </div>
+
+                            <div class="car-buttons">
+                                <button class="button-v2 btn-primary">RESERVAR</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="car-card">
+                        <div class="car-image">
+                            <img src="../img/items/Car_Toyota_corolla.jpg" alt="Sportage NQ5">
+                        </div>
+                        <div class="car-info">
+                            <h4 class="car-marca">TOYOTA</h4>
+                            <h3 class="car-modelo">Corolla Cross</h3>
+                            
+                            <div class="color-options">
+                                <div class="color-dot color-white"></div>
+                                <div class="color-dot color-gray"></div>
+                                <div class="color-dot color-black"></div>
+                            </div>
+
+                            <div class="car-pricing">
+                                <div class="original-price">
+                                    USD 32,100 <span class="crossed-price">o S/ 123,712</span>
+                                </div>
+                                <div class="current-price">
+                                    Desde US $26,140 o S/ 98,547
+                                </div>
+                            </div>
+
+                            <div class="car-buttons">
+                                <button class="button-v2 btn-primary">RESERVAR</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="car-card">
+                        <div class="car-image">
+                            <img src="../img/items/car_Mazda_CX-5 TOURING.jpg" alt="Mazda CX-5">
+                        </div>
+                        <div class="car-info">
+                            <h4 class="car-marca">MAZDA</h4>
+                            <h3 class="car-modelo">CX-5 TOURING</h3>
+
+                            <div class="color-options">
+                                <div class="color-dot color-red"></div>
+                                <div class="color-dot color-gray"></div>
+                                <div class="color-dot color-black"></div>
+                            </div>
+
+                            <div class="car-pricing">
+                                <div class="original-price">
+                                    USD 36,490 <span class="crossed-price">o S/ 143,961</span>
+                                </div>
+                                <div class="current-price">
+                                    Desde US $34,990 o S/ 137,861
+                                </div>
+                            </div>
+
+                            <div class="car-buttons">
+                                <button class="button-v2 btn-primary">RESERVAR</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="car-card">
+                        <div class="car-image">
+                            <img src="../img/items/car_Hyundai_TUCSON HYBRID.jpg" alt="Hyundai Tucson Hybrid">
+                        </div>
+                        <div class="car-info">
+                            <h4 class="car-marca">HYUNDAI</h4>
+                            <h3 class="car-modelo">TUCSON HYBRID</h3>
+
+                            <div class="color-options">
+                                <div class="color-dot color-blue"></div>
+                                <div class="color-dot color-white"></div>
+                                <div class="color-dot color-black"></div>
+                            </div>
+
+                            <div class="car-pricing">
+                                <div class="original-price">
+                                    USD 39,990 <span class="crossed-price">o S/ 157,861</span>
+                                </div>
+                                <div class="current-price">
+                                    Desde US $37,990 o S/ 149,961
+                                </div>
+                            </div>
+
+                            <div class="car-buttons">
+                                <button class="button-v2 btn-primary">RESERVAR</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="car-card">
+                        <div class="car-image">
+                            <img src="../img/items/car_KIA_NIRO EV.jpg" alt="Kia Niro EV">
+                        </div>
+                        <div class="car-info">
+                            <h4 class="car-marca">KIA</h4>
+                            <h3 class="car-modelo">NIRO EV</h3>
+
+                            <div class="color-options">
+                                <div class="color-dot color-green"></div>
+                                <div class="color-dot color-white"></div>
+                                <div class="color-dot color-gray"></div>
+                            </div>
+
+                            <div class="car-pricing">
+                                <div class="original-price">
+                                    USD 42,990 <span class="crossed-price">o S/ 169,861</span>
+                                </div>
+                                <div class="current-price">
+                                    Desde US $40,990 o S/ 161,861
+                                </div>
+                            </div>
+
+                            <div class="car-buttons">
+                                <button class="button-v2 btn-primary">RESERVAR</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="car-card">
+                        <div class="car-image">
+                            <img src="../img/items/car_Cupra_Formentor.jpg" alt="Sportage NQ5">
+                        </div>
+                        <div class="car-info">
+                            <h4 class="car-marca">CUPRA</h4>
+                            <h3 class="car-modelo">Formentor</h3>
+                            
+                            <div class="color-options">
+                                <div class="color-dot color-brown"></div>
+                                <div class="color-dot color-gray"></div>
+                                <div class="color-dot color-black"></div>
+                            </div>
+
+                            <div class="car-pricing">
+                                <div class="original-price">
+                                    USD 43,990 <span class="crossed-price">o S/ 173,761</span>
+                                </div>
+                                <div class="current-price">
+                                    Desde US $44,490 o S/ 168,617
+                                </div>
+                            </div>
+
+                            <div class="car-buttons">
+                                <button class="button-v2 btn-primary">RESERVAR</button>
+                            </div>
+                        </div>
+                    </div>-->
+
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

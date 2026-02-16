@@ -7,6 +7,7 @@ import com.rentify.ProjectRentify.entity.Region;
 import com.rentify.ProjectRentify.repository.RegionRepository;
 import com.rentify.ProjectRentify.service.RegionService;
 
+@Service
 public class RegionServiceImpl implements RegionService {
 	
 	@Autowired

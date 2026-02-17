@@ -1,5 +1,5 @@
 // Configuración de la API
-const API_URL = 'http://localhost:8080/api/admin';
+const API_URL = 'http://localhost:9090/api/admin';
 let currentPage = 0;
 const pageSize = 10;
 let totalPages = 1;

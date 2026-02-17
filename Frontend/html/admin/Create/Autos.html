@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Autos System</title>
+    <title>Crear Auto ✅</title>
     <link rel="stylesheet" href="/Frontend/css/admin/layout.css">
-    <link rel="stylesheet" href="/Frontend/css/admin/autos.css">
-    <link rel="stylesheet" href="/Frontend/css/admin/table.css">
+    <link rel="stylesheet" href="/Frontend/css/admin/layout_2.css">
+    <link rel="stylesheet" href="/Frontend/css/admin/vehiculo_create.css">
 </head>
 <body>
     <nav class="navegador">
@@ -30,12 +30,6 @@
                     <li>
                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#000000" viewBox="0 0 256 256"><path d="M240,104H229.2L201.42,41.5A16,16,0,0,0,186.8,32H69.2a16,16,0,0,0-14.62,9.5L26.8,104H16a8,8,0,0,0,0,16h8v80a16,16,0,0,0,16,16H64a16,16,0,0,0,16-16V184h96v16a16,16,0,0,0,16,16h24a16,16,0,0,0,16-16V120h8a8,8,0,0,0,0-16ZM69.2,48H186.8l24.89,56H44.31ZM64,200H40V184H64Zm128,0V184h24v16Zm24-32H40V120H216ZM56,144a8,8,0,0,1,8-8H80a8,8,0,0,1,0,16H64A8,8,0,0,1,56,144Zm112,0a8,8,0,0,1,8-8h16a8,8,0,0,1,0,16H176A8,8,0,0,1,168,144Z"></path></svg>
                         Vehiculos
-                    </li>
-                </a>
-                <a href="/Frontend/html/admin/Autos.html">
-                    <li>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#000000" viewBox="0 0 256 256"><path d="M240,104H229.2L201.42,41.5A16,16,0,0,0,186.8,32H69.2a16,16,0,0,0-14.62,9.5L26.8,104H16a8,8,0,0,0,0,16h8v80a16,16,0,0,0,16,16H64a16,16,0,0,0,16-16V184h96v16a16,16,0,0,0,16,16h24a16,16,0,0,0,16-16V120h8a8,8,0,0,0,0-16ZM69.2,48H186.8l24.89,56H44.31ZM64,200H40V184H64Zm128,0V184h24v16Zm24-32H40V120H216ZM56,144a8,8,0,0,1,8-8H80a8,8,0,0,1,0,16H64A8,8,0,0,1,56,144Zm112,0a8,8,0,0,1,8-8h16a8,8,0,0,1,0,16H176A8,8,0,0,1,168,144Z"></path></svg>
-                        Autos
                     </li>
                 </a>
                 <a href="">
@@ -87,98 +81,168 @@
             <div class="guia">
                 <h2 class="main-guia">Dashboard</h2>
                 <h2>/</h2>
-                <h2 class="sub-guia">Productos</h2>
+                <h2 class="sub-guia">Vehiculos</h2>
                 <h2>/</h2>
                 <h2 class="sub-guia">Autos</h2>
+                <h2>/</h2>
+                <h2 class="sub-guia">Añadir</h2>
             </div>
             <div class="title">
-                <h1>Lista de Autos</h1>
+                <h1>Crear Nuevo Auto</h1>
             </div>
-            <div style="display: flex;flex-direction: row-reverse;justify-content: space-between; margin-bottom: 20px;">
-                <div class="list-header">
-                    <a class="buttom-create" href="../admin/Create/Autos.html">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#000000" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"></path></svg>
-                        <h2>Crear nuevo</h2>
-                    </a>
-                </div>
-                <div class="filtros-autos">
-                    <select id="filtroVehiculos">
-                        <option value="">Todos los vehiculos</option>
-                    </select>
+            <div class="create-section">
+                    <form id="formAuto" style="display:flex;flex-direction:column;gap:14px;">
 
-                    <select id="filtroDisponibilidad">
-                        <option value="">Todos</option>
-                        <option value="DISPONIBLE">DISPONIBLE</option>
-                        <option value="OCUPADO">OCUPADO</option>
-                    </select>
+                        <div class="from-flex">
+                            <div class="form-body">
+                                <div>
+                                    <label>Placa *</label>
+                                    <input type="text" id="inputPlaca" placeholder="ABC-123" required>
+                                </div>
+                                <!-- VEHICULO (RELACIÓN) -->
+                                <div>
+                                    <label>Vehículo *</label>
+                                    <select id="selectVehiculo" required>
+                                    <option value="">Cargando vehículos...</option>
+                                    </select>
+                                </div>
 
-                    <input
-                        type="text"
-                        id="buscadorPlaca"
-                        placeholder="Buscar placa..."
-                    />
-                </div>
-            </div>
-            <div class="tabla" >
-                <table>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Placa</th>
-                            <th>Vehiculo</th>
-                            <th>Color</th>
-                            <th>Kilometraje</th>
-                            <th>Fecha</th>
-                            <th>Estado</th>
-                            <th>Ubicacion</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbodyAutos">
-                        <tr>
-                            <td>1</td>
-                            <td>OUT-120</td>
-                            <td>COROLLA TOYOTA 2023</td>
-                            <td>BLANCO</td>
-                            <td>12-2-2023</td>
-                            <td style="justify-items: center;">
-                                <div class="estado-text disponible">
-                                    <h5>DISPONIBLE</h5>
+                                <div>
+                                    <label>Color *</label>
+                                    <input type="text" id="inputColor" placeholder="Rojo" required>
                                 </div>
-                            </td>
-                            <td>
-                                <div class="buttons-table">
-                                    <a class="button-crud btn-edit" href="">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#000000" viewBox="0 0 256 256"><path d="M227.31,73.37,182.63,28.68a16,16,0,0,0-22.63,0L36.69,152A15.86,15.86,0,0,0,32,163.31V208a16,16,0,0,0,16,16H92.69A15.86,15.86,0,0,0,104,219.31L227.31,96a16,16,0,0,0,0-22.63ZM92.69,208H48V163.31l88-88L180.69,120ZM192,108.68,147.31,64l24-24L216,84.68Z"></path></svg>
-                                    </a>
-                                    <a class="button-crud btn-delete" href="">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#000000" viewBox="0 0 256 256"><path d="M216,48H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM192,208H64V64H192ZM80,24a8,8,0,0,1,8-8h80a8,8,0,0,1,0,16H88A8,8,0,0,1,80,24Z"></path></svg>
-                                    </a>
+
+                                <div>
+                                    <label>Kilometraje *</label>
+                                    <input type="number" id="inputKilometraje" placeholder="12000" min="0" required>
                                 </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+
+                                <div>
+                                    <label>Ubicación</label>
+                                    <input type="text" id="inputUbicacion" placeholder="Lima - Sede Central">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="btnCrearAuto">Crear Auto</button>
+                    </form>
             </div>
         </section>
     </div>
-
-
-    <div id="modalDelete" class="modal-delete hidden">
-        <div class="modal-content">
-            <h3>¿Eliminar este Auto?</h3>
-
-            <p>
-            <strong id="deletePlaca"></strong>
-            <span id="deleteVehiculo"></span>
-            </p>
-
-            <div class="modal-actions">
-            <button id="btnCancelDelete" class="btn-cancel">Cancelar</button>
-            <button id="btnConfirmDelete" class="btn-confirm-delete">Eliminar</button>
+    <!--<div class="container">
+        <section class="container-top">
+            <div class="perfil">
+                <div class="perfil-correo">
+                    <h1 class="correo">testpeakmootors@test.com</h1>
+                    <h1 class="rango">TEST</h1>
+                </div>
+                <div class="perfil-img">
+                    <img src="/fontend/img/recurse/extra/person-icon.webp" alt="">
+                </div>
             </div>
-        </div>
-    </div>
+        </section>
+        <section class="container-body">
+            <div class="guia">
+                <h2 class="main-guia">Dashboad</h2> <h2>/</h2> <h2 class="sub-guia">Productos</h2> <h2>/</h2> <h2 class="sub-guia">Añadir</h2>
+            </div>
+            <div class="title">
+                <h1>Crear Nuevo Producto</h1>
+            </div>
+            <div class="create-section">
+                <div class="total">
+                    <div class="total-img">
+                        <img src="" alt="Imagen de la marca">
+                    </div>
+                    <div class="total-title">
+                        <h2> MARCA </h2> + <h2> NOMBRE DEL MODELO </h2> + <h3> AÑO </h3>
+                    </div>
+                </div>
+                <form action="">
+                    <div class="marca">
+                        <label>Marca: </label>
+                        <input type="text" name="" id="" placeholder="Toyota">
+                    </div>
+                    <div class="modelo">
+                        <label>Modelo: </label>
+                        <input type="text" name="" id="" placeholder="RAV4">
+                    </div>
+                    <div class="version">
+                        <label>Version: </label>
+                        <input type="text" name="" id="" placeholder="Hybrid Limited">
+                    </div>
+                    <div class="year">
+                        <label>Año: </label>
+                        <input type="number" name="" id="" placeholder="2022">
+                    </div>
+                    <div class="categoria">
+                        <label>Categoria: </label>
+                        <select id="categoria" name="categoria">
+                            <option value="">Seleccione una categoría</option>
+                            <option value="AUTO">AUTOS</option>
+                            <option value="SUV">SUVS</option>
+                            <option value="CAMIONETA">CAMIONETAS</option>
+                            <option value="ELECTRICO">ELECTRICOS</option>
+                        </select>
+                    </div>
+                    <div class="carroceria">
+                        <label>Carroceria: </label>
+                        <input type="text" name="" id="" placeholder="SUV">
+                    </div>
+                    <div class="combustible">
+                        <label>Combustible: </label>
+                        <select name="combustible">
+                            <option value="GASOLINA">Gasolina</option>
+                            <option value="DIESEL">Diésel</option>
+                            <option value="HIBRIDO">Híbrido</option>
+                            <option value="ELECTRICO">Eléctrico</option>
+                        </select>
+                    </div>
+                    <div class="transmision">
+                        <label>Transmicion: </label>
+                        <select name="transmision">
+                            <option value="MANUAL">Manual</option>
+                            <option value="AUTOMATICA">Automática</option>
+                        </select>
+                    </div>
+                    <div class="motor">
+                        <label>Motor: </label>
+                        <input type="text" name="" id="" placeholder="2.5L">
+                    </div>
+                    <div class="kilometraje">
+                        <label>KM: </label>
+                        <input type="number" name="" id="" placeholder="0">
+                    </div>
+                    <div class="descripcion">
+                        <label>Descripcion: </label>
+                        <textarea name="" id="" placeholder="Descripcion corta"></textarea>
+                    </div>
+                    <div class="fecha_registro">
+                        <label>Fecha Registrada: </label>
+                        <input type="datetime-local" name="" id="">
+                    </div>
+                    <div class="precio">
+                        <label>Precio: </label>
+                        <input type="number" name="" id="" placeholder="148900">
+                    </div>
+                    <div class="stock">
+                        <label for="">Stock: </label>
+                        <input type="number" name="" id="" placeholder="12">
+                    </div>
+                    <div class="estado">
+                        <label for="">Estado: </label>
+                        <select name="estado">
+                            <option value="DISPONIBLE">Disponible</option>
+                            <option value="RESERVADO">Reservado</option>
+                            <option value="VENDIDO">Vendido</option>
+                        </select>
+                    </div>
 
-    <script src="/Frontend/js/listAutos.js"></script>
+                    <button type="button">Crear</button>
+                </form>
+            </div>
+        </section>
+    </div>-->
+
+    <script src="/Frontend/js/extras/cargar_vehiculos.js"></script>
+    <script src="/Frontend/js/createAuto.js"></script>
 </body>
 </html>

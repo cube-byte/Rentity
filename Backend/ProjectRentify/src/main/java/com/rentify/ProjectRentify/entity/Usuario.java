@@ -1,3 +1,4 @@
+
 package com.rentify.ProjectRentify.entity;
 
 import jakarta.persistence.*;

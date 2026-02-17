@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 import com.rentify.ProjectRentify.dto.AutoCreateDTO;
 import com.rentify.ProjectRentify.dto.AutoUpdateDTO;
 import com.rentify.ProjectRentify.entity.Auto;
+import com.rentify.ProjectRentify.entity.Ubicacion;
 import com.rentify.ProjectRentify.entity.Vehiculo;
 import com.rentify.ProjectRentify.repository.AutoRepository;
+import com.rentify.ProjectRentify.repository.UbicacionRepository;
 import com.rentify.ProjectRentify.repository.VehiculoRepository;
 import com.rentify.ProjectRentify.service.AutoService;
 
@@ -23,6 +25,7 @@ public class AutoImpl implements AutoService {
 
     private final AutoRepository repoAuto;
     private final VehiculoRepository repoVehiculo;
+    private final UbicacionRepository repoUbicacion;
 
     @Override
     public List<Auto> listar() {
@@ -33,6 +36,12 @@ public class AutoImpl implements AutoService {
     private Vehiculo obtenerVehiculo(Long idVehiculo) {
         return repoVehiculo.findById(idVehiculo)
                 .orElseThrow(() -> new RuntimeException("Vehiculo no encontrado"));
+    }
+    
+    
+    private Ubicacion obtenerUbicacion(Long idUbicacion) {
+        return repoUbicacion.findById(idUbicacion)
+                .orElseThrow(() -> new RuntimeException("Ubicación no encontrada"));
     }
     
     @Override
@@ -46,6 +55,7 @@ public class AutoImpl implements AutoService {
         auto.setKilometraje(dto.getKilometraje());
         auto.setEstado("DISPONIBLE");
         auto.setFecha_registro(LocalDateTime.now());
+        auto.setUbicacion(obtenerUbicacion(dto.getUbicacion()));
 
         return repoAuto.save(auto);
     }
@@ -66,6 +76,9 @@ public class AutoImpl implements AutoService {
         auto.setColor(dto.getColor());
         auto.setKilometraje(dto.getKilometraje());
         auto.setEstado(dto.getEstado());
+        if(dto.getUbicacion() != null) {
+            auto.setUbicacion(obtenerUbicacion(dto.getUbicacion()));
+        }
 
         return repoAuto.save(auto);
     }
@@ -74,4 +87,6 @@ public class AutoImpl implements AutoService {
     public void eliminar(Long id) {
         repoAuto.deleteById(id);
     }
+    
+    
 }

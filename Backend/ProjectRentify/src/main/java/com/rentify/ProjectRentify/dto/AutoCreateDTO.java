@@ -10,5 +10,6 @@ public class AutoCreateDTO {
     private Long vehiculo;
     private String color;
     private long kilometraje;
+    private Long ubicacion;
     
 }

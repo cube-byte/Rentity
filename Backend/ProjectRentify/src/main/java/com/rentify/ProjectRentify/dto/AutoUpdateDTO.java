@@ -10,5 +10,6 @@ public class AutoUpdateDTO {
     private String color;
     private long kilometraje;
     private String estado;
+    private Long ubicacion;
     
 }

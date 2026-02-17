@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.rentify.ProjectRentify.dto.AutoCreateDTO;
 import com.rentify.ProjectRentify.dto.AutoUpdateDTO;
 import com.rentify.ProjectRentify.entity.Auto;
+import com.rentify.ProjectRentify.repository.UbicacionRepository;
 import com.rentify.ProjectRentify.service.AutoService;
 
 import lombok.AllArgsConstructor;
@@ -31,6 +32,7 @@ import lombok.AllArgsConstructor;
 public class AutoController {
 
 	private final AutoService autoService;
+	private final UbicacionRepository repoUbicacion;
 
     @GetMapping
     public ResponseEntity<?> listarAutos() {
@@ -63,5 +65,11 @@ public class AutoController {
         autoService.eliminar(id);
         return ResponseEntity.noContent().build();
     }
+    
+    @GetMapping("/ubicaciones")
+    public ResponseEntity<?> listarUbicaciones() {
+        return ResponseEntity.ok(repoUbicacion.findAll());
+    }
+
     
 }

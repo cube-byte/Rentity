@@ -18,5 +18,5 @@ public class Ubicacion {
     private Long id;
 
     @Column(unique = true)
-    private String nombre; // Ejemplo: Lima, Cuzco, Puno
+    private String nombre;
 }

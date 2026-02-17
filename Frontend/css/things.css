@@ -1,0 +1,17 @@
+.button{
+    padding: 8px 32px;
+    border-radius: 30px;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+.button-v2{
+    flex: 1;
+    padding: 14px;
+    border: none;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}

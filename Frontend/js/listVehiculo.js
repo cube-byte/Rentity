@@ -1,4 +1,5 @@
 const URL_API = "http://localhost:9090/api/v12/vehiculos";
+
 const tbody = document.querySelector("#tbodyAutos");
 let vehiculosGlobal = [];
 let idvehiculoAEliminar = null;
@@ -11,7 +12,20 @@ document.addEventListener("DOMContentLoaded", () => {
   buscadorModelo.addEventListener("input", filtrarVehiculos);
 });
 
+let listaAutos = [];
 
+fetch("http://localhost:9090/api/v12/autos") .then(res => res.json()) .then(data => { listaAutos = data; }); 
+
+function contarAutos(id) {
+  return listaAutos.filter(a => a.vehiculo.vehiculo === Number(id)).length;
+}
+
+function contarAutosDisponibles(id) {
+  return listaAutos.filter(a =>
+    a.vehiculo.vehiculo === Number(id) &&
+    a.estado === "DISPONIBLE"
+  ).length;
+}
 
 function estadoClase(estado) {
   switch (estado) {
@@ -51,6 +65,8 @@ function renderVehiculos(lista) {
           <td>${vehiculo.year}</td>
           <td>${vehiculo.categoria ?? "-"}</td>
           <td>$${vehiculo.precio}</td>
+          <td>${contarAutos(vehiculo.vehiculo)}</td>
+          <td>${contarAutosDisponibles(vehiculo.vehiculo)}</td>
           <td style="justify-items: center;">
             <div class="estado ${estadoClase(vehiculo.estado)}"></div>
           </td>
@@ -155,4 +171,3 @@ function eliminarvehiculoConfirmado() {
     });
 }
 
-id_auto

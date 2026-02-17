@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle Auto</title>
+    <link rel="stylesheet" href="/Frontend/css/layout.css">
+    <link rel="stylesheet" href="/Frontend/css/things.css">
+    <link rel="stylesheet" href="/Frontend/css/detalle.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="/Frontend/recursos/img/Rentity-Logo.png" alt="">
+            <h1>RENTITY</h1>
+        </div>
+        <nav>
+            <a href="../index.html">Dashboard</a>
+            <a href="./catalogo.html">Vehiculos</a>
+            <a href="/fontend/html/nosotros.html">Nosotros</a>
+            <a href="/fontend/html/contacto.html">Contacto</a>
+            <a href="/fontend/html/tiendas.html">Tiendas</a>
+            <a href="">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                </svg>
+                <h2></h2> 
+            </a>
+        </nav>
+    </header>
+
+    <div class="container">
+
+        <!-- BANNER HERO -->
+        <section class="banner-hero">
+            <img src="/Frontend/recursos/img/banner/decorations/banner_null.jpg" alt="Banner null">
+            <div class="banner-texto">
+                <h1>Bueno, Bonito y barato</h1>
+            </div>
+        </section>
+
+        <!-- PRESENTACION -->
+        <section class="presentacion">
+            <h2 class="modelo" id="modelo">Corolla Cross</h2>
+            <p class="tagline">Muévete a tu mejor versión</p>
+
+            <div class="precio">
+                <span class="label">Precio por dia desde</span>
+                <strong id="precio">S/ 220</strong>
+            </div>
+
+            <div class="acciones">
+                <a href="#cotizar" class="btn-primario">Solicitar cotización</a>
+            </div>
+
+            <div class="specs">
+                <div class="spec">
+                    <span class="label">Precio por Semana</span>
+                    <strong id="consumo">S/ 1200</strong>
+                </div>
+                <div class="spec">
+                    <span class="label">Categoría</span>
+                    <strong id="categoria">SUV</strong>
+                </div>
+        <div class="spec">
+                    <span class="label">Año</span>
+                    <strong id="year">2024</strong>
+                </div>
+            </div>
+        </section>
+
+        <!-- BENEFICIOS -->
+        <section class="beneficios">
+            <div class="beneficio">
+                <span></span>
+                <a href="/Frontend/html/user/Catalogo.html">Ver catálogo</a>
+            </div>
+            <div class="beneficio">
+                <span></span>
+                <a>Financiamiento</a>
+            </div>
+            <div class="beneficio">
+                <span></span>
+                <a href="/Frontend/html/user/Catalogo.html">Ver más modelos</a>
+            </div>
+        </section>
+
+        <!-- AUTO VISUAL -->
+        <section class="auto-visual">
+            <h3 class="auto-modelo">MODELO VISUAL</h3>
+            <h5>Descubre cada detalle de tu nuevo vehículo</h5>
+            <img 
+                src="" 
+                alt="x"
+            >
+        </section>
+
+        <!-- ESPECIFICACIONES -->
+        <section class="especificaciones" id="especificaciones">
+            <div class="especificaciones-container">
+                <div class="especificaciones-image">
+                    <img src="/Frontend/recursos/img/autos/car_null.png" alt="Vehículo">
+                </div>
+
+                <div class="especificaciones-details">
+                    <h3>Especificaciones Técnicas</h3>
+
+                    <div class="spec-item">
+                        <span class="spec-label">Carrocería</span>
+                        <span class="spec-value" id="carroceria">SUV</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONFIANZA -->
+        <section class="confianza">
+            <p>
+                Más de <strong>50,000 conductores</strong> confían en nosotros
+            </p>
+        </section>
+
+        <!-- PRECIO Y COTIZAR -->
+        <section class="precio-section" id="cotizar">
+            <div class="precio-container">
+                <p class="precio-label">Precio del Vehículo por dia</p>
+                <p class="precio-usd" id="precioUSD">$ 120</p>
+                <p class="precio-pen" id="precioPEN">S/ 400</p>
+            </div>
+
+            <a href="#" class="cotizar-btn" data-id="1">COTIZAR AHORA</a>
+        </section>
+
+    </div>
+
+    <script src="/Frontend/js/detailsAutos.js"></script>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Rentify</h4>
+                <p>Tu concesionaria de confianza para encontrar el vehículo perfecto.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Enlaces rápidos</h4>
+                <ul>
+                    <li><a href="#vehiculos">Vehículos</a></li>
+                    <li><a href="#categorias">Categorías</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contacto</h4>
+                <ul>
+                    <li>📧 info@Rentify.com</li>
+                    <li>📱 +51 987 654 321</li>
+                    <li>📍 Av. Principal 123, Surco</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Síguenos</h4>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                    <li><a href="#">YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Rentify . Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+
+    
+</body>
+</html>

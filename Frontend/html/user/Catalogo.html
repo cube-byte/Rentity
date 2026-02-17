@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="/Frontend/css/catalogo.css">
 </head>
 <body>
-    <header style="position: relative;">
+    <header style="position: relative">
         <div class="logo">
             <img src="/Frontend/recursos/img/Rentity-Logo.png" alt="">
             <h1>RENTITY</h1>
@@ -28,12 +28,12 @@
         </nav>
     </header>
     <div class="catalog-banner">
-            <img src="/Frontend/recursos/img/banners/catalogo_banner.jpg" alt="">
+            <img src="/Frontend/recursos/img/banner/Catalog_banner.jpg" alt="">
     </div>
     <div class="container">
         <div class="breadcrumb">
             Inicio
-        </div>   
+        </div>
         <div class="main-content">
                     <aside class="sidebar">
             <h2>MODELOS</h2>
@@ -152,6 +152,10 @@
                         <option>Más Nuevo</option>
                     </select>
                 </div>
+                <div id="catalog-recomendation">
+
+                </div>
+
                 <div class="cars-grid" id="lista-catalogo">
                     <!--<div class="car-card">
                         <div class="car-image">
@@ -419,5 +423,17 @@
             </main>
         </div>
     </div>
+
+    <script>
+        function toggleFilter(header) {
+            const filterSection = header.parentElement;
+            const options = filterSection.querySelector('.filter-options');
+            
+            header.classList.toggle('active');
+            options.classList.toggle('active');
+        }
+</script>
+
+    <script src="/Frontend/js/catalogo.js"></script>
 </body>
 </html>

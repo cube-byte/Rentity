@@ -27,7 +27,6 @@ body {
 .catalog-banner{
     margin-top: -74px;
 }
-
 /* Sidebar */
 .sidebar {
     width: 320px;
@@ -42,7 +41,7 @@ body {
 
         .sidebar h2 {
             font-size: 1.3em;
-            color: #525b86;
+            color: #759776;
             margin-bottom: 25px;
             font-weight: 700;
             padding-bottom: 15px;
@@ -119,7 +118,7 @@ body {
             height: 18px;
             margin-right: 12px;
             cursor: pointer;
-            accent-color: #525b86;
+            accent-color: #759776;
         }
 
         .filter-option label {
@@ -130,7 +129,7 @@ body {
         }
 
         .filter-option input[type="checkbox"]:checked + label {
-            color: #525b86;
+            color: #759776;
             font-weight: 600;
         }
 
@@ -150,7 +149,7 @@ body {
 
         .btn-aplicar {
             padding: 12px;
-            background-color: #525b86;
+            background-color: #759776;
             color: white;
             border: none;
             border-radius: 6px;
@@ -160,14 +159,14 @@ body {
         }
 
         .btn-aplicar:hover {
-            background-color: #3a4263;
+            background-color: #759776;
         }
 
         .btn-limpiar {
             padding: 12px;
             background-color: white;
-            color: #525b86;
-            border: 2px solid #525b86;
+            color: #759776;
+            border: 2px solid #759776;
             border-radius: 6px;
             font-weight: 600;
             cursor: pointer;
@@ -327,14 +326,13 @@ body {
     color: #333;
 }
 
-.car-buttons {
-    display: flex;
-    gap: 10px;
-}
-
 .btn-primary {
-    background: #1a1a1a;
+    background: #373a37;
     color: white;
+    display: block;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer
 }
 
 .btn-primary:hover {
@@ -363,4 +361,85 @@ body {
     .car-buttons {
         flex-direction: column;
     }
+}
+
+.catalog-recomendation {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  background: linear-gradient(135deg, #4e8750, #3c6f3f);
+  padding: 28px 34px;
+  border-radius: 18px;
+  margin-bottom: 54px;
+  color: #fff;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.rec-car-image {
+    width: 35%;
+    height: 204px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.rec-car-image img {
+    object-fit: cover;
+    width: 100%;
+        height: 100%;
+}
+
+.rec-car-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.badge-recomendado {
+  font-size: 14px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  opacity: 0.9;
+}
+
+.rec-marca {
+  font-size: 14px;
+  opacity: 0.85;
+  letter-spacing: 1px;
+}
+
+.rec-modelo {
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.rec-precio {
+  margin-top: 6px;
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+.rec-precio span {
+  display: block;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.btn-reservar {
+  margin-top: 12px;
+  padding: 10px 22px;
+  border-radius: 8px;
+  border: none;
+  background: #ffffff;
+  color: #2f5e33;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.btn-reservar:hover {
+  background: #e9f3ea;
+  transform: translateY(-2px);
 }

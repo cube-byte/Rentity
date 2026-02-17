@@ -10,13 +10,15 @@ function crearAuto() {
     vehiculo: document.getElementById("selectVehiculo").value,
     color: document.getElementById("inputColor").value,
     kilometraje: document.getElementById("inputKilometraje").value,
-    ubicacion: document.getElementById("inputUbicacion").value
+    ubicacion: document.getElementById("selectUbicacion").value
   };
 
-  if (!auto.placa || !auto.vehiculo || !auto.color || !auto.kilometraje) {
+  if (!auto.placa || !auto.vehiculo || !auto.color || !auto.kilometraje || !auto.ubicacion) {
     alert("Completa los campos obligatorios");
     return;
   }
+
+  console.log(auto);
 
   fetch(URL_API, {
     method: "POST",

@@ -1,0 +1,407 @@
+/* BANNER CON IMAGEN */
+        .banner-hero {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #1a1a1a, #2d2d2d);
+        }
+
+        .banner-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+
+        .banner-texto {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            color: white;
+            z-index: 2;
+        }
+
+        .banner-texto h1 {
+            font-size: 3em;
+            font-weight: 700;
+            margin-bottom: 5px;
+            letter-spacing: 2px;
+        }
+
+        /* PRESENTACION */
+        .presentacion {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 40px;
+            background-color: #ffffff;
+        }
+
+        .presentacion .modelo {
+            font-size: 2.8em;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        .presentacion .tagline {
+            font-size: 1.3em;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .presentacion .precio {
+            display: flex;
+            align-items: baseline;
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+
+        .presentacion .precio .label {
+            font-size: 1em;
+            color: #888;
+        }
+
+        .presentacion .precio strong {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .acciones {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+
+        .btn-primario,
+        .btn-secundario {
+            padding: 15px 40px;
+            font-size: 1em;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primario {
+            background-color: #1e8ae3;
+            color: white;
+            border: 2px solid #1e8ae3;
+        }
+
+        .btn-primario:hover {
+            background-color: #1866a5;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 138, 227, 0.3);
+        }
+
+        .btn-secundario {
+            background-color: transparent;
+            color: #1a1a1a;
+            border: 2px solid #1a1a1a;
+        }
+
+        .btn-secundario:hover {
+            background-color: #1a1a1a;
+            color: white;
+        }
+
+        .specs {
+            display: flex;
+            gap: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .specs .spec {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .specs .spec .label {
+            font-size: 0.9em;
+            color: #888;
+            margin-bottom: 5px;
+        }
+
+        .specs .spec strong {
+            font-size: 1.1em;
+            color: #1a1a1a;
+            font-weight: 600;
+        }
+
+        /* BENEFICIOS */
+        .beneficios {
+            background-color: #f8f8f8;
+            padding: 50px 40px;
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .beneficio {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .beneficio span {
+            font-size: 2.5em;
+        }
+
+        .beneficio p {
+            font-size: 1.1em;
+            color: #333;
+            font-weight: 500;
+        }
+
+        /* AUTO VISUAL */
+        .auto-visual {
+            max-width: 1400px;
+            margin: 80px auto;
+            padding: 0 40px;
+            text-align: center;
+        }
+
+        .auto-visual .auto-modelo {
+            font-size: 2em;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 5px;
+        }
+
+        .auto-visual h5 {
+            font-size: 1em;
+            color: #888;
+            font-weight: 400;
+            margin-bottom: 40px;
+        }
+
+        .auto-visual img {
+            width: 100%;
+            max-width: 900px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* VERSIONES */
+        .versiones {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 40px;
+            text-align: center;
+        }
+
+        .versiones h3 {
+            font-size: 2em;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 30px;
+        }
+
+        .version-cards {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .version-card {
+            padding: 20px 50px;
+            background-color: #f8f8f8;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .version-card:hover {
+            border-color: #1a1a1a;
+            background-color: #ffffff;
+        }
+
+        .version-card.active {
+            background-color: #1a1a1a;
+            color: white;
+            border-color: #1a1a1a;
+        }
+
+        /* ESPECIFICACIONES */
+        .especificaciones {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 60px 40px;
+            background-color: #f8f8f8;
+            border-radius: 12px;
+        }
+
+        .especificaciones-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .especificaciones-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .especificaciones-details h3 {
+            font-size: 2em;
+            color: #1a1a1a;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 18px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .spec-item:last-child {
+            border-bottom: none;
+        }
+
+        .spec-label {
+            font-size: 1em;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .spec-value {
+            font-size: 1em;
+            color: #1a1a1a;
+            font-weight: 600;
+        }
+
+        /* CONFIANZA */
+        .confianza {
+            background-color: #1a1a1a;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .confianza p {
+            font-size: 1.3em;
+            color: #e0e0e0;
+        }
+
+        .confianza strong {
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        /* PRECIO SECTION */
+        .precio-section {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 60px 40px;
+            background-color: #ffffff;
+            text-align: center;
+        }
+
+        .precio-container {
+            margin-bottom: 40px;
+        }
+
+        .precio-label {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .precio-usd {
+            font-size: 3.5em;
+            color: #1a1a1a;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .precio-pen {
+            font-size: 1.8em;
+            color: #888;
+            font-weight: 500;
+        }
+
+        .cotizar-btn {
+            display: inline-block;
+            padding: 18px 60px;
+            background-color: #505050;
+            color: #ffffff;
+            font-size: 1.2em;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 6px;
+            border: 2px solid #505050;
+            transition: all 0.3s ease;
+        }
+
+        .cotizar-btn:hover {
+            background-color: #3b3b3b;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(49, 49, 49, 0.3);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .banner-hero {
+                height: 60vh;
+            }
+
+            .banner-texto {
+                left: 20px;
+                bottom: 20px;
+            }
+
+            .banner-texto h1 {
+                font-size: 2em;
+            }
+
+            .presentacion {
+                padding: 40px 20px;
+            }
+
+            .presentacion .modelo {
+                font-size: 2em;
+            }
+
+            .presentacion .precio strong {
+                font-size: 1.8em;
+            }
+
+            .acciones {
+                flex-direction: column;
+            }
+
+            .specs {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .beneficios {
+                flex-direction: column;
+                gap: 30px;
+                padding: 40px 20px;
+            }
+
+            .especificaciones-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .precio-usd {
+                font-size: 2.5em;
+            }
+        }

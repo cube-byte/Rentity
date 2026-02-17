@@ -39,6 +39,12 @@ function listarAutos() {
     .catch(err => console.error("Error al listar autos:", err));
 }
 
+function fechanormal(fecha){
+  fechaObj = new Date(fecha);
+  return fechaObj.toLocaleDateString();
+}
+
+
 function renderAutos(lista) {
   tbody.innerHTML = "";
 
@@ -50,10 +56,12 @@ function renderAutos(lista) {
 
     fila.innerHTML = `
         <td>${auto.auto}</td>
-        <td>${nombre}</td>
         <td>${auto.placa}</td>
+        <td>${nombre}</td>
         <td>${auto.color}</td>
         <td>${auto.kilometraje}</td>
+        <td>${auto.ubicacion.nombre}</td>
+        <td>${fechanormal(auto.fecha_registro)}</td>
         <td style="justify-items:center;">
             <div class="estado-text ${estadoClase(auto.estado)}">
                 <h5>${auto.estado}</h5>
@@ -172,3 +180,4 @@ function eliminarAutoConfirmado() {
       alert("No se pudo eliminar el auto");
     });
 }
+

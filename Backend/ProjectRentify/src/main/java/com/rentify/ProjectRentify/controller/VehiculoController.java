@@ -69,6 +69,15 @@ public class VehiculoController {
         service.actualizar(id, dto, imagen);
         return ResponseEntity.noContent().build();
     }
+    
+    /**@PutMapping("/{id}")  // Cambiar esta línea
+    public ResponseEntity<?> actualizar(
+            @PathVariable Long id,
+            @RequestBody VehiculoUpdateDTO dto  // Cambiar a @RequestBody
+    ) throws IOException {
+        service.actualizar(id, dto, null);  // Pasar null para imagen
+        return ResponseEntity.noContent().build();
+    }**/
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminar(@PathVariable Long id) {

@@ -1,0 +1,124 @@
+.tabla{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+td{
+    text-align: center;
+}
+td img{
+    width: 150px;
+    vertical-align: middle;
+}
+table{
+    background: white;
+    width: 100%;
+    
+}
+
+table,th,td{
+    border-collapse: collapse;
+    padding: 1em;
+}
+.estado{
+    width: 10px;
+    height: 10px;
+    padding: 10px;
+    background-color: #333;
+    border-radius: 200px;
+}
+.estado-text{
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border-radius: 10px;
+}
+
+.disponible{
+    background-color: rgb(44, 156, 44);
+}
+.ocupado{
+   background-color: #ffae00; 
+}
+.indisponible{
+   background-color: #c21010; 
+}
+.buttons-table{
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+    justify-content: center;
+}
+.button-crud{
+    padding: 10px;
+    border-radius: 10px;
+}
+.btn-edit{
+    background-color: #1bafe9;
+}
+.btn-edit:hover{
+    background-color: #44e9ff
+}
+.btn-delete{
+    background-color: crimson;
+}
+.btn-delete:hover{
+    background-color: #ff2d2d;
+}
+.button-crud svg{
+    fill: white;
+    width: 20px;
+    height: 20px;
+}
+
+.modal-delete {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-delete.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  width: 425px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.modal-content img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+  margin: 10px 0;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.btn-cancel {
+  background: #ccc;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.btn-confirm-delete {
+  background: crimson;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+

@@ -1,0 +1,192 @@
+
+        .create-section {
+            padding: 30px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .total {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            align-items: center;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .total-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .total-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .total-title {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .total-title h2 {
+            font-size: 1.5em;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .total-title h3 {
+            font-size: 1.2em;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .total-title .separator {
+            color: #999;
+            font-size: 1.2em;
+            font-weight: 300;
+        }
+
+        .total-title .placeholder {
+            color: #bbb;
+            font-style: italic;
+        }
+
+        .form-body {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 12px;
+            flex: 1;
+        }
+
+        .form-body > div {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .descripcion, .imagen{
+            display: flex;
+            flex-direction: column;
+        }
+        .descripcion label, .imagen label{
+            font-size: 0.9em;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 8px;
+        }
+        .imagen input{
+                        padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-body input,
+        .form-body select,
+        .form-body textarea {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .descripcion textarea{
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-body input:focus,
+        .form-body select:focus,
+        .form-body textarea:focus {
+            outline: none;
+            border-color: #70a865;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+        }
+
+        .form-body textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .descripcion {
+            grid-column: 1 / -1;
+        }
+
+        button {
+            grid-column: 1 / -1;
+            padding: 15px 30px;
+            background-color: #70a865;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #83d473;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 226, 107, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .container-body {
+                padding: 20px;
+            }
+
+            .form-body {
+                grid-template-columns: 1fr;
+            }
+
+            .total {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .total-title {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+        }
+
+        .from-flex{
+            display: flex;
+                align-items: center;
+                    margin-bottom: 10px;
+        }
+        .form-img{
+            width: 600px;
+        }
+        .form-img img{
+            width: 100%;
+        }

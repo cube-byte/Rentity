@@ -21,8 +21,14 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class VehiculoImpl implements VehiculoService{
 	
-	private final String RUTA_IMAGENES = 
-		    "C:\\Users\\USUARIO\\Desktop\\Rentify\\fontend\\recursos\\img\\autos\\";
+    // obtiene la ruta base del proyecto
+    private final Path rutaBase = Paths.get(System.getProperty("user.dir"))
+            .getParent()   // sale de RentifyProyect
+            .getParent();  // sale de Backend
+
+    // ruta final hacia Frontend
+    private final Path RUTA_IMAGENES =
+            rutaBase.resolve("Frontend/recursos/img/autos");
 
     private final VehiculoRepository repoVehiculo;
 	
@@ -54,12 +60,12 @@ public class VehiculoImpl implements VehiculoService{
                     dto.getMarca().toLowerCase().replace(" ", "") + "_" +
                     dto.getModel().toLowerCase().replace(" ", "") + ".jpg";
 
-            Path ruta = Paths.get(RUTA_IMAGENES + nombreArchivo);
-
-            Files.createDirectories(ruta.getParent());
+            Files.createDirectories(RUTA_IMAGENES);
+            Path ruta = RUTA_IMAGENES.resolve(nombreArchivo);
+            
             imagen.transferTo(ruta.toFile());
 
-            vehiculo.setImagen("/fontend/recursos/img/autos/" + nombreArchivo);
+            vehiculo.setImagen("/Frontend/recursos/img/autos/" + nombreArchivo);
         }
 
         return repoVehiculo.save(vehiculo);
@@ -93,11 +99,13 @@ public class VehiculoImpl implements VehiculoService{
             		vehiculo.getMarca().toLowerCase().replace(" ", "") + "_" +
             		vehiculo.getModel().toLowerCase().replace(" ", "") + ".jpg";
 
-            Path ruta = Paths.get(RUTA_IMAGENES, nombreArchivo);
-            Files.createDirectories(ruta.getParent());
+            Path ruta = RUTA_IMAGENES.resolve(nombreArchivo);
+            
+            Files.createDirectories(RUTA_IMAGENES);
+            
             imagen.transferTo(ruta.toFile());
 
-            vehiculo.setImagen("/recursos/img/autos/" + nombreArchivo);
+            vehiculo.setImagen("/Frontend/recursos/img/autos/" + nombreArchivo);
         }
 
         return repoVehiculo.save(vehiculo);

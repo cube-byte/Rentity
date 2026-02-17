@@ -38,9 +38,7 @@ public class AutoController {
     }
 
     @PostMapping
-    public ResponseEntity<?> crear(
-    		@RequestBody AutoCreateDTO dto) throws IOException {
-
+    public ResponseEntity<?> crear(@RequestBody AutoCreateDTO dto) throws IOException {
         Auto guardado = autoService.guardar(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(guardado);
     }

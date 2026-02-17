@@ -1,0 +1,101 @@
+.container-top{
+    background-color: white;
+    padding: 10px 12px;
+    justify-items: end;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.perfil{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+}
+.perfil-correo{
+    margin-right: 10px;
+}
+.correo{
+    font-size: 1em;
+    color: #333;
+}
+.rango{
+    font-size: 0.6em;
+    color: dimgrey;
+}
+.perfil-img{
+    width: 32px;
+    height: 32px;
+}
+.perfil-img img{
+    width: 100%;
+    display: block;
+}
+
+.container-body{
+    padding: 30px 20px;
+}
+
+.guia{
+    font-size: 0.5em;
+    display: flex;
+    flex-direction: row;
+    color: #6e6e6e;
+}
+.guia .main-guia{
+    font-weight: 600;
+}
+.guia h2{
+    font-weight: 400;
+    margin: 0px 2px;
+}
+.guia .sub-guia{
+    font-weight: 500;
+    color: #5f5f5f;
+}
+.title{
+    margin: 12px 0px;
+    color: #252525;
+}
+.list-header{
+    display: flex;
+    justify-content: end;
+}
+.buttom-create{
+    display: flex;
+    flex-direction: row;
+    background-color: #22a34d;
+    border: solid 2px #22a34d;
+    color: white;
+    padding: 8px 40px;
+    align-items: center;
+    gap: 5px;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+.buttom-create h2{
+    font-weight: 500;
+    font-size: 1.1em;
+}
+.buttom-create svg{
+    fill: white;
+    width: 22px;
+}
+.buttom-create:hover{
+    background-color: whitesmoke;
+    border: solid 2px #6fcf8f;
+    color: #6fcf8f;
+}
+.buttom-create:hover svg{
+    fill: #6fcf8f;
+}
+
+.filtros-autos {
+  display: flex;
+  gap: 12px;
+}
+
+.filtros-autos select,
+.filtros-autos input {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}

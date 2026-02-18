@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="text_primary">#FF212121</color>
+    <color name="hint_color">#FF757575</color>
+    <color name="edittext_background">#FFFFFFFF</color>
+    <color name="edittext_stroke">#FFBDBDBD</color>
+
+    <!-- Colores para botón -->
+    <color name="button_teal">#FF00796B</color>
+    <color name="button_text">#FFFFFFFF</color>
+
+    <!-- Colores adicionales -->
+    <color name="inputBackground">#FFF5F5F5</color>
+</resources>

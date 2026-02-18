@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">RentifyDemo</string>
+
+        <!-- Login -->
+        <string name="login_title">Continua y crea tu cuenta</string>
+        <string name="email_hint">Email Address</string>
+        <string name="password_hint">Password</string>
+        <string name="remember_me">Recordarme</string>
+        <string name="login_button">Registrarse</string>
+
+        <!-- Errores -->
+        <string name="error_email">Correo inválido</string>
+        <string name="error_password">Mínimo 6 caracteres</string>
+        <string name="valid_data">Datos válidos</string>
+        <string name="login">Iniciar Sesion</string>
+        <string name="register">Registrarse</string>
+        <string name="forgot_password">Forgot Password?</string>
+        <string name="subtitle">Registrate para disfrutar de la mejor experiencia de gestion</string>
+
+</resources>

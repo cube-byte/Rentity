@@ -1,10 +1,10 @@
 const API_URL = "http://localhost:9090/api/v12/ubicaciones";
 
-// ─── Estado ────────────────────────────────────────────────────────────────
+// ─── Estado 
 let ubicaciones = [];
 let ubicacionEditandoId = null;
 
-// ─── Elementos del DOM ─────────────────────────────────────────────────────
+// ─── Elementos del DOM
 const tbody             = document.getElementById("tbodyUbicaciones");
 const buscador          = document.getElementById("buscadorUbicacion");
 
@@ -20,7 +20,7 @@ const deleteNombreEl    = document.getElementById("deleteNombre");
 const btnCancelDelete   = document.getElementById("btnCancelDelete");
 const btnConfirmDelete  = document.getElementById("btnConfirmDelete");
 
-// ─── Cargar ubicaciones desde el backend ───────────────────────────────────
+// ─── Cargar ubicaciones desde el backend
 async function cargarUbicaciones() {
     try {
         const res = await fetch(API_URL);
@@ -33,7 +33,7 @@ async function cargarUbicaciones() {
     }
 }
 
-// ─── Renderizar tabla ───────────────────────────────────────────────────────
+// ─── Renderizar tabla
 function renderTabla(lista) {
     tbody.innerHTML = "";
 
@@ -66,14 +66,14 @@ function renderTabla(lista) {
     });
 }
 
-// ─── Buscador ───────────────────────────────────────────────────────────────
+// ─── Buscador
 buscador.addEventListener("input", () => {
     const q = buscador.value.toLowerCase();
     const filtradas = ubicaciones.filter(u => u.nombre.toLowerCase().includes(q));
     renderTabla(filtradas);
 });
 
-// ─── Modal Crear ────────────────────────────────────────────────────────────
+// ─── Modal Crear 
 btnAbrirModal.addEventListener("click", () => {
     ubicacionEditandoId = null;
     modalTitulo.textContent = "Nueva Ubicación";
@@ -86,7 +86,7 @@ btnCancelarForm.addEventListener("click", () => {
     modalForm.classList.add("hidden");
 });
 
-// ─── Modal Editar ───────────────────────────────────────────────────────────
+// ─── Modal Editar 
 function abrirEditar(id, nombre) {
     ubicacionEditandoId = id;
     modalTitulo.textContent = "Editar Ubicación";
@@ -95,7 +95,7 @@ function abrirEditar(id, nombre) {
     inputNombre.focus();
 }
 
-// ─── Guardar (Crear o Editar) ───────────────────────────────────────────────
+// ─── Guardar (Crear o Editar) 
 btnGuardar.addEventListener("click", async () => {
     const nombre = inputNombre.value.trim();
     if (!nombre) {
@@ -126,7 +126,7 @@ btnGuardar.addEventListener("click", async () => {
     }
 });
 
-// ─── Modal Eliminar ─────────────────────────────────────────────────────────
+// ─── Modal Eliminar 
 let eliminarId = null;
 
 function abrirEliminar(id, nombre) {
@@ -154,7 +154,7 @@ btnConfirmDelete.addEventListener("click", async () => {
     }
 });
 
-// ─── Cerrar modales al hacer click fuera ───────────────────────────────────
+// ─── Cerrar modales al hacer click fuera 
 modalForm.addEventListener("click", (e) => {
     if (e.target === modalForm) modalForm.classList.add("hidden");
 });
@@ -162,10 +162,10 @@ modalDelete.addEventListener("click", (e) => {
     if (e.target === modalDelete) modalDelete.classList.add("hidden");
 });
 
-// ─── Utilidad ───────────────────────────────────────────────────────────────
+// ─── Utilidad 
 function escapeHtml(str) {
     return str.replace(/'/g, "\\'").replace(/"/g, "&quot;");
 }
 
-// ─── Init ───────────────────────────────────────────────────────────────────
+// ─── Init 
 cargarUbicaciones();

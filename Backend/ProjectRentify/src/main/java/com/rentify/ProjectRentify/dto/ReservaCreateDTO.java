@@ -1,13 +1,13 @@
 package com.rentify.ProjectRentify.dto;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import lombok.Data;
 
 @Data
-public class ReservaDTO {
-
+public class ReservaCreateDTO {
+	
+    private Long idUsuario;
     private String nombres;
     private String email;
     private String telefono;
@@ -15,13 +15,8 @@ public class ReservaDTO {
 
     private Long idVehiculo;
     private Long idAuto;
-    private Long idUsuario;
     
     private LocalDateTime fecha_inicio;
     private LocalDateTime fecha_fin;
-    
-    private BigDecimal precio_total;
-    
-    private String estado;
-    
+	
 }

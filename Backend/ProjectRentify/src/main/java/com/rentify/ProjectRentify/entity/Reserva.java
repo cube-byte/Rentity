@@ -27,25 +27,26 @@ public class Reserva {
     @Column(name = "id_reserva")
     private Long id;
 
-    private String nombres;
-    private String email;
-    private String telefono;
-    
-    private String DNI;
-
-    @ManyToOne
-    @JoinColumn(name = "id_auto", nullable = false)
-    private Auto auto;
-
     @ManyToOne
     @JoinColumn(name = "id_usuario", nullable = true)
     private Usuario usuario;
+    
+    private String nombres;
+    private String email;
+    private String telefono;
+    private String DNI;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_vehiculo", nullable = false)
+    private Vehiculo vehiculo;
+    @ManyToOne
+    @JoinColumn(name = "id_auto", nullable = false)
+    private Auto auto;
 
     private LocalDateTime fecha_inicio;
     private LocalDateTime fecha_fin;
     
     private BigDecimal precio_total;
-    
     private LocalDateTime fecha;
     private String estado;
 

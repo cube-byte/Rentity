@@ -20,4 +20,5 @@ public interface VehiculoService {
     Vehiculo actualizar(Long id, VehiculoUpdateDTO dto, MultipartFile imagen) throws IOException;
 
     void eliminar(Long id);
+    
 }

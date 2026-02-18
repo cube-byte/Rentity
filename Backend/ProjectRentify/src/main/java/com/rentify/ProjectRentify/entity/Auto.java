@@ -39,7 +39,6 @@ public class Auto {
 	private String color;
 	private long kilometraje;
 	
-	
 	private LocalDateTime fecha_registro;
 	
 	private String estado;

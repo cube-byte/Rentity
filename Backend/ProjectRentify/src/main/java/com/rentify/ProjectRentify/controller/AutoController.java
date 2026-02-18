@@ -4,7 +4,6 @@ package com.rentify.ProjectRentify.controller;
 import java.io.IOException;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,13 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rentify.ProjectRentify.dto.AutoCreateDTO;
 import com.rentify.ProjectRentify.dto.AutoUpdateDTO;
 import com.rentify.ProjectRentify.entity.Auto;
-import com.rentify.ProjectRentify.repository.UbicacionRepository;
 import com.rentify.ProjectRentify.service.AutoService;
 
 import lombok.AllArgsConstructor;
@@ -32,7 +29,6 @@ import lombok.AllArgsConstructor;
 public class AutoController {
 
 	private final AutoService autoService;
-	private final UbicacionRepository repoUbicacion;
 
     @GetMapping
     public ResponseEntity<?> listarAutos() {
@@ -64,11 +60,6 @@ public class AutoController {
     public ResponseEntity<?> eliminarAuto(@PathVariable Long id) {
         autoService.eliminar(id);
         return ResponseEntity.noContent().build();
-    }
-    
-    @GetMapping("/ubicaciones")
-    public ResponseEntity<?> listarUbicaciones() {
-        return ResponseEntity.ok(repoUbicacion.findAll());
     }
 
     

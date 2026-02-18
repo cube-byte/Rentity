@@ -19,5 +19,5 @@ public interface AutoService {
     Auto actualizar(Long id, AutoUpdateDTO dto) throws IOException;
 
     void eliminar(Long id);
-	
+    
 }

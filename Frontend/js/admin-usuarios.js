@@ -1,39 +1,149 @@
-// Configuración de la API
+// ══════════════════════════════════════════════
+//  admin-usuarios.js  –  Rentify Admin
+// ══════════════════════════════════════════════
+
 const API_URL = 'http://localhost:9090/api/admin/usuarios';
 let currentPage = 0;
 const pageSize = 10;
 let totalPages = 1;
 let usuarioIdEliminar = null;
 
-// === CARGAR USUARIOS ===
+// ── HELPERS DE VALIDACIÓN INLINE ─────────────
+
+function mostrarError(id, mensaje) {
+    const input = document.getElementById(id);
+    if (!input) return;
+    input.classList.add('input-error');
+    input.classList.remove('input-ok');
+
+    let err = input.parentElement.querySelector('.field-error');
+    if (!err) {
+        err = document.createElement('span');
+        err.className = 'field-error';
+        // Insertar ANTES del form-hint si existe, si no al final
+        const hint = input.parentElement.querySelector('.form-hint');
+        if (hint) {
+            input.parentElement.insertBefore(err, hint);
+        } else {
+            input.parentElement.appendChild(err);
+        }
+    }
+    err.textContent = mensaje;
+}
+
+function limpiarError(id) {
+    const input = document.getElementById(id);
+    if (!input) return;
+    input.classList.remove('input-error');
+    input.classList.add('input-ok');
+    const err = input.parentElement.querySelector('.field-error');
+    if (err) err.remove();
+}
+
+function limpiarTodosLosErrores() {
+    document.querySelectorAll('.input-error').forEach(el => {
+        el.classList.remove('input-error');
+        el.classList.add('input-ok');
+    });
+    document.querySelectorAll('.field-error').forEach(el => el.remove());
+}
+
+// Limpia el error al empezar a escribir
+function agregarLimpiezaAutomatica() {
+    ['nombres','apellidos','documento','licencia','telefono','email','password','rol'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.addEventListener('input',  () => limpiarError(id));
+        el.addEventListener('change', () => limpiarError(id));
+    });
+}
+
+// ── VALIDAR FORMULARIO ────────────────────────
+function validarFormulario() {
+    let valido = true;
+    const usuarioId = document.getElementById('usuarioId').value;
+
+    const nombres = document.getElementById('nombres').value.trim();
+    if (!nombres) {
+        mostrarError('nombres', 'El nombre es obligatorio');
+        valido = false;
+    }
+
+    const apellidos = document.getElementById('apellidos').value.trim();
+    if (!apellidos) {
+        mostrarError('apellidos', 'Los apellidos son obligatorios');
+        valido = false;
+    }
+
+    const documento = document.getElementById('documento').value.trim();
+    if (!documento) {
+        mostrarError('documento', 'El documento es obligatorio');
+        valido = false;
+    } else if (!/^[0-9]{8,12}$/.test(documento)) {
+        mostrarError('documento', 'Debe tener entre 8 y 12 dígitos numéricos');
+        valido = false;
+    }
+
+    const licencia = document.getElementById('licencia').value.trim();
+    if (!licencia) {
+        mostrarError('licencia', 'La licencia es obligatoria');
+        valido = false;
+    }
+
+    const telefono = document.getElementById('telefono').value.trim();
+    if (!telefono) {
+        mostrarError('telefono', 'El teléfono es obligatorio');
+        valido = false;
+    } else if (!/^[0-9]{9}$/.test(telefono)) {
+        mostrarError('telefono', 'Debe tener exactamente 9 dígitos');
+        valido = false;
+    }
+
+    const email = document.getElementById('email').value.trim();
+    if (!email) {
+        mostrarError('email', 'El email es obligatorio');
+        valido = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        mostrarError('email', 'Ingresa un email válido');
+        valido = false;
+    }
+
+    const password = document.getElementById('password').value;
+    if (!usuarioId && !password) {
+        mostrarError('password', 'La contraseña es obligatoria para nuevos usuarios');
+        valido = false;
+    } else if (password && password.length < 6) {
+        mostrarError('password', 'La contraseña debe tener al menos 6 caracteres');
+        valido = false;
+    }
+
+    const rol = document.getElementById('rol').value;
+    if (!rol) {
+        mostrarError('rol', 'Selecciona un rol');
+        valido = false;
+    }
+
+    return valido;
+}
+
+// ── CARGAR USUARIOS ───────────────────────────
 async function cargarUsuarios(page = 0) {
     try {
         const search = document.getElementById('searchUsuarios').value;
-        const rol = document.getElementById('filterRol').value;
+        const rol    = document.getElementById('filterRol').value;
         const estado = document.getElementById('filterEstado').value;
 
         let url = `${API_URL}?page=${page}&size=${pageSize}`;
-        
-        if (search) {
-            url += `&search=${encodeURIComponent(search)}`;
-        }
-        if (rol) {
-            url += `&rol=${rol}`;
-        }
-        if (estado) {
-            url += `&activo=${estado}`;
-        }
+        if (search) url += `&search=${encodeURIComponent(search)}`;
+        if (rol)    url += `&rol=${rol}`;
+        if (estado) url += `&activo=${estado}`;
 
         const response = await fetch(url);
+        if (!response.ok) throw new Error('Error al cargar usuarios');
 
-        if (!response.ok) {
-            throw new Error('Error al cargar usuarios');
-        }
-
-        const data = await response.json();
-
-        currentPage = data.number || 0;
-        totalPages = data.totalPages || 1;
+        const data  = await response.json();
+        currentPage = data.number     || 0;
+        totalPages  = data.totalPages || 1;
 
         renderUsuarios(data.content || []);
         actualizarPaginacion();
@@ -48,15 +158,13 @@ async function cargarUsuarios(page = 0) {
     }
 }
 
-// === RENDERIZAR TABLA ===
+// ── RENDERIZAR TABLA ──────────────────────────
 function renderUsuarios(usuarios) {
     const tbody = document.getElementById('usuariosTableBody');
 
     if (!usuarios || usuarios.length === 0) {
         tbody.innerHTML = `
-            <tr>
-                <td colspan="10" class="empty-cell">No se encontraron usuarios</td>
-            </tr>
+            <tr><td colspan="10" class="empty-cell">No se encontraron usuarios</td></tr>
         `;
         return;
     }
@@ -80,46 +188,32 @@ function renderUsuarios(usuarios) {
     `).join('');
 }
 
-// === PAGINACIÓN ===
+// ── PAGINACIÓN ────────────────────────────────
 function actualizarPaginacion() {
     document.getElementById('paginationInfo').textContent = `Página ${currentPage + 1} de ${totalPages}`;
     document.getElementById('btnPrevious').disabled = currentPage === 0;
-    document.getElementById('btnNext').disabled = currentPage >= totalPages - 1;
+    document.getElementById('btnNext').disabled     = currentPage >= totalPages - 1;
 }
 
 document.getElementById('btnPrevious').addEventListener('click', () => {
-    if (currentPage > 0) {
-        cargarUsuarios(currentPage - 1);
-    }
+    if (currentPage > 0) cargarUsuarios(currentPage - 1);
 });
 
 document.getElementById('btnNext').addEventListener('click', () => {
-    if (currentPage < totalPages - 1) {
-        cargarUsuarios(currentPage + 1);
-    }
+    if (currentPage < totalPages - 1) cargarUsuarios(currentPage + 1);
 });
 
-// === BÚSQUEDA Y FILTROS ===
+// ── BÚSQUEDA Y FILTROS ────────────────────────
 let searchTimeout;
 document.getElementById('searchUsuarios').addEventListener('input', () => {
     clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(() => {
-        currentPage = 0;
-        cargarUsuarios(0);
-    }, 500);
+    searchTimeout = setTimeout(() => { currentPage = 0; cargarUsuarios(0); }, 500);
 });
 
-document.getElementById('filterRol').addEventListener('change', () => {
-    currentPage = 0;
-    cargarUsuarios(0);
-});
+document.getElementById('filterRol').addEventListener('change', () => { currentPage = 0; cargarUsuarios(0); });
+document.getElementById('filterEstado').addEventListener('change', () => { currentPage = 0; cargarUsuarios(0); });
 
-document.getElementById('filterEstado').addEventListener('change', () => {
-    currentPage = 0;
-    cargarUsuarios(0);
-});
-
-// === MODAL NUEVO USUARIO ===
+// ── MODAL NUEVO USUARIO ───────────────────────
 function abrirModalNuevo() {
     document.getElementById('modalTitle').textContent = 'Nuevo Usuario';
     document.getElementById('formUsuario').reset();
@@ -128,111 +222,97 @@ function abrirModalNuevo() {
     document.getElementById('passwordRequired').style.display = 'inline';
     document.getElementById('passwordHint').textContent = 'Mínimo 6 caracteres';
     document.getElementById('activo').checked = true;
+    limpiarTodosLosErrores();
     document.getElementById('modalUsuario').classList.add('show');
 }
 
-// === EDITAR USUARIO ===
+// ── EDITAR USUARIO ────────────────────────────
 async function editarUsuario(id) {
     try {
         const response = await fetch(`${API_URL}/${id}`);
-        
-        if (!response.ok) {
-            throw new Error('Error al cargar usuario');
-        }
+        if (!response.ok) throw new Error('Error al cargar usuario');
 
         const usuario = await response.json();
 
         document.getElementById('modalTitle').textContent = 'Editar Usuario';
-        document.getElementById('usuarioId').value = usuario.id;
-        document.getElementById('nombres').value = usuario.nombres;
-        document.getElementById('apellidos').value = usuario.apellidos;
-        document.getElementById('documento').value = usuario.documento;
-        document.getElementById('licencia').value = usuario.licencia;
-        document.getElementById('telefono').value = usuario.telefono;
-        document.getElementById('email').value = usuario.email;
-        document.getElementById('rol').value = usuario.rol;
-        document.getElementById('activo').checked = usuario.activo;
-        document.getElementById('password').value = '';
-        document.getElementById('password').required = false;
+        document.getElementById('usuarioId').value    = usuario.id;
+        document.getElementById('nombres').value      = usuario.nombres;
+        document.getElementById('apellidos').value    = usuario.apellidos;
+        document.getElementById('documento').value    = usuario.documento;
+        document.getElementById('licencia').value     = usuario.licencia;
+        document.getElementById('telefono').value     = usuario.telefono;
+        document.getElementById('email').value        = usuario.email;
+        document.getElementById('rol').value          = usuario.rol;
+        document.getElementById('activo').checked     = usuario.activo;
+        document.getElementById('password').value     = '';
+        document.getElementById('password').required  = false;
         document.getElementById('passwordRequired').style.display = 'none';
         document.getElementById('passwordHint').textContent = 'Dejar vacío para mantener la actual';
 
+        limpiarTodosLosErrores();
         document.getElementById('modalUsuario').classList.add('show');
 
     } catch (error) {
         console.error('Error:', error);
-        alert('Error al cargar los datos del usuario');
+        // Mostrar error en la tabla en vez de alert
+        mostrarMensajeTabla('No se pudieron cargar los datos del usuario');
     }
 }
 
-// === GUARDAR USUARIO (CREAR O ACTUALIZAR) ===
+// ── GUARDAR USUARIO ───────────────────────────
 document.getElementById('formUsuario').addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const usuarioId = document.getElementById('usuarioId').value;
-    const password = document.getElementById('password').value;
+    // Validar antes de enviar
+    if (!validarFormulario()) return;
 
-    // Validar password solo si es nuevo usuario o si se ingresó una nueva contraseña
-    if (!usuarioId && !password) {
-        alert('La contraseña es obligatoria para nuevos usuarios');
-        return;
-    }
+    const usuarioId = document.getElementById('usuarioId').value;
+    const password  = document.getElementById('password').value;
 
     const usuario = {
-        nombres: document.getElementById('nombres').value,
-        apellidos: document.getElementById('apellidos').value,
-        documento: document.getElementById('documento').value,
-        licencia: document.getElementById('licencia').value,
-        telefono: document.getElementById('telefono').value,
-        email: document.getElementById('email').value,
-        rol: document.getElementById('rol').value,
-        activo: document.getElementById('activo').checked
+        nombres:   document.getElementById('nombres').value.trim(),
+        apellidos: document.getElementById('apellidos').value.trim(),
+        documento: document.getElementById('documento').value.trim(),
+        licencia:  document.getElementById('licencia').value.trim(),
+        telefono:  document.getElementById('telefono').value.trim(),
+        email:     document.getElementById('email').value.trim(),
+        rol:       document.getElementById('rol').value,
+        activo:    document.getElementById('activo').checked
     };
 
-    // Solo incluir password si se ingresó
-    if (password) {
-        usuario.password = password;
-    }
+    if (password) usuario.password = password;
 
     try {
-        let response;
-        
-        if (usuarioId) {
-            // Actualizar usuario existente
-            response = await fetch(`${API_URL}/${usuarioId}`, {
+        const response = usuarioId
+            ? await fetch(`${API_URL}/${usuarioId}`, {
                 method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(usuario)
-            });
-        } else {
-            // Crear nuevo usuario
-            response = await fetch(API_URL, {
+              })
+            : await fetch(API_URL, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(usuario)
-            });
-        }
+              });
 
         if (!response.ok) {
-            const error = await response.text();
-            throw new Error(error || 'Error al guardar usuario');
+            const errorTexto = await response.text();
+            // Mostrar error del servidor debajo del email (campo más común de conflicto)
+            mostrarError('email', errorTexto || 'Error al guardar el usuario');
+            return;
         }
 
-        alert(usuarioId ? 'Usuario actualizado exitosamente' : 'Usuario creado exitosamente');
         cerrarModal();
         cargarUsuarios(currentPage);
+        mostrarBannerExito(usuarioId ? 'Usuario actualizado correctamente' : 'Usuario creado correctamente');
 
     } catch (error) {
         console.error('Error:', error);
-        alert('Error al guardar usuario: ' + error.message);
+        mostrarError('email', 'Error de conexión. Intenta nuevamente.');
     }
 });
 
-// === ELIMINAR USUARIO ===
+// ── ELIMINAR USUARIO ──────────────────────────
 function eliminarUsuario(id) {
     usuarioIdEliminar = id;
     document.getElementById('modalConfirmar').classList.add('show');
@@ -242,70 +322,102 @@ async function confirmarEliminar() {
     if (!usuarioIdEliminar) return;
 
     try {
-        const response = await fetch(`${API_URL}/${usuarioIdEliminar}`, {
-            method: 'DELETE'
-        });
+        const response = await fetch(`${API_URL}/${usuarioIdEliminar}`, { method: 'DELETE' });
 
-        if (!response.ok) {
-            throw new Error('Error al eliminar usuario');
-        }
+        if (!response.ok) throw new Error('Error al eliminar usuario');
 
-        alert('Usuario eliminado exitosamente');
         cerrarModalConfirmar();
         cargarUsuarios(currentPage);
+        mostrarBannerExito('Usuario eliminado correctamente');
 
     } catch (error) {
         console.error('Error:', error);
-        alert('Error al eliminar usuario: ' + error.message);
+        // Mostrar error dentro del modal de confirmación
+        const modalBody = document.querySelector('#modalConfirmar .modal-body');
+        let err = modalBody.querySelector('.field-error');
+        if (!err) {
+            err = document.createElement('span');
+            err.className = 'field-error';
+            modalBody.appendChild(err);
+        }
+        err.textContent = 'No se pudo eliminar el usuario. Intenta nuevamente.';
     }
 }
 
-// === CERRAR MODALES ===
+// ── BANNER DE ÉXITO (bajo el título) ──────────
+function mostrarBannerExito(mensaje) {
+    let banner = document.getElementById('banner-exito');
+    if (!banner) {
+        banner = document.createElement('div');
+        banner.id = 'banner-exito';
+        banner.style.cssText = `
+            background: #e8f5e9;
+            border-left: 4px solid #22a34d;
+            color: #1b5e20;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 16px;
+        `;
+        // Insertar justo antes de filters-section
+        const filtros = document.querySelector('.filters-section');
+        filtros.parentElement.insertBefore(banner, filtros);
+    }
+    banner.textContent = `✓  ${mensaje}`;
+    banner.style.display = 'block';
+    setTimeout(() => { banner.style.display = 'none'; }, 3500);
+}
+
+function mostrarMensajeTabla(mensaje) {
+    document.getElementById('usuariosTableBody').innerHTML = `
+        <tr><td colspan="10" class="error-cell">${mensaje}</td></tr>
+    `;
+}
+
+// ── CERRAR MODALES ────────────────────────────
 function cerrarModal() {
     document.getElementById('modalUsuario').classList.remove('show');
     document.getElementById('formUsuario').reset();
+    limpiarTodosLosErrores();
 }
 
 function cerrarModalConfirmar() {
     document.getElementById('modalConfirmar').classList.remove('show');
+    // Limpiar error del modal de confirmar si existe
+    const err = document.querySelector('#modalConfirmar .field-error');
+    if (err) err.remove();
     usuarioIdEliminar = null;
 }
 
-// Cerrar modales al hacer clic fuera
 window.onclick = function(event) {
-    const modalUsuario = document.getElementById('modalUsuario');
-    const modalConfirmar = document.getElementById('modalConfirmar');
-    
-    if (event.target === modalUsuario) {
-        cerrarModal();
-    }
-    if (event.target === modalConfirmar) {
-        cerrarModalConfirmar();
-    }
-}
+    if (event.target === document.getElementById('modalUsuario'))   cerrarModal();
+    if (event.target === document.getElementById('modalConfirmar')) cerrarModalConfirmar();
+};
 
-// === FORMATEAR FECHA ===
+// ── FORMATEAR FECHA ───────────────────────────
 function formatearFecha(fechaString) {
     const fecha = new Date(fechaString);
-    const dia = fecha.getDate().toString().padStart(2, '0');
-    const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
-    const anio = fecha.getFullYear();
+    const dia   = fecha.getDate().toString().padStart(2, '0');
+    const mes   = (fecha.getMonth() + 1).toString().padStart(2, '0');
+    const anio  = fecha.getFullYear();
     return `${dia}/${mes}/${anio}`;
 }
 
-// === INICIALIZAR ===
+// ── INICIALIZAR ───────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
     cargarUsuarios();
+    agregarLimpiezaAutomatica();
 });
 
-// Cerrar sesión
+// ── CERRAR SESIÓN ─────────────────────────────
 document.getElementById('btn-cerrar-sesion').addEventListener('click', (e) => {
-e.preventDefault();
-localStorage.removeItem('rentify_usuario');
-window.location.href = '../../html/login.html';
+    e.preventDefault();
+    localStorage.removeItem('rentify_usuario');
+    window.location.href = '../../html/login.html';
 });
 
-// Perfil
+// ── PERFIL ────────────────────────────────────
 const _u = JSON.parse(localStorage.getItem('rentify_usuario') || '{}');
 if (_u.email) document.getElementById('perfilEmail').textContent = _u.email;
 if (_u.rol)   document.getElementById('perfilRol').textContent   = _u.rol;

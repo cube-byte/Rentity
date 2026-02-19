@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../../css/admin/layout.css">
     <link rel="stylesheet" href="../../css/admin/table.css">
     <link rel="stylesheet" href="../../css/usuarios.css">
+    <link rel="stylesheet" href="../../css/admin/validacion.css">
 </head>
 <body>
 
@@ -171,7 +172,9 @@
                 <h3 id="modalTitle">Nuevo Usuario</h3>
                 <button class="modal-close" onclick="cerrarModal()">&times;</button>
             </div>
-            <form id="formUsuario" class="modal-body">
+
+            <!-- novalidate: desactiva tooltips nativos, la validación la maneja el JS -->
+            <form id="formUsuario" class="modal-body" novalidate>
                 <input type="hidden" id="usuarioId">
 
                 <div class="form-section">
@@ -179,33 +182,33 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="nombres">Nombres *</label>
-                            <input type="text" id="nombres" required maxlength="50">
+                            <input type="text" id="nombres" maxlength="50">
                         </div>
                         <div class="form-group">
                             <label for="apellidos">Apellidos *</label>
-                            <input type="text" id="apellidos" required maxlength="50">
+                            <input type="text" id="apellidos" maxlength="50">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="documento">Documento *</label>
-                            <input type="text" id="documento" required maxlength="12" pattern="[0-9]{8,12}">
+                            <input type="text" id="documento" maxlength="12">
                             <small class="form-hint">8-12 dígitos numéricos</small>
                         </div>
                         <div class="form-group">
                             <label for="licencia">Licencia de Conducir *</label>
-                            <input type="text" id="licencia" required>
+                            <input type="text" id="licencia">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="telefono">Teléfono *</label>
-                            <input type="tel" id="telefono" required maxlength="9" pattern="[0-9]{9}">
+                            <input type="tel" id="telefono" maxlength="9">
                             <small class="form-hint">9 dígitos</small>
                         </div>
                         <div class="form-group">
                             <label for="email">Email *</label>
-                            <input type="email" id="email" required maxlength="100">
+                            <input type="email" id="email" maxlength="100">
                         </div>
                     </div>
                 </div>
@@ -215,12 +218,12 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="password">Contraseña <span id="passwordRequired">*</span></label>
-                            <input type="password" id="password" minlength="6">
+                            <input type="password" id="password">
                             <small class="form-hint" id="passwordHint">Mínimo 6 caracteres</small>
                         </div>
                         <div class="form-group">
                             <label for="rol">Rol *</label>
-                            <select id="rol" required>
+                            <select id="rol">
                                 <option value="">Seleccionar rol</option>
                                 <option value="CLIENTE">Cliente</option>
                                 <option value="ADMINISTRADOR">Administrador</option>
@@ -242,7 +245,8 @@
             </form>
         </div>
     </div>
-    
+
+    <!-- ═══ MODAL CONFIRMAR ELIMINAR ═══ -->
     <div id="modalConfirmar" class="modal">
         <div class="modal-content modal-small">
             <div class="modal-header">

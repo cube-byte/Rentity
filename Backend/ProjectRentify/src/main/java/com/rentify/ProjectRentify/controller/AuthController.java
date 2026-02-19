@@ -44,5 +44,15 @@ private final AuthService authService;
     public ResponseEntity<String> test() {
         return ResponseEntity.ok("API de autenticación funcionando correctamente");
     }
+    
+    @GetMapping("/perfil/{id}")
+    public ResponseEntity<?> obtenerPerfil(@PathVariable Long id) {
+        try {
+            Usuario usuario = authService.obtenerPorId(id);
+            return ResponseEntity.ok(usuario);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 }

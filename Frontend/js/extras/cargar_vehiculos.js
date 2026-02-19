@@ -26,3 +26,4 @@ function cargarVehiculos() {
     })
     .catch(err => console.error("Error cargando vehículos:", err));
 }
+

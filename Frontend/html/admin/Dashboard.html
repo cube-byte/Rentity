@@ -3,64 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Admin - Rentify</title>
-    <link rel="stylesheet" href="../../css/layout.css">
+    <title>Dashboard - Rentify System</title>
+    <link rel="stylesheet" href="../../css/admin/layout.css">
+    <link rel="stylesheet" href="../../css/admin/table.css">
     <link rel="stylesheet" href="../../css/admin.css">
 </head>
 <body>
 
-    <!-- HEADER -->
-    <header>
-        <div class="logo">
-            <img src="../../recursos/img/Rentity-Logo.png" alt="Logo">
-            <h1><b>Rentify</b> Admin</h1>
-        </div>
-
-        <nav>
-            <a href="Dashboard.html">Dashboard</a>
-            <a href="Autos.html">Autos</a>
-            <a href="Reservas.html">Reservas</a>
-            <a href="Usuarios.html">Usuarios</a>
-            <!-- Cerrar sesión: usa href="#" y el script limpia localStorage antes de redirigir -->
-            <a href="#" id="btn-cerrar-sesion">Cerrar Sesión</a>
-        </nav>
-    </header>
-
-    <!-- CONTENIDO PRINCIPAL -->
-    <main class="admin-container">
-        <h2>Panel de Administración</h2>
-
-        <!-- Tarjetas de resumen -->
-        <div class="admin-cards">
-            <div class="admin-card">
-                <h3>Autos Registrados</h3>
-                <p id="totalAutos">24</p>
+    <!-- ═══ NAV LATERAL ═══ -->
+    <nav class="navegador">
+        <div class="nav_top">
+            <div class="nav-logo">
+                <img src="/Frontend/recursos/img/Rentity-Logo.png" alt="">
             </div>
-            <div class="admin-card">
-                <h3>Reservas Activas</h3>
-                <p id="totalReservas">12</p>
-            </div>
-            <div class="admin-card">
-                <h3>Usuarios Registrados</h3>
-                <p id="totalUsuarios">156</p>
-            </div>
-            <div class="admin-card">
-                <h3>Ingresos del Mes</h3>
-                <p id="totalPagos">$8,450</p>
+            <div class="nav-title">
+                <h1><b>RENTIFY</b> System</h1>
             </div>
         </div>
+        <div class="nav_buttom">
+            <ul>
+                <a href="/Frontend/html/admin/Dashboard.html">
+                    <li class="li-menu">
+                        <svg class="nav_icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#000000" viewBox="0 0 256 256"><path d="M219.31,108.68l-80-80a16,16,0,0,0-22.62,0l-80,80A15.87,15.87,0,0,0,32,120v96a8,8,0,0,0,8,8H216a8,8,0,0,0,8-8V120A15.87,15.87,0,0,0,219.31,108.68ZM208,208H48V120l80-80,80,80Z"></path></svg>
+                        Dashboard
+                    </li>
+                </a>
+                <li class="menu-item">
+                    <div class="menu-link">
+                        <svg class="nav_icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#000000" viewBox="0 0 256 256"><path d="M240,104H229.2L201.42,41.5A16,16,0,0,0,186.8,32H69.2a16,16,0,0,0-14.62,9.5L26.8,104H16a8,8,0,0,0,0,16h8v80a16,16,0,0,0,16,16H64a16,16,0,0,0,16-16V184h96v16a16,16,0,0,0,16,16h24a16,16,0,0,0,16-16V120h8a8,8,0,0,0,0-16ZM69.2,48H186.8l24.89,56H44.31ZM64,200H40V184H64Zm128,0V184h24v16Zm24-32H40V120H216ZM56,144a8,8,0,0,1,8-8H80a8,8,0,0,1,0,16H64A8,8,0,0,1,56,144Zm112,0a8,8,0,0,1,8-8h16a8,8,0,0,1,0,16H176A8,8,0,0,1,168,144Z"></path></svg>
+                        Vehiculos
+                    </div>
+                    <ul class="submenu">
+                        <a href="/Frontend/html/admin/Vehiculos.html"><li>Vehiculos</li></a>
+                        <a href="/Frontend/html/admin/Autos.html"><li>Autos</li></a>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <div class="menu-link">
+                        <svg class="nav_icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#000000" viewBox="0 0 256 256"><path d="M104,216a16,16,0,1,1-16-16A16,16,0,0,1,104,216Zm88-16a16,16,0,1,0,16,16A16,16,0,0,0,192,200ZM239.71,74.14l-25.64,92.28A24.06,24.06,0,0,1,191,184H92.16A24.06,24.06,0,0,1,69,166.42L33.92,40H16a8,8,0,0,1,0-16H40a8,8,0,0,1,7.71,5.86L57.19,64H232a8,8,0,0,1,7.71,10.14ZM221.47,80H61.64l22.81,82.14A8,8,0,0,0,92.16,168H191a8,8,0,0,0,7.71-5.86Z"></path></svg>
+                        Ventas
+                    </div>
+                    <ul class="submenu">
+                        <a href="/Frontend/html/admin/Reservas.html"><li>Reservas</li></a>
+                        <a href="#"><li>Pagos</li></a>
+                        <a href="#"><li>Comprobantes</li></a>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <div class="menu-link">
+                        <svg class="nav_icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#000000" viewBox="0 0 256 256"><path d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"></path></svg>
+                        Clientes
+                    </div>
+                    <ul class="submenu">
+                        <a href="/Frontend/html/admin/Clientes.html"><li>Clientes</li></a>
+                        <a href="/Frontend/html/admin/Ubicaciones.html"><li>Ubicaciones</li></a>
+                    </ul>
+                </li>
+                <a href="/Frontend/html/user/Catalogo.html">
+                    <li class="li-menu">
+                        <svg class="nav_icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#000000" viewBox="0 0 256 256"><path d="M128,24h0A104,104,0,1,0,232,128,104.12,104.12,0,0,0,128,24Zm88,104a87.61,87.61,0,0,1-3.33,24H174.16a157.44,157.44,0,0,0,0-48h38.51A87.61,87.61,0,0,1,216,128ZM102,168H154a115.11,115.11,0,0,1-26,45A115.27,115.27,0,0,1,102,168Zm-3.9-16a140.84,140.84,0,0,1,0-48h59.88a140.84,140.84,0,0,1,0,48ZM40,128a87.61,87.61,0,0,1,3.33-24H81.84a157.44,157.44,0,0,0,0,48H43.33A87.61,87.61,0,0,1,40,128ZM154,88H102a115.11,115.11,0,0,1,26-45A115.27,115.27,0,0,1,154,88Zm52.33,0H170.71a135.28,135.28,0,0,0-22.3-45.6A88.29,88.29,0,0,1,206.37,88ZM107.59,42.4A135.28,135.28,0,0,0,85.29,88H49.63A88.29,88.29,0,0,1,107.59,42.4ZM49.63,168H85.29a135.28,135.28,0,0,0,22.3,45.6A88.29,88.29,0,0,1,49.63,168Zm98.78,45.6a135.28,135.28,0,0,0,22.3-45.6h35.66A88.29,88.29,0,0,1,148.41,213.6Z"></path></svg>
+                        Website
+                    </li>
+                </a>
+                <a href="">
+                    <li class="li-menu">
+                        <svg class="nav_icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#000000" viewBox="0 0 256 256"><path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Zm88-29.84q.06-2.16,0-4.32l14.92-18.64a8,8,0,0,0,1.48-7.06,107.21,107.21,0,0,0-10.88-26.25,8,8,0,0,0-6-3.93l-23.72-2.64q-1.48-1.56-3-3L186,40.54a8,8,0,0,0-3.94-6,107.71,107.71,0,0,0-26.25-10.87,8,8,0,0,0-7.06,1.49L130.16,40Q128,40,125.84,40L107.2,25.11a8,8,0,0,0-7.06-1.48A107.6,107.6,0,0,0,73.89,34.51a8,8,0,0,0-3.93,6L67.32,64.27q-1.56,1.49-3,3L40.54,70a8,8,0,0,0-6,3.94,107.71,107.71,0,0,0-10.87,26.25,8,8,0,0,0,1.49,7.06L40,125.84Q40,128,40,130.16L25.11,148.8a8,8,0,0,0-1.48,7.06,107.21,107.21,0,0,0,10.88,26.25,8,8,0,0,0,6,3.93l23.72,2.64q1.49,1.56,3,3L70,215.46a8,8,0,0,0,3.94,6,107.71,107.71,0,0,0,26.25,10.87,8,8,0,0,0,7.06-1.49L125.84,216q2.16.06,4.32,0l18.64,14.92a8,8,0,0,0,7.06,1.48,107.21,107.21,0,0,0,26.25-10.88,8,8,0,0,0,3.93-6l2.64-23.72q1.56-1.48,3-3L215.46,186a8,8,0,0,0,6-3.94,107.71,107.71,0,0,0,10.87-26.25,8,8,0,0,0-1.49-7.06Zm-16.1-6.5a73.93,73.93,0,0,1,0,8.68,8,8,0,0,0,1.74,5.48l14.19,17.73a91.57,91.57,0,0,1-6.23,15L187,173.11a8,8,0,0,0-5.1,2.64,74.11,74.11,0,0,1-6.14,6.14,8,8,0,0,0-2.64,5.1l-2.51,22.58a91.32,91.32,0,0,1-15,6.23l-17.74-14.19a8,8,0,0,0-5-1.75h-.48a73.93,73.93,0,0,1-8.68,0,8,8,0,0,0-5.48,1.74L100.45,215.8a91.57,91.57,0,0,1-15-6.23L82.89,187a8,8,0,0,0-2.64-5.1,74.11,74.11,0,0,1-6.14-6.14,8,8,0,0,0-5.1-2.64L46.43,170.6a91.32,91.32,0,0,1-6.23-15l14.19-17.74a8,8,0,0,0,1.74-5.48,73.93,73.93,0,0,1,0-8.68,8,8,0,0,0-1.74-5.48L40.2,100.45a91.57,91.57,0,0,1,6.23-15L69,82.89a8,8,0,0,0,5.1-2.64,74.11,74.11,0,0,1,6.14-6.14A8,8,0,0,0,82.89,69L85.4,46.43a91.32,91.32,0,0,1,15-6.23l17.74,14.19a8,8,0,0,0,5.48,1.74,73.93,73.93,0,0,1,8.68,0,8,8,0,0,0,5.48-1.74L155.55,40.2a91.57,91.57,0,0,1,15,6.23L173.11,69a8,8,0,0,0,2.64,5.1,74.11,74.11,0,0,1,6.14,6.14,8,8,0,0,0,5.1,2.64l22.58,2.51a91.32,91.32,0,0,1,6.23,15l-14.19,17.74A8,8,0,0,0,199.87,123.66Z"></path></svg>
+                        Configuracion
+                    </li>
+                </a>
+                <a href="#" id="btn-cerrar-sesion">
+                    <li class="li-menu">
+                        <svg class="nav_icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#000000" viewBox="0 0 256 256"><path d="M120,216a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V40a8,8,0,0,1,8-8h64a8,8,0,0,1,0,16H56V208h56A8,8,0,0,1,120,216Zm109.66-93.66-40-40a8,8,0,0,0-11.32,11.32L204.69,120H112a8,8,0,0,0,0,16h92.69l-26.35,26.34a8,8,0,0,0,11.32,11.32l40-40A8,8,0,0,0,229.66,122.34Z"></path></svg>
+                        Salir
+                    </li>
+                </a>
+            </ul>
+        </div>
+    </nav>
 
-        <!-- Sección: Lista de Usuarios -->
-        <section class="usuarios-section">
+    <!-- ═══ CONTENIDO ═══ -->
+    <div class="container">
+
+        <section class="container-top">
+            <div class="perfil">
+                <div class="perfil-correo">
+                    <h1 class="correo" id="perfilEmail">cargando...</h1>
+                    <h1 class="rango" id="perfilRol">-</h1>
+                </div>
+                <div class="perfil-img">
+                    <img src="../../recursos/img/icons/person-icon.webp" alt="">
+                </div>
+            </div>
+        </section>
+
+        <section class="container-body">
+
+            <div class="guia">
+                <h2 class="main-guia">Dashboard</h2>
+            </div>
+
+            <div class="title">
+                <h1>Panel de Administración</h1>
+            </div>
+
+            <!-- TARJETAS -->
+            <div class="cards-grid">
+
+                <div class="stat-card">
+                    <div class="card-icon icon-vehiculos">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 256 256"><path d="M240,104H229.2L201.42,41.5A16,16,0,0,0,186.8,32H69.2a16,16,0,0,0-14.62,9.5L26.8,104H16a8,8,0,0,0,0,16h8v80a16,16,0,0,0,16,16H64a16,16,0,0,0,16-16V184h96v16a16,16,0,0,0,16,16h24a16,16,0,0,0,16-16V120h8a8,8,0,0,0,0-16ZM69.2,48H186.8l24.89,56H44.31ZM64,200H40V184H64Zm128,0V184h24v16Zm24-32H40V120H216Z"></path></svg>
+                    </div>
+                    <span class="card-label">Vehículos</span>
+                    <span class="card-value" id="totalVehiculos">—</span>
+                    <span class="card-sub">modelos registrados</span>
+                </div>
+
+                <div class="stat-card">
+                    <div class="card-icon icon-autos">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 256 256"><path d="M247.42,117l-14-35A15.93,15.93,0,0,0,218.58,72H184V64a8,8,0,0,0-8-8H32A16,16,0,0,0,16,72V184a16,16,0,0,0,16,16H49a32,32,0,0,0,62,0h50a32,32,0,0,0,62,0h17a16,16,0,0,0,16-16V120A7.94,7.94,0,0,0,247.42,117ZM80,208a16,16,0,1,1,16-16A16,16,0,0,1,80,208Zm112,0a16,16,0,1,1,16-16A16,16,0,0,1,192,208Zm0-88H184V88h34.58l14,32Z"></path></svg>
+                    </div>
+                    <span class="card-label">Autos en Flota</span>
+                    <span class="card-value" id="totalAutos">—</span>
+                    <span class="card-sub">unidades totales</span>
+                </div>
+
+                <div class="stat-card">
+                    <div class="card-icon icon-disponibles">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 256 256"><path d="M173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"></path></svg>
+                    </div>
+                    <span class="card-label">Disponibles</span>
+                    <span class="card-value" id="totalDisponibles">—</span>
+                    <span class="card-sub">listos para rentar</span>
+                </div>
+
+                <div class="stat-card">
+                    <div class="card-icon icon-reservas">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 256 256"><path d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM72,48v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80H48V48ZM208,208H48V96H208V208Zm-48-56a8,8,0,0,1-8,8H104a8,8,0,0,1,0-16h48A8,8,0,0,1,160,152Zm16-32a8,8,0,0,1-8,8H88a8,8,0,0,1,0-16h80A8,8,0,0,1,176,120Z"></path></svg>
+                    </div>
+                    <span class="card-label">Reservas Activas</span>
+                    <span class="card-value" id="totalReservas">—</span>
+                    <span class="card-sub">en curso</span>
+                </div>
+
+                <div class="stat-card">
+                    <div class="card-icon icon-usuarios">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 256 256"><path d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"></path></svg>
+                    </div>
+                    <span class="card-label">Usuarios</span>
+                    <span class="card-value" id="totalUsuarios">—</span>
+                    <span class="card-sub">registrados</span>
+                </div>
+
+                <div class="stat-card">
+                    <div class="card-icon icon-ingresos">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 256 256"><path d="M152,120H136V56h8a32,32,0,0,1,32,32,8,8,0,0,0,16,0,48.05,48.05,0,0,0-48-48h-8V24a8,8,0,0,0-16,0V40h-8a48,48,0,0,0,0,96h8v64H104a32,32,0,0,1-32-32,8,8,0,0,0-16,0,48.05,48.05,0,0,0,48,48h16v16a8,8,0,0,0,16,0V216h16a48,48,0,0,0,0-96Zm-40,0a32,32,0,0,1,0-64h8v64Zm40,80H136V136h16a32,32,0,0,1,0,64Z"></path></svg>
+                    </div>
+                    <span class="card-label">Ingresos del Mes</span>
+                    <span class="card-value" id="totalPagos">—</span>
+                    <span class="card-sub">facturado este mes</span>
+                </div>
+
+            </div>
+
+            <!-- TABLA USUARIOS -->
             <div class="section-header">
-                <h3 class="section-title">Lista de Usuarios</h3>
-                <div class="section-actions">
-                    <input type="text" id="searchUsuarios" placeholder="Buscar por nombre o email..." class="search-input">
+                <h2 class="section-title">Lista de Usuarios</h2>
+                <div class="filtros-autos">
+                    <input type="text" id="searchUsuarios" placeholder="Buscar por nombre o email...">
                 </div>
             </div>
 
-            <div class="table-container">
-                <table class="admin-table">
+            <div class="tabla">
+                <table>
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -86,10 +200,12 @@
                 <span class="pagination-info" id="paginationInfo">Página 1 de 1</span>
                 <button class="pagination-btn" id="btnNext">Siguiente →</button>
             </div>
+
         </section>
-    </main>
+    </div>
 
+    <script src="/Frontend/ts/menu.js"></script>
+    <script src="/Frontend/js/extras/admin-cargar_nav.js"></script>
     <script src="../../js/admin-dashboard.js"></script>
-
 </body>
 </html>

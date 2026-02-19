@@ -4,17 +4,8 @@ const tbody = document.querySelector("#tbodyAutos");
 let vehiculosGlobal = [];
 let idvehiculoAEliminar = null;
 
-// cuando carga la página
-document.addEventListener("DOMContentLoaded", () => {
-  listarVehiculos();
-
-  filtroMarca.addEventListener("change", filtrarVehiculos);
-  buscadorModelo.addEventListener("input", filtrarVehiculos);
-});
 
 let listaAutos = [];
-
-fetch("http://localhost:9090/api/v12/autos") .then(res => res.json()) .then(data => { listaAutos = data; }); 
 
 function contarAutos(id) {
   return listaAutos.filter(a => a.vehiculo.vehiculo === Number(id)).length;
@@ -115,6 +106,26 @@ function filtrarVehiculos() {
 
   renderVehiculos(filtrados);
 }
+
+
+// ESTO HACE CARGAR LA PAGINA ==================================================
+
+document.addEventListener("DOMContentLoaded", () => {
+    fetch("http://localhost:9090/api/v12/autos") // PRIMERO SE CARGAN LOS AUTOS, SI NO LUEGO NO LLEGAN A TIEMPO PARA CONTAR CUANTOS AUTOS HAY DISPONIBLES
+    .then(res => res.json())
+    .then(data => {
+      listaAutos = data;
+
+      listarVehiculos();
+    });
+
+  filtroMarca.addEventListener("change", filtrarVehiculos);
+  buscadorModelo.addEventListener("input", filtrarVehiculos);
+});
+
+
+
+// EDIT AND DELETE BUTTON ==================================================
 
 document.addEventListener("click", function (e) {
 

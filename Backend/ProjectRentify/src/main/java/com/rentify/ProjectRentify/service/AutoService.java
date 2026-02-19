@@ -20,4 +20,6 @@ public interface AutoService {
 
     void eliminar(Long id);
     
+    List<Auto> buscarConFiltros(String marca, String modelo);
+    
 }

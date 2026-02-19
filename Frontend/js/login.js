@@ -2,6 +2,7 @@
 
         const API_BASE = 'http://localhost:9090/api';
 
+
         const RUTAS = {
             ADMINISTRADOR: 'admin/Dashboard.html',
             CLIENTE:       'user/Catalogo.html'
@@ -90,5 +91,7 @@
         const u = JSON.parse(raw);
         window.location.href = RUTAS[u.rol] || RUTAS.CLIENTE;
     }
+
 });
+
 

@@ -1,12 +1,20 @@
 package com.rentify.ProjectRentify.service.impl;
 
 import java.io.IOException;
+
 import java.util.List;
+
 import org.springframework.stereotype.Service;
+
+
 import com.rentify.ProjectRentify.dto.UbicacionDTO;
+
 import com.rentify.ProjectRentify.entity.Ubicacion;
+
 import com.rentify.ProjectRentify.repository.UbicacionRepository;
+
 import com.rentify.ProjectRentify.service.UbicacionService;
+
 import lombok.AllArgsConstructor;
 
 @Service
@@ -14,32 +22,19 @@ import lombok.AllArgsConstructor;
 public class UbicacionImpl implements UbicacionService {
 
     private final UbicacionRepository repoUbicacion;
-
+	
     @Override
     public List<Ubicacion> listar() {
         return repoUbicacion.findAll();
     }
-
+    
     @Override
     public Ubicacion guardar(UbicacionDTO dto) throws IOException {
-        Ubicacion ubi = new Ubicacion();
-        ubi.setNombre(dto.getNombre());
-        return repoUbicacion.save(ubi);
-    }
 
-    @Override
-    public Ubicacion actualizar(Long id, UbicacionDTO dto) throws IOException {
-        Ubicacion ubi = repoUbicacion.findById(id)
-                .orElseThrow(() -> new RuntimeException("Ubicación no encontrada con id: " + id));
-        ubi.setNombre(dto.getNombre());
-        return repoUbicacion.save(ubi);
-    }
+    	Ubicacion ubi = new Ubicacion();
 
-    @Override
-    public void eliminar(Long id) {
-        if (!repoUbicacion.existsById(id)) {
-            throw new RuntimeException("Ubicación no encontrada con id: " + id);
-        }
-        repoUbicacion.deleteById(id);
+    	ubi.setNombre(dto.getNombre());
+
+        return repoUbicacion.save(ubi);
     }
 }

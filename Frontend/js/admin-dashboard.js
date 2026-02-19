@@ -1,115 +1,125 @@
-// Configuración de la API
-const API_URL = 'http://localhost:9090/api/admin';
-let currentPage = 0;
-const pageSize = 10;
-let totalPages = 1;
+// ═══════════════════════════════════════════════════════
+//  dashboard.js  –  Rentify Admin
+// ═══════════════════════════════════════════════════════
 
-// === CARGAR ESTADÍSTICAS DEL DASHBOARD ===
-async function cargarEstadisticas() {
+const API_URL       = 'http://localhost:9090/api/admin';
+const API_VEHICULOS = 'http://localhost:9090/api/v12/vehiculos';
+const API_AUTOS     = 'http://localhost:9090/api/v12/autos';
+
+let currentPage = 0;
+const pageSize  = 10;
+let totalPages  = 1;
+
+// ── HELPERS ──────────────────────────────────────────────
+function setText(id, value) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = value;
+}
+
+function formatearFecha(fechaString) {
+    const fecha = new Date(fechaString);
+    const dia   = fecha.getDate().toString().padStart(2, '0');
+    const mes   = (fecha.getMonth() + 1).toString().padStart(2, '0');
+    const anio  = fecha.getFullYear();
+    return `${dia}/${mes}/${anio}`;
+}
+
+// ── ESTADÍSTICAS ADMIN (reservas, usuarios, ingresos) ────
+async function cargarEstadisticasAdmin() {
     try {
-        const response = await fetch(`${API_URL}/dashboard`);
-        
-        if (!response.ok) {
-            throw new Error('Error al obtener datos del servidor');
-        }
-        
-        const data = await response.json();
-        
-        // Actualizar tarjetas
-        document.getElementById('totalAutos').textContent = data.totalAutos || 0;
-        document.getElementById('totalReservas').textContent = data.reservasActivas || 0;
-        document.getElementById('totalUsuarios').textContent = data.totalUsuarios || 0;
-        document.getElementById('totalPagos').textContent = data.ingresosMes 
-            ? `$${data.ingresosMes.toLocaleString()}` 
-            : '$0';
-        
-    } catch (error) {
-        console.error('Error al cargar estadísticas:', error);
+        const res = await fetch(`${API_URL}/dashboard`);
+        if (!res.ok) return;
+        const data = await res.json();
+
+        setText('totalReservas', data.reservasActivas ?? 0);
+        setText('totalUsuarios', data.totalUsuarios   ?? 0);
+        setText('totalPagos',
+            data.ingresosMes != null
+                ? `$${data.ingresosMes.toLocaleString()}`
+                : '$0'
+        );
+    } catch (err) {
+        console.error('Error estadísticas:', err);
     }
 }
 
-// === CARGAR LISTA DE USUARIOS ===
+// ── CONTADORES FLOTA (vehículos y autos) ─────────────────
+async function cargarContadoresFlota() {
+    try {
+        const [resV, resA] = await Promise.all([
+            fetch(API_VEHICULOS),
+            fetch(API_AUTOS)
+        ]);
+
+        if (resV.ok) {
+            const vehiculos = await resV.json();
+            setText('totalVehiculos', vehiculos.length ?? 0);
+        }
+
+        if (resA.ok) {
+            const autos = await resA.json();
+            setText('totalAutos', autos.length ?? 0);
+            const disponibles = autos.filter(a => a.estado === 'DISPONIBLE').length;
+            setText('totalDisponibles', disponibles);
+        }
+    } catch (err) {
+        console.error('Error flota:', err);
+    }
+}
+
+// ── TABLA USUARIOS ────────────────────────────────────────
 async function cargarUsuarios(page = 0, search = '') {
     try {
         let url = `${API_URL}/usuarios?page=${page}&size=${pageSize}`;
-        if (search) {
-            url += `&search=${encodeURIComponent(search)}`;
-        }
-        
-        const response = await fetch(url);
-        
-        if (!response.ok) {
-            throw new Error('Error al obtener usuarios');
-        }
-        
-        const data = await response.json();
-        
-        // Actualizar variables de paginación
-        currentPage = data.number || 0;
-        totalPages = data.totalPages || 1;
-        
-        // Renderizar tabla
-        renderUsuarios(data.content || []);
-        
-        // Actualizar paginación
+        if (search) url += `&search=${encodeURIComponent(search)}`;
+
+        const res = await fetch(url);
+        if (!res.ok) throw new Error('Error al obtener usuarios');
+
+        const data  = await res.json();
+        currentPage = data.number     ?? 0;
+        totalPages  = data.totalPages ?? 1;
+
+        renderUsuarios(data.content ?? []);
         actualizarPaginacion();
-        
-    } catch (error) {
-        console.error('Error al cargar usuarios:', error);
+
+    } catch (err) {
+        console.error('Error usuarios:', err);
         document.getElementById('usuariosTableBody').innerHTML = `
-            <tr>
-                <td colspan="8" class="error-cell">Error al cargar usuarios. Verifique la conexión.</td>
-            </tr>
+            <tr><td colspan="8" class="error-cell">Error al cargar usuarios. Verifique la conexión.</td></tr>
         `;
     }
 }
 
-// === RENDERIZAR USUARIOS EN LA TABLA ===
 function renderUsuarios(usuarios) {
     const tbody = document.getElementById('usuariosTableBody');
-    
+
     if (!usuarios || usuarios.length === 0) {
-        tbody.innerHTML = `
-            <tr>
-                <td colspan="8" class="empty-cell">No se encontraron usuarios</td>
-            </tr>
-        `;
+        tbody.innerHTML = `<tr><td colspan="8" class="empty-cell">No se encontraron usuarios</td></tr>`;
         return;
     }
-    
-    tbody.innerHTML = usuarios.map(usuario => `
+
+    tbody.innerHTML = usuarios.map(u => `
         <tr>
-            <td>${usuario.id}</td>
-            <td>${usuario.nombres} ${usuario.apellidos}</td>
-            <td>${usuario.email}</td>
-            <td>${usuario.documento}</td>
-            <td>${usuario.telefono}</td>
-            <td><span class="badge badge-${usuario.rol.toLowerCase()}">${usuario.rol}</span></td>
-            <td><span class="badge badge-${usuario.activo ? 'activo' : 'inactivo'}">${usuario.activo ? 'Activo' : 'Inactivo'}</span></td>
-            <td>${formatearFecha(usuario.fechaRegistro)}</td>
+            <td>${u.id}</td>
+            <td>${u.nombres} ${u.apellidos}</td>
+            <td>${u.email}</td>
+            <td>${u.documento}</td>
+            <td>${u.telefono}</td>
+            <td><span class="badge badge-${u.rol.toLowerCase()}">${u.rol}</span></td>
+            <td><span class="badge badge-${u.activo ? 'activo' : 'inactivo'}">${u.activo ? 'Activo' : 'Inactivo'}</span></td>
+            <td>${formatearFecha(u.fechaRegistro)}</td>
         </tr>
     `).join('');
 }
 
-// === ACTUALIZAR PAGINACIÓN ===
 function actualizarPaginacion() {
-    document.getElementById('paginationInfo').textContent = `Página ${currentPage + 1} de ${totalPages}`;
-    
-    // Habilitar/deshabilitar botones
+    setText('paginationInfo', `Página ${currentPage + 1} de ${totalPages}`);
     document.getElementById('btnPrevious').disabled = currentPage === 0;
-    document.getElementById('btnNext').disabled = currentPage >= totalPages - 1;
+    document.getElementById('btnNext').disabled     = currentPage >= totalPages - 1;
 }
 
-// === FORMATEAR FECHA ===
-function formatearFecha(fechaString) {
-    const fecha = new Date(fechaString);
-    const dia = fecha.getDate().toString().padStart(2, '0');
-    const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
-    const anio = fecha.getFullYear();
-    return `${dia}/${mes}/${anio}`;
-}
-
-// === BÚSQUEDA ===
+// ── BÚSQUEDA ──────────────────────────────────────────────
 let searchTimeout;
 document.getElementById('searchUsuarios').addEventListener('input', (e) => {
     clearTimeout(searchTimeout);
@@ -119,33 +129,43 @@ document.getElementById('searchUsuarios').addEventListener('input', (e) => {
     }, 500);
 });
 
-// === EVENTOS DE PAGINACIÓN ===
+// ── PAGINACIÓN ────────────────────────────────────────────
 document.getElementById('btnPrevious').addEventListener('click', () => {
     if (currentPage > 0) {
-        const search = document.getElementById('searchUsuarios').value;
-        cargarUsuarios(currentPage - 1, search);
+        cargarUsuarios(currentPage - 1, document.getElementById('searchUsuarios').value);
     }
 });
 
 document.getElementById('btnNext').addEventListener('click', () => {
     if (currentPage < totalPages - 1) {
-        const search = document.getElementById('searchUsuarios').value;
-        cargarUsuarios(currentPage + 1, search);
+        cargarUsuarios(currentPage + 1, document.getElementById('searchUsuarios').value);
     }
 });
 
-// === INICIALIZAR AL CARGAR LA PÁGINA ===
-document.addEventListener('DOMContentLoaded', () => {
-    cargarEstadisticas();
-    cargarUsuarios();
-    
-    // Actualizar estadísticas cada 30 segundos
-    setInterval(cargarEstadisticas, 30000);
+// ── CERRAR SESIÓN ─────────────────────────────────────────
+document.getElementById('btn-cerrar-sesion').addEventListener('click', (e) => {
+    e.preventDefault();
+    localStorage.removeItem('rentify_usuario');
+    window.location.href = '../../html/login.html';
 });
 
-        // ─── Cerrar sesión ────────────────────────────────────────────────────────────
-        document.getElementById('btn-cerrar-sesion').addEventListener('click', (e) => {
-            e.preventDefault();
-            localStorage.removeItem('rentify_usuario'); // Borra la sesión guardada
-            window.location.href = '../../html/login.html'; // Regresa al login
-        });
+// ── PERFIL DESDE LOCALSTORAGE ─────────────────────────────
+function cargarPerfil() {
+    const usuario = JSON.parse(localStorage.getItem('rentify_usuario') || '{}');
+    if (usuario.email) setText('perfilEmail', usuario.email);
+    if (usuario.rol)   setText('perfilRol',   usuario.rol);
+}
+
+// ── INIT ──────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+    cargarPerfil();
+    cargarEstadisticasAdmin();
+    cargarContadoresFlota();
+    cargarUsuarios();
+
+    // Refresco automático cada 30 s
+    setInterval(() => {
+        cargarEstadisticasAdmin();
+        cargarContadoresFlota();
+    }, 30_000);
+});

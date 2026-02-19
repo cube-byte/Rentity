@@ -44,7 +44,7 @@
                         Ventas
                     </div>
                     <ul class="submenu">
-                        <a href="#"><li>Reservas</li></a>
+                        <a href="/Frontend/html/admin/Reservas.html"><li>Reservas</li></a>
                         <a href="#"><li>Pagos</li></a>
                         <a href="#"><li>Comprobantes</li></a>
                     </ul>
@@ -144,37 +144,22 @@
 
                                 <h2 class="h2-box">Vehiculo Seleccionado</h2>
                                 <div class="vehiculo-selector" id="vehiculoSelector">
-                                    <div class="vehiculo-seleccionado">
+                                    <div class="vehiculo-seleccionado" id="vehiculoSeleccionado">
                                         Selecciona un vehículo
                                     </div>
-                                    <div class="vehiculo-opciones">
-                                        <div class="vehiculo-opcion" data-id="1">
+                                    <div class="vehiculo-opciones" id="vehiculoOpciones">
+
+                                        <!--<div class="vehiculo-opcion" data-id="1">
                                                 <img src="../../../recursos/img/autos/car_toyota_corolla.jpg">
                                                 <div class="info">
                                                     <h3>Toyota Corolla</h3>
                                                     <p>2024 • SUV • Auto</p>
                                                     <span>S/ 100 por día</span>
                                                 </div>
-                                        </div>
-                                        <div class="vehiculo-opcion" data-id="2">
-                                                <img src="../../../recursos/img/autos/car_kia_sportage.jpg">
-                                                <div class="info">
-                                                    <h3>KIA Sportage</h3>
-                                                    <p>2024 • SUV • Camioneta</p>
-                                                    <span>S/ 140 por día</span>
-                                                </div>
-                                        </div>
-                                        <div class="vehiculo-opcion" data-id="3">
-                                                <img src="../../../recursos/img/autos/car_nissan_altima.jpg">
-                                                <div class="info">
-                                                    <h3>Nissan Altima</h3>
-                                                    <p>2025 • SUV • Auto</p>
-                                                    <span>S/ 120 por día</span>
-                                                </div>
-                                        </div>
+                                        </div>-->
                                     </div>
                                 </div>
-                                <input type="hidden" id="vehiculoSeleccionado">
+                                <input type="hidden" id="vehiculoId">
                             </div>
 
                             <div class="fecha-box">
@@ -197,17 +182,15 @@
                             <div class="precio-box">
 
                                 <div class="precio-calculo">
-                                    <span class="detalle">
-                                        8 días × S/ 100 por día
+                                    <span class="detalle" style="display: flex;">
+                                        <p style="margin: 0px 5px;" id="dias-vista">0</p> días x S/   <p style="margin: 0px 5px;" id="precio-vista">0</p>  por día
                                     </span>
-                                    <span class="subtotal">
-                                        S/ 800
-                                    </span>
+                                    <p class="subtotal" id="subtotal">S/ 0</p>
                                 </div>
 
                                 <div class="precio-total">
                                     <span>Total a pagar</span>
-                                    <strong>S/ 800</strong>
+                                    <strong>S/ <span id="precio">0</span></strong>
                                 </div>
 
                             </div>
@@ -254,8 +237,45 @@
     });
     });
 </script>
+<script>
 
+const fechaInicio = document.getElementById("fechaInicio");
+const fechaFin = document.getElementById("fechaFin");
+const vistaDias = document.getElementById("dias-vista");
+const vistaTotal = document.getElementById("precio");
+const vistaPrecio = document.getElementById("precio-vista");
+
+fechaInicio.addEventListener("change", calcular);
+fechaFin.addEventListener("change", calcular);
+
+function calcular() {
+
+    const inicio = fechaInicio.value;
+    const fin = fechaFin.value;
+
+    if (!inicio || !fin) return;
+
+    const fInicio = new Date(inicio);
+    const fFin = new Date(fin);
+
+    const diferenciaMs = fFin - fInicio;
+    const dias = Math.ceil(diferenciaMs / 86400000);
+
+    const precioDia = parseFloat(vistaPrecio.textContent);
+
+    const total = dias * precioDia;
+
+    vistaDias.textContent = dias;
+    vistaTotal.textContent = total;
+
+    const vistaSubTotal = document.getElementById("subtotal");
+
+    vistaSubTotal.textContent = "S/ " + total;
+}
+
+</script>
     <script src="/Frontend/ts/menu.js"></script>
-    <script src="/Frontend/js/createReserva.js"></script>
+    <script src="/Frontend/js/extras/cargar_vehiculosDetallados.js"></script>
+    <script src="/Frontend/js/createReservas.js"></script>
 </body>
 </html>

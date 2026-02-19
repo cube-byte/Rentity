@@ -142,3 +142,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Actualizar estadísticas cada 30 segundos
     setInterval(cargarEstadisticas, 30000);
 });
+
+        // ─── Cerrar sesión ────────────────────────────────────────────────────────────
+        document.getElementById('btn-cerrar-sesion').addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem('rentify_usuario'); // Borra la sesión guardada
+            window.location.href = '../../html/login.html'; // Regresa al login
+        });

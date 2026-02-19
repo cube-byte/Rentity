@@ -88,5 +88,10 @@ public class AutoImpl implements AutoService {
         repoAuto.deleteById(id);
     }
     
+    @Override
+    public List<Auto> buscarConFiltros(String marca, String modelo) {
+        return repoAuto.buscarConFiltros(marca, modelo);
+    }
+    
     
 }

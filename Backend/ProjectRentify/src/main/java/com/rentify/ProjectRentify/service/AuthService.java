@@ -80,4 +80,9 @@ public class AuthService {
 
         return new LoginResponse(usuarioGuardado, "Usuario registrado exitosamente");
     }
+    
+    public Usuario obtenerPorId(Long id) {
+        return usuarioRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+    }
 }

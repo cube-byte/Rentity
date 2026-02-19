@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rentify.ProjectRentify.dto.AutoCreateDTO;
@@ -30,10 +31,16 @@ public class AutoController {
 
 	private final AutoService autoService;
 
-    @GetMapping
-    public ResponseEntity<?> listarAutos() {
-        return ResponseEntity.ok(autoService.listar());
-    }
+	@GetMapping
+	public ResponseEntity<?> listarAutos(
+	    @RequestParam(required = false) String marca,
+	    @RequestParam(required = false) String modelo
+	) {
+	    if (marca != null || modelo != null) {
+	        return ResponseEntity.ok(autoService.buscarConFiltros(marca, modelo));
+	    }
+	    return ResponseEntity.ok(autoService.listar());
+	}
 
     @PostMapping
     public ResponseEntity<?> crear(@RequestBody AutoCreateDTO dto) throws IOException {

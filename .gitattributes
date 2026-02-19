@@ -1,0 +1,10 @@
+# HTML generado automáticamente
+dist/**/*.html linguist-generated=true
+build/**/*.html linguist-generated=true
+
+# HTML de plantillas compiladas
+public/**/*.html linguist-generated=true
+
+# HTML de librerías o demos
+vendor/**/*.html linguist-vendored=true
+node_modules/**/*.html linguist-vendored=true

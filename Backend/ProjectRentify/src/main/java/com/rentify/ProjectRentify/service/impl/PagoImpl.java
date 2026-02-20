@@ -10,7 +10,6 @@ import com.rentify.ProjectRentify.entity.Pago;
 import com.rentify.ProjectRentify.entity.Reserva;
 
 import com.rentify.ProjectRentify.repository.PagoRepository;
-import com.rentify.ProjectRentify.repository.ReservaRepository;
 
 import com.rentify.ProjectRentify.service.PagoService;
 
@@ -22,7 +21,6 @@ import lombok.AllArgsConstructor;
 public class PagoImpl implements PagoService{
 	
     private final PagoRepository pagoRepo;
-    private final ReservaRepository reservaRepo;
 
     @Override
     public List<Pago> listar() {

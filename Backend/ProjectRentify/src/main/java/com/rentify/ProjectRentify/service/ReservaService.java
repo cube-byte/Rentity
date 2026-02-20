@@ -13,4 +13,5 @@ public interface ReservaService {
 
     Reserva buscarPorId(Long id);
     
+    List<Reserva> listarPorUsuario(Long idUsuario);
 }

@@ -44,4 +44,9 @@ public class ReservaController {
     public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
         return ResponseEntity.ok(reservaSvc.buscarPorId(id));
     }
+    
+    @GetMapping("/usuario/{idUsuario}")
+    public ResponseEntity<?> listarPorUsuario(@PathVariable Long idUsuario) {
+        return ResponseEntity.ok(reservaSvc.listarPorUsuario(idUsuario));
+    }
 }

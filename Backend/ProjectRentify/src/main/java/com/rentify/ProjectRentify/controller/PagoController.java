@@ -1,7 +1,5 @@
 package com.rentify.ProjectRentify.controller;
 
-import java.io.IOException;
-
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -35,7 +33,7 @@ public class PagoController {
     }
 	
     @PutMapping(value = "/{id}")
-    public ResponseEntity<?> completarPago(@PathVariable Long id,@RequestBody PagoConfirmarDTO dto) throws IOException {
+    public ResponseEntity<?> completarPago(@PathVariable Long id,@RequestBody PagoConfirmarDTO dto) {
         Pago pago = pagoSvc.completarPago(id,dto);
         return ResponseEntity.ok(pago);
     }

@@ -1,4 +1,4 @@
-package com.rentify.ProjectRentify.service.impl;
+ package com.rentify.ProjectRentify.service.impl;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -9,15 +9,18 @@ import org.springframework.stereotype.Service;
 
 import com.rentify.ProjectRentify.dto.ReservaCreateDTO;
 import com.rentify.ProjectRentify.entity.Auto;
+import com.rentify.ProjectRentify.entity.Pago;
 import com.rentify.ProjectRentify.entity.Reserva;
 import com.rentify.ProjectRentify.entity.Usuario;
 import com.rentify.ProjectRentify.entity.Vehiculo;
 import com.rentify.ProjectRentify.repository.AutoRepository;
+import com.rentify.ProjectRentify.repository.PagoRepository;
 import com.rentify.ProjectRentify.repository.ReservaRepository;
 import com.rentify.ProjectRentify.repository.UsuarioRepository;
 import com.rentify.ProjectRentify.repository.VehiculoRepository;
 import com.rentify.ProjectRentify.service.ReservaService;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -28,6 +31,7 @@ public class ReservaImpl implements ReservaService{
     private final VehiculoRepository vehiculoRepo;
     private final AutoRepository autoRepo;
     private final UsuarioRepository usuarioRepo;
+    private final PagoRepository pagoRepo;
     
 	
     @Override
@@ -36,33 +40,51 @@ public class ReservaImpl implements ReservaService{
     }
     
     @Override
+    @Transactional
     public Reserva guardar(ReservaCreateDTO dto) {
     
     	
-    	BigDecimal precioBase = obtenerPrecioVehiculo(dto.getIdVehiculo());
+        Auto auto = autoRepo.findById(dto.getIdAuto())
+                .orElseThrow(() -> new RuntimeException("Auto no encontrado"));
+    	
+    	
+        BigDecimal precioBase = obtenerPrecioVehiculo(dto.getIdVehiculo());
+        if (precioBase == null) {
+            throw new RuntimeException("Vehículo no encontrado");
+        }
+
         long dias = ChronoUnit.DAYS.between(dto.getFecha_inicio(), dto.getFecha_fin());
+        if (dias <= 0) dias = 1;
+
         BigDecimal precioTotal = precioBase.multiply(BigDecimal.valueOf(dias));
-    	
-    	Reserva reserva = new Reserva();
-    	
-    	reserva.setUsuario(obtenerUsuario(dto.getIdUsuario()));
-        reserva.setNombres(dto.getNombres());
-        reserva.setEmail(dto.getEmail());
-        reserva.setTelefono(dto.getTelefono());
-        reserva.setDNI(dto.getDNI());
-    	
-        
-    	reserva.setVehiculo(obtenerVehiculo(dto.getIdVehiculo()));
-    	reserva.setAuto(obtenerAuto(dto.getIdAuto()));
-    	
-    	reserva.setFecha_inicio(dto.getFecha_inicio());
-    	reserva.setFecha_fin(dto.getFecha_fin());
-    	
-    	reserva.setPrecio_total(precioTotal);
+
+        Reserva reserva = new Reserva();
+
+        reserva.setUsuario(obtenerUsuario(dto.getIdUsuario()));
+
+        reserva.setVehiculo(obtenerVehiculo(dto.getIdVehiculo()));
+        reserva.setAuto(obtenerAuto(dto.getIdAuto()));
+
+        reserva.setFecha_inicio(dto.getFecha_inicio());
+        reserva.setFecha_fin(dto.getFecha_fin());
+
+        reserva.setPrecio_total(precioTotal);
         reserva.setFecha(LocalDateTime.now());
         reserva.setEstado("NUEVA");
+        
+        auto.setEstado("OCUPADO");
 
-        return reservaRepo.save(reserva);
+        Reserva reservaGuardada = reservaRepo.save(reserva);
+        
+        Pago pago = new Pago();
+        pago.setReserva(reservaGuardada);
+        pago.setMonto(reserva.getPrecio_total());
+        pago.setFecha(LocalDateTime.now());
+        pago.setEstado("PENDIENTE");
+        
+        pagoRepo.save(pago);
+        
+        return reservaGuardada;
     }
 
     @Override
@@ -82,9 +104,8 @@ public class ReservaImpl implements ReservaService{
                 .orElseThrow(() -> new RuntimeException("Auto no encontrado"));
     }
 
-    private Usuario obtenerUsuario(Long idUsuario) {
-        if (idUsuario == null) return null; 
-        return usuarioRepo.findById(idUsuario)
+    private Usuario obtenerUsuario(Long id) {
+        return usuarioRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
     }
     

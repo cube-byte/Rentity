@@ -28,13 +28,6 @@ table,th,td{
     background-color: #333;
     border-radius: 200px;
 }
-.estado-text{
-    padding: 10px;
-    background-color: #333;
-    color: white;
-    border-radius: 10px;
-}
-
 .disponible{
     background-color: rgb(44, 156, 44);
 }
@@ -66,6 +59,24 @@ table,th,td{
 .btn-delete:hover{
     background-color: #ff2d2d;
 }
+
+.btn-confirm{
+    background-color: #1da524;
+    color: white;
+    font-weight: 600;
+}
+.btn-confirm:hover{
+    background-color: #378d3c;
+}
+.btn-cancelx{
+    background-color: #c42727;
+    color: white;
+    font-weight: 600;
+}
+.btn-cancelx:hover{
+    background-color: #da4949;
+}
+
 .button-crud svg{
     fill: white;
     width: 20px;

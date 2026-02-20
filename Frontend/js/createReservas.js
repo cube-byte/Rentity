@@ -32,19 +32,13 @@ function FechaFormatoLocalDateTime(fecha){
 
 function crearReserva() {
 
+  const usuarioId = document.getElementById("buscarCliente").value;
   const vehiculoId = document.getElementById("vehiculoId").value;
   const autoId = obtenerAutoAleatorioPorVehiculo(vehiculoId);
 
   const reserva = {
 
-    //usuario: document.getElementById("buscarCliente").value,
-     
-
-    nombres: document.getElementById("inputNombres").value,
-    email: document.getElementById("inputEmail").value,
-    telefono: document.getElementById("inputTelefono").value,
-    dni: document.getElementById("inputDni").value,
-
+    idUsuario: Number(usuarioId),
     idVehiculo: Number(vehiculoId),
     idAuto: Number(autoId),
 
@@ -52,16 +46,14 @@ function crearReserva() {
     fecha_fin: FechaFormatoLocalDateTime(document.getElementById("fechaFin").value),
 
   };
-  console.log("nombres:", (document.getElementById("inputNombres").value));
-  console.log("email:", (document.getElementById("inputEmail").value));
-  console.log("telefono:", (document.getElementById("inputTelefono").value));
-  console.log("dni:", (document.getElementById("inputDni").value));
+
+  console.log("idUsuario:", (Number(usuarioId)));
   console.log("idVehiculo:", (Number(vehiculoId)));
   console.log("idAuto:", (Number(autoId)));
   console.log("fecha_inicio:", (FechaFormatoLocalDateTime(document.getElementById("fechaInicio").value)));
   console.log("fecha_fin:", (FechaFormatoLocalDateTime(document.getElementById("fechaFin").value)));
 
-  if (!reserva.nombres || !reserva.email || !reserva.telefono || !reserva.dni || !reserva.idVehiculo || !reserva.idAuto || !reserva.fecha_inicio || !reserva.fecha_fin) {
+  if (!reserva.idUsuario || !reserva.idVehiculo || !reserva.idAuto || !reserva.fecha_inicio || !reserva.fecha_fin) {
     alert("Completa los campos obligatorios");
     return;
   }

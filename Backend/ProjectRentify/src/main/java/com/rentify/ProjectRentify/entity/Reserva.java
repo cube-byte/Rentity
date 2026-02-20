@@ -28,13 +28,8 @@ public class Reserva {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_usuario", nullable = true)
+    @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
-    
-    private String nombres;
-    private String email;
-    private String telefono;
-    private String DNI;
     
     @ManyToOne
     @JoinColumn(name = "id_vehiculo", nullable = false)

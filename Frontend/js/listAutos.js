@@ -20,9 +20,13 @@ function nombreVehiculo(auto) {
 function estadoClase(estado) {
   switch (estado) {
     case "DISPONIBLE":
-      return "disponible";
+      return "disponible-state";
     case "OCUPADO":
-      return "ocupado";
+      return "ocupado-state";
+    case "EN MANTENIMIENTO":
+      return "mantenimiento-state";
+    case "FUERA DE SERVICIO":
+      return "fuera_servicio-state";
     default:
       return "desconocido";
   }

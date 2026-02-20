@@ -7,11 +7,12 @@ import lombok.Data;
 @Data
 public class ReservaCreateDTO {
 	
-    private Long idUsuario;
-    private String nombres;
-    private String email;
-    private String telefono;
-    private String DNI;
+	private Long idUsuario;
+	
+	//private String nombres;
+    //private String email;
+	//private String telefono;
+	//private String DNI;
 
     private Long idVehiculo;
     private Long idAuto;

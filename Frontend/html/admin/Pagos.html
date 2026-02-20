@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vehiculos System</title>
-    <link rel="stylesheet" href="../../css/admin/layout.css">
-    <link rel="stylesheet" href="../../css/admin/vehiculos.css">
-    <link rel="stylesheet" href="../../css/admin/table.css">
+    <title>Pago System</title>
+    <link rel="stylesheet" href="/Frontend/css/admin/layout.css">
+    <link rel="stylesheet" href="/Frontend/css/admin/pagos.css">
+    <link rel="stylesheet" href="/Frontend/css/admin/table.css">
+    <link rel="stylesheet" href="../../css/decotation/extras.css">
 </head>
 <body>
     <nav class="navegador">
@@ -92,28 +93,55 @@
         </section>
         <section class="container-body">
             <div class="guia">
-                <h2 class="main-guia">Dashboad</h2> <h2>/</h2> <h2 class="sub-guia">Vehiculos</h2>
+                <h2 class="main-guia">Dashboard</h2>
+                <h2>/</h2>
+                <h2 class="sub-guia">Ventas</h2>
+                <h2>/</h2>
+                <h2 class="sub-guia">Pagos</h2>
             </div>
             <div class="title">
-                <h1>Lista de Vehiculos</h1>
+                <h1>Lista de Pagos</h1>
             </div>
             <div style="display: flex;flex-direction: row-reverse;justify-content: space-between; margin-bottom: 20px;">
                 <div class="list-header">
-                    <a class="buttom-create" href="../admin/Create/Vehiculos.html">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#000000" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"></path></svg>
-                        <h2>Crear nuevo</h2>
-                    </a>
+
                 </div>
                 <div class="filtros-autos">
-                    <select id="filtroMarca">
-                        <option value="">Todas las marcas</option>
+
+                    <input
+                        type="text"
+                        id="buscadorPago"
+                        placeholder="Buscar pago..."
+                    />
+
+                    <input
+                        type="text"
+                        id="buscadorReserva"
+                        placeholder="Buscar Reserva..."
+                    />
+
+                    <input
+                        type="text"
+                        id="buscadorUsuario"
+                        placeholder="Buscar Usuario..."
+                    />
+
+                    <select id="filtroVehiculos">
+                        <option value="">Todos los vehiculos</option>
                     </select>
 
                     <input
                         type="text"
-                        id="buscadorModelo"
-                        placeholder="Buscar por modelo..."
+                        id="buscadorPlaca"
+                        placeholder="Buscar Auto por Placa..."
                     />
+
+                    <select id="filtroDisponibilidad">
+                        <option value="">Toda disponibilidad</option>
+                        <option value="PENDIENTE">PENDIENTE</option>
+                        <option value="REALIZADO">REALIZADO</option>
+                    </select>
+
                 </div>
             </div>
             <div class="tabla" >
@@ -121,31 +149,27 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Diseño</th>
-                            <th>Modelo</th>
-                            <th>Marca</th>
-                            <th>Año</th>
-                            <th>Categoria</th>
-                            <th>Costo dia</th>
-                            <th>Cantidad</th>
-                            <th>Disponibles</th>
+                            <th>Reserva</th>
+                            <th>Usuario</th>
+                            <th>Vehiculo</th>
+                            <th>Auto</th>
+                            <th>Total</th>
+                            <th>Fecha</th>
                             <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody id="tbodyAutos">
+                    <tbody id="tbodyPagos">
                         <!--<tr>
                             <td>1</td>
-                            <td style="width: 0;"><img src="/Frontend/recursos/img/autos/car_toyota_rav4.jpg" alt=""></td>
-                            <td>SENTRA</td>
-                            <td>NISSAN</td>
-                            <td>2024</td>
-                            <td>AUTO</td>
-                            <td>S/ 420</td>
-                            <td>5</td>
-                            <td>2</td>
+                            <td>OUT-120</td>
+                            <td>COROLLA TOYOTA 2023</td>
+                            <td>BLANCO</td>
+                            <td>12-2-2023</td>
                             <td style="justify-items: center;">
-                                <div class="estado indisponible"></div>
+                                <div class="estado-text disponible">
+                                    <h5>DISPONIBLE</h5>
+                                </div>
                             </td>
                             <td>
                                 <div class="buttons-table">
@@ -167,14 +191,11 @@
 
     <div id="modalDelete" class="modal-delete hidden">
         <div class="modal-content">
-            <h3>¿Eliminar este vehículo?</h3>
-
-            <img id="deleteImg" src="" alt="Auto">
+            <h3>¿Eliminar este Reserva?</h3>
 
             <p>
-            <strong id="deleteMarca"></strong>
-            <span id="deleteModelo"></span>
-            <span id="deleteYear"></span>
+            <strong id="deletePlaca"></strong>
+            <span id="deleteVehiculo"></span>
             </p>
 
             <div class="modal-actions">
@@ -183,9 +204,8 @@
             </div>
         </div>
     </div>
-
     <script src="/Frontend/ts/menu.js"></script>
-    <script src="../../js/listVehiculo.js"></script>
+    <script src="/Frontend/js/listPagos.js"></script>
 
 </body>
 </html>

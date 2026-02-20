@@ -8,14 +8,15 @@ import lombok.Data;
 @Data
 public class ReservaDTO {
 
-    private String nombres;
-    private String email;
-    private String telefono;
-    private String DNI;
+	private Long idUsuario;
+	//private String nombres;
+	//private String email;
+	//private String telefono;
+	//private String DNI;
 
     private Long idVehiculo;
     private Long idAuto;
-    private Long idUsuario;
+    
     
     private LocalDateTime fecha_inicio;
     private LocalDateTime fecha_fin;

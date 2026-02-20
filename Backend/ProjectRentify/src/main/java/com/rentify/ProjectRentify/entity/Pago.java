@@ -33,7 +33,7 @@ public class Pago {
     
     private BigDecimal monto;
     private String metodo; // Tarjeta, Transferencia
+    
     private String estado; // PENDIENTE, COMPLETADO
-
     private LocalDateTime fecha;
 }

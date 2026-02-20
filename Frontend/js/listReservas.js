@@ -20,13 +20,13 @@ function nombreVehiculo(reserva) {
 function estadoClase(estado) {
   switch (estado) {
     case "NUEVA":
-      return "nueva";
+      return "nuevo-state";
     case "CONFIRMADA":
-      return "confirmada";
+      return "confirm-state";
     case "REALIZADA":
-      return "realizada";
+      return "proceso-state";
     case "TERMINADA":
-      return "terminada";
+      return "terminado-state";
     default:
       return "desconocido";
   }
@@ -60,14 +60,14 @@ function renderReservas(lista) {
 
     fila.innerHTML = `
         <td>${reserva.id}</td>
-        <td>${reserva.nombres}</td>
-        <td>${reserva.email}</td>
+        <td>${reserva.usuario.nombres}</td>
+        <td>${reserva.usuario.email}</td>
         <td>${nombre}</td>
         <td>${reserva.auto.placa}</td>
         <td>${reserva.auto.color}</td>
         <td>${fechanormal(reserva.fecha_inicio)}</td>
         <td>${fechanormal(reserva.fecha_fin)}</td>
-        <td>${reserva.precio_total}</td>
+        <td>$ ${reserva.precio_total}</td>
         <td>${fechanormal(reserva.fecha)}</td>
         <td style="justify-items:center;">
             <div class="estado-text ${estadoClase(reserva.estado)}">

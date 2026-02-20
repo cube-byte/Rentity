@@ -190,3 +190,8 @@
         .form-img img{
             width: 100%;
         }
+
+        .color-picker select {
+  padding: 8px 12px;
+  font-size: 16px;
+}

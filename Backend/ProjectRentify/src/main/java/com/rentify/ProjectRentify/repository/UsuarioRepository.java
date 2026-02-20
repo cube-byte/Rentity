@@ -1,4 +1,4 @@
-package com.rentify.ProjectRentify.repository;
+	package com.rentify.ProjectRentify.repository;
 
 import com.rentify.ProjectRentify.entity.Usuario;
 import org.springframework.data.domain.Page;

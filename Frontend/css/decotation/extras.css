@@ -1,0 +1,75 @@
+
+.estado-text{
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border-radius: 10px;
+}
+.disponible-state{
+    background-color: #1b911b;
+}
+
+.mantenimiento-state{
+    background-color: rgb(44, 115, 180);
+}
+.ocupado-state{
+    background-color: #d88519;
+}
+.fuera_servicio-state{
+    background-color: #a72828;
+}
+
+.nuevo-state{
+    background-color: #80cc7d;
+}
+.confirm-state{
+    background-color: #19d8df;
+}
+
+.pendiente-state{
+    background-color: #eea00e;
+}
+
+.realizado-state{
+    background-color: #15c90f;
+}
+.proceso-state{
+    background-color: #ffc710;
+}
+.terminado-state{
+    background-color: #bd4545;
+}
+
+.color-select{
+    background-color: #252525;
+}
+.c-opgreen{
+    background-color: #426342;
+}
+.c-darkgreen{
+    background-color: #2f422f;
+}
+.c-green{
+    background-color: #77a377;
+}
+.c-darkred{
+    background-color: #751919;
+}
+.c-red{
+    background-color: #913131;
+}
+.c-white{
+    background-color: #ffffff;
+}
+.c-gray{
+    background-color: #bbbbbb;
+}
+.c-dark{
+    background-color: #5c5c5c;
+}
+.c-nigth{
+    background-color: #33353d;
+}
+.c-black{
+    background-color: #1b1b1b;
+}

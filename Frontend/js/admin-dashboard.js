@@ -1,10 +1,11 @@
 // ═══════════════════════════════════════════════════════
-//  dashboard.js  –  Rentify Admin
+//  admin-dashboard.js  –  Rentify Admin
 // ═══════════════════════════════════════════════════════
 
 const API_URL       = 'http://localhost:9090/api/admin';
 const API_VEHICULOS = 'http://localhost:9090/api/v12/vehiculos';
 const API_AUTOS     = 'http://localhost:9090/api/v12/autos';
+const API_RESERVAS  = 'http://localhost:9090/api/admin/reservas';
 
 let currentPage = 0;
 const pageSize  = 10;
@@ -24,15 +25,14 @@ function formatearFecha(fechaString) {
     return `${dia}/${mes}/${anio}`;
 }
 
-// ── ESTADÍSTICAS ADMIN (reservas, usuarios, ingresos) ────
+// ── ESTADÍSTICAS ADMIN (usuarios e ingresos) ─────────────
 async function cargarEstadisticasAdmin() {
     try {
         const res = await fetch(`${API_URL}/dashboard`);
         if (!res.ok) return;
         const data = await res.json();
 
-        setText('totalReservas', data.reservasActivas ?? 0);
-        setText('totalUsuarios', data.totalUsuarios   ?? 0);
+        setText('totalUsuarios', data.totalUsuarios ?? 0);
         setText('totalPagos',
             data.ingresosMes != null
                 ? `$${data.ingresosMes.toLocaleString()}`
@@ -40,6 +40,46 @@ async function cargarEstadisticasAdmin() {
         );
     } catch (err) {
         console.error('Error estadísticas:', err);
+    }
+}
+
+// ── CONTADORES RESERVAS ───────────────────────────────────
+async function cargarContadoresReservas() {
+    try {
+        // Pedimos todas las reservas (sin paginación o página grande)
+        // para contar estados en el frontend mientras no haya endpoint específico
+        const res = await fetch(`${API_RESERVAS}?page=0&size=1000`);
+
+        if (!res.ok) {
+            // Si el backend aún no está listo, usamos el campo del dashboard
+            const resDash = await fetch(`${API_URL}/dashboard`);
+            if (resDash.ok) {
+                const data = await resDash.json();
+                setText('totalReservas', data.reservasActivas ?? 0);
+            }
+            return;
+        }
+
+        const data     = await res.json();
+        const reservas = data.content ?? [];
+
+        // Contamos reservas "activas": PENDIENTE, APROBADA o EN_CURSO
+        const activas = reservas.filter(r =>
+            ['PENDIENTE', 'APROBADA', 'EN_CURSO', 'NUEVA', 'CONFIRMADA'].includes(r.estado)
+        ).length;
+
+        setText('totalReservas', activas);
+
+    } catch (err) {
+        console.error('Error reservas:', err);
+        // Fallback: intentar con el endpoint del dashboard
+        try {
+            const resDash = await fetch(`${API_URL}/dashboard`);
+            if (resDash.ok) {
+                const data = await resDash.json();
+                setText('totalReservas', data.reservasActivas ?? 0);
+            }
+        } catch (_) { /* silencioso */ }
     }
 }
 
@@ -161,11 +201,13 @@ document.addEventListener('DOMContentLoaded', () => {
     cargarPerfil();
     cargarEstadisticasAdmin();
     cargarContadoresFlota();
+    cargarContadoresReservas();   // ← nuevo
     cargarUsuarios();
 
     // Refresco automático cada 30 s
     setInterval(() => {
         cargarEstadisticasAdmin();
         cargarContadoresFlota();
+        cargarContadoresReservas();   // ← nuevo
     }, 30_000);
 });

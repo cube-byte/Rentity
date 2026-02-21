@@ -100,7 +100,7 @@ public class UsuarioController {
         }
     }
 
-    /**
+    /**n
      * Habilitar un usuario
      * PUT /api/admin/usuarios/{id}/activar
      */

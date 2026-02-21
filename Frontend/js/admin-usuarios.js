@@ -6,7 +6,8 @@ const API_URL = 'http://localhost:9090/api/admin/usuarios';
 let currentPage = 0;
 const pageSize = 10;
 let totalPages = 1;
-let usuarioIdEliminar = null;
+let usuarioIdAccion = null;       // ← renombrado
+let usuarioActivoActual = false;  // ← nuevo: guarda el estado actual del usuario
 
 // ── HELPERS DE VALIDACIÓN INLINE ─────────────
 
@@ -20,7 +21,6 @@ function mostrarError(id, mensaje) {
     if (!err) {
         err = document.createElement('span');
         err.className = 'field-error';
-        // Insertar ANTES del form-hint si existe, si no al final
         const hint = input.parentElement.querySelector('.form-hint');
         if (hint) {
             input.parentElement.insertBefore(err, hint);
@@ -48,7 +48,6 @@ function limpiarTodosLosErrores() {
     document.querySelectorAll('.field-error').forEach(el => el.remove());
 }
 
-// Limpia el error al empezar a escribir
 function agregarLimpiezaAutomatica() {
     ['nombres','apellidos','documento','licencia','telefono','email','password','rol'].forEach(id => {
         const el = document.getElementById(id);
@@ -182,7 +181,10 @@ function renderUsuarios(usuarios) {
             <td>${formatearFecha(usuario.fechaRegistro)}</td>
             <td>
                 <button class="btn-action" onclick="editarUsuario(${usuario.id})">Editar</button>
-                <button class="btn-action delete" onclick="eliminarUsuario(${usuario.id})">Eliminar</button>
+                <button class="btn-action ${usuario.activo ? 'delete' : 'enable'}"
+                        onclick="toggleEstadoUsuario(${usuario.id}, ${usuario.activo})">
+                    ${usuario.activo ? 'Deshabilitar' : 'Habilitar'}
+                </button>
             </td>
         </tr>
     `).join('');
@@ -254,7 +256,6 @@ async function editarUsuario(id) {
 
     } catch (error) {
         console.error('Error:', error);
-        // Mostrar error en la tabla en vez de alert
         mostrarMensajeTabla('No se pudieron cargar los datos del usuario');
     }
 }
@@ -263,7 +264,6 @@ async function editarUsuario(id) {
 document.getElementById('formUsuario').addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Validar antes de enviar
     if (!validarFormulario()) return;
 
     const usuarioId = document.getElementById('usuarioId').value;
@@ -297,7 +297,6 @@ document.getElementById('formUsuario').addEventListener('submit', async (e) => {
 
         if (!response.ok) {
             const errorTexto = await response.text();
-            // Mostrar error del servidor debajo del email (campo más común de conflicto)
             mostrarError('email', errorTexto || 'Error al guardar el usuario');
             return;
         }
@@ -312,27 +311,43 @@ document.getElementById('formUsuario').addEventListener('submit', async (e) => {
     }
 });
 
-// ── ELIMINAR USUARIO ──────────────────────────
-function eliminarUsuario(id) {
-    usuarioIdEliminar = id;
+// ── TOGGLE ESTADO USUARIO (Habilitar / Deshabilitar) ──
+function toggleEstadoUsuario(id, activo) {
+    usuarioIdAccion      = id;
+    usuarioActivoActual  = activo;
+
+    const titulo = activo ? 'Deshabilitar Usuario' : 'Habilitar Usuario';
+    const texto  = activo
+        ? '¿Estás seguro de que deseas deshabilitar este usuario? No podrá iniciar sesión.'
+        : '¿Estás seguro de que deseas habilitar este usuario? Recuperará acceso al sistema.';
+
+    document.getElementById('modalConfirmarTitulo').textContent = titulo;
+    document.getElementById('modalConfirmarTexto').textContent  = texto;
+    document.getElementById('btnConfirmarAccion').textContent   = activo ? 'Deshabilitar' : 'Habilitar';
+    document.getElementById('btnConfirmarAccion').className     = activo ? 'btn-danger' : 'btn-primary';
+
     document.getElementById('modalConfirmar').classList.add('show');
 }
 
 async function confirmarEliminar() {
-    if (!usuarioIdEliminar) return;
+    if (!usuarioIdAccion) return;
+
+    const endpoint = usuarioActivoActual
+        ? `${API_URL}/${usuarioIdAccion}/desactivar`
+        : `${API_URL}/${usuarioIdAccion}/activar`;
 
     try {
-        const response = await fetch(`${API_URL}/${usuarioIdEliminar}`, { method: 'DELETE' });
-
-        if (!response.ok) throw new Error('Error al eliminar usuario');
+        const response = await fetch(endpoint, { method: 'PUT' });
+        if (!response.ok) throw new Error('Error al cambiar estado');
 
         cerrarModalConfirmar();
         cargarUsuarios(currentPage);
-        mostrarBannerExito('Usuario eliminado correctamente');
+        mostrarBannerExito(usuarioActivoActual
+            ? 'Usuario deshabilitado correctamente'
+            : 'Usuario habilitado correctamente');
 
     } catch (error) {
         console.error('Error:', error);
-        // Mostrar error dentro del modal de confirmación
         const modalBody = document.querySelector('#modalConfirmar .modal-body');
         let err = modalBody.querySelector('.field-error');
         if (!err) {
@@ -340,11 +355,11 @@ async function confirmarEliminar() {
             err.className = 'field-error';
             modalBody.appendChild(err);
         }
-        err.textContent = 'No se pudo eliminar el usuario. Intenta nuevamente.';
+        err.textContent = 'No se pudo cambiar el estado. Intenta nuevamente.';
     }
 }
 
-// ── BANNER DE ÉXITO (bajo el título) ──────────
+// ── BANNER DE ÉXITO ───────────────────────────
 function mostrarBannerExito(mensaje) {
     let banner = document.getElementById('banner-exito');
     if (!banner) {
@@ -360,7 +375,6 @@ function mostrarBannerExito(mensaje) {
             font-weight: 500;
             margin-bottom: 16px;
         `;
-        // Insertar justo antes de filters-section
         const filtros = document.querySelector('.filters-section');
         filtros.parentElement.insertBefore(banner, filtros);
     }
@@ -384,10 +398,10 @@ function cerrarModal() {
 
 function cerrarModalConfirmar() {
     document.getElementById('modalConfirmar').classList.remove('show');
-    // Limpiar error del modal de confirmar si existe
     const err = document.querySelector('#modalConfirmar .field-error');
     if (err) err.remove();
-    usuarioIdEliminar = null;
+    usuarioIdAccion     = null;   // ← renombrado
+    usuarioActivoActual = false;  // ← reset
 }
 
 window.onclick = function(event) {

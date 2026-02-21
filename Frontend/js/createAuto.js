@@ -40,3 +40,15 @@ function crearAuto() {
   });
 }
 
+// ── CERRAR SESIÓN ─────────────────────────────
+document.getElementById('btn-cerrar-sesion').addEventListener('click', (e) => {
+    e.preventDefault();
+    localStorage.removeItem('rentify_usuario');
+    window.location.href = '../../html/login.html';
+});
+
+// ── PERFIL ────────────────────────────────────
+const _u = JSON.parse(localStorage.getItem('rentify_usuario') || '{}');
+if (_u.email) document.getElementById('perfilEmail').textContent = _u.email;
+if (_u.rol)   document.getElementById('perfilRol').textContent   = _u.rol;
+

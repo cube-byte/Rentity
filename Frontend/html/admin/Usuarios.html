@@ -243,23 +243,26 @@
         </div>
     </div>
 
-    <!-- ═══ MODAL CONFIRMAR ELIMINAR ═══ -->
-    <div id="modalConfirmar" class="modal">
-        <div class="modal-content modal-small">
-            <div class="modal-header">
-                <h3>Confirmar Eliminación</h3>
-                <button class="modal-close" onclick="cerrarModalConfirmar()">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>¿Estás seguro de que deseas eliminar este usuario?</p>
-                <p class="text-warning">Esta acción no se puede deshacer.</p>
-            </div>
-            <div class="modal-footer">
-                <button class="btn-secondary" onclick="cerrarModalConfirmar()">Cancelar</button>
-                <button class="btn-danger" onclick="confirmarEliminar()">Eliminar</button>
-            </div>
+   <!-- ═══ MODAL CONFIRMAR DESHABILITAR ═══ -->
+<div id="modalConfirmar" class="modal">
+    <div class="modal-content modal-small">
+        <div class="modal-header">
+            <h3 id="modalConfirmarTitulo">Confirmar Acción</h3>
+            <button class="modal-close" onclick="cerrarModalConfirmar()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p id="modalConfirmarTexto">
+                ¿Estás seguro de que deseas cambiar el estado de este usuario?
+            </p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-secondary" onclick="cerrarModalConfirmar()">Cancelar</button>
+            <button class="btn-danger" id="btnConfirmarAccion" onclick="confirmarEliminar()">
+    Confirmar
+</button>
         </div>
     </div>
+</div>
 
     <script src="/Frontend/ts/menu.js"></script>
     <script src="/Frontend/js/extras/admin-cargar_nav.js"></script>

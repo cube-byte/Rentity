@@ -85,13 +85,31 @@ public class UsuarioController {
     }
     
     /**
-     * Eliminar un usuario
-     * DELETE /api/admin/usuarios/{id}
+     * Deshabilitar un usuario (soft delete)
+     * PUT /api/admin/usuarios/{id}/desactivar
      */
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> eliminar(@PathVariable Long id) {
+    @PutMapping("/{id}/desactivar")
+    public ResponseEntity<?> desactivar(@PathVariable Long id) {
         try {
-            usuarioService.eliminar(id);
+            Usuario usuario = usuarioService.obtenerPorId(id);
+            usuario.setActivo(false);
+            usuarioService.actualizar(id, usuario);
+            return ResponseEntity.ok().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    /**
+     * Habilitar un usuario
+     * PUT /api/admin/usuarios/{id}/activar
+     */
+    @PutMapping("/{id}/activar")
+    public ResponseEntity<?> activar(@PathVariable Long id) {
+        try {
+            Usuario usuario = usuarioService.obtenerPorId(id);
+            usuario.setActivo(true);
+            usuarioService.actualizar(id, usuario);
             return ResponseEntity.ok().build();
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

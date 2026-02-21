@@ -12,6 +12,18 @@ document.addEventListener("DOMContentLoaded", () => {
   buscadorPlaca.addEventListener("input", filtrarPagos);
   filtroVehiculos.addEventListener("change", filtrarPagos);
   filtroDisponibilidad.addEventListener("change", filtrarPagos);
+
+  // ── CERRAR SESIÓN ─────────────────────────────
+  document.getElementById('btn-cerrar-sesion').addEventListener('click', (e) => {
+      e.preventDefault();
+      localStorage.removeItem('rentify_usuario');
+      window.location.href = '../../html/login.html';
+  });
+
+  // ── PERFIL ────────────────────────────────────
+  const _u = JSON.parse(localStorage.getItem('rentify_usuario') || '{}');
+  if (_u.email) document.getElementById('perfilEmail').textContent = _u.email;
+  if (_u.rol)   document.getElementById('perfilRol').textContent   = _u.rol;
 });
 
 function listarPagos() {
@@ -44,6 +56,7 @@ function estadoClase(estado) {
     default: return "desconocido";
   }
 }
+
 function renderPagos(lista) {
   tbody.innerHTML = "";
 
@@ -70,7 +83,7 @@ function renderPagos(lista) {
         </td>
         <td>
             <div class="buttons-table">
-                <a class="button-crud btn-confirm" href="/Frontend/html/admin/Update/Pagos.html?idPago=${pago.id}""> REALIZAR PAGO </a>
+                <a class="button-crud btn-confirm" href="/Frontend/html/admin/Update/Pagos.html?idPago=${pago.id}"> REALIZAR PAGO </a>
                 <a class="button-crud btn-cancelx" href="#" onclick='mostrarModalEliminar(${JSON.stringify(pago)})'> CANCELAR PAGO </a>
             </div>
         </td>
@@ -107,36 +120,22 @@ function filtrarPagos() {
   const filtrados = pagosGlobal.filter(p => {
 
     const idPago = p.id.toString();
-
-    const okPago =
-      !textoPago || idPago.includes(textoPago);
+    const okPago = !textoPago || idPago.includes(textoPago);
 
     const idReserva = p.reserva?.id?.toString() || "";
+    const okReserva = !textoReserva || idReserva.includes(textoReserva);
 
-    const okReserva =
-      !textoReserva || idReserva.includes(textoReserva);
-
-    const nombreUsuario =
-      p.reserva?.usuario?.nombres?.toLowerCase() || "";
-
-    const okUsuario =
-      !textoUsuario || nombreUsuario.includes(textoUsuario);
+    const nombreUsuario = p.reserva?.usuario?.nombres?.toLowerCase() || "";
+    const okUsuario = !textoUsuario || nombreUsuario.includes(textoUsuario);
 
     const nombreVeh = nombreVehiculo(p).toLowerCase();
+    const okVehiculo = !vehiculoSeleccionado || nombreVeh === vehiculoSeleccionado;
 
-    const okVehiculo =
-      !vehiculoSeleccionado || nombreVeh === vehiculoSeleccionado;
-
-    const placaAuto =
-      p.reserva?.auto?.placa?.toLowerCase() || "";
-
-    const okPlaca =
-      !placa || placaAuto.includes(placa);
+    const placaAuto = p.reserva?.auto?.placa?.toLowerCase() || "";
+    const okPlaca = !placa || placaAuto.includes(placa);
 
     const estadoPago = p.estado.toLowerCase();
-
-    const okEstado =
-      !estado || estadoPago === estado;
+    const okEstado = !estado || estadoPago === estado;
 
     return okPago && okReserva && okUsuario && okVehiculo && okPlaca && okEstado;
   });

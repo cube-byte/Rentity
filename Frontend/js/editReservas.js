@@ -54,21 +54,17 @@ document.addEventListener("DOMContentLoaded", async () => {
 // ── PRECARGAR FORMULARIO CON DATOS DE LA RESERVA ─────────────────────
 function precargarFormulario(reserva) {
 
-  // Título
   document.getElementById("tituloId").textContent = `#${reserva.id}`;
 
-  // Cliente
   document.getElementById("buscarCliente").value  = reserva.usuario.id ?? "";
   document.getElementById("inputNombres").value   = `${reserva.usuario.nombres ?? ""} ${reserva.usuario.apellidos ?? ""}`.trim();
   document.getElementById("inputEmail").value     = reserva.usuario.email    ?? "";
   document.getElementById("inputTelefono").value  = reserva.usuario.telefono ?? "";
   document.getElementById("inputDni").value       = reserva.usuario.documento ?? "";
 
-  // Vehículo y auto
   document.getElementById("vehiculoId").value = reserva.vehiculo?.vehiculo ?? "";
   document.getElementById("autoId").value     = reserva.auto?.auto ?? "";
 
-  // Mostrar vehiculo seleccionado en el selector
   const seleccionado = document.getElementById("vehiculoSeleccionado");
   seleccionado.innerHTML = `
     <div class="vehiculo-card">
@@ -77,23 +73,20 @@ function precargarFormulario(reserva) {
         <div class="info">
           <h3>${reserva.vehiculo?.marca} ${reserva.vehiculo?.model}</h3>
           <p>${reserva.vehiculo?.year} • ${reserva.vehiculo?.categoria ?? ""}</p>
-          <span>S/ ${reserva.vehiculo?.precio} por día</span>
+          <span>$ ${reserva.vehiculo?.precio} por día</span>
         </div>
       </div>
     </div>
   `;
   document.getElementById("precio-vista").textContent = reserva.vehiculo?.precio ?? 0;
 
-  // Fechas (LocalDateTime → date input: tomar solo los primeros 10 chars)
   if (reserva.fecha_inicio)
     document.getElementById("fechaInicio").value = reserva.fecha_inicio.substring(0, 10);
   if (reserva.fecha_fin)
     document.getElementById("fechaFin").value = reserva.fecha_fin.substring(0, 10);
 
-  // Estado
   document.getElementById("estadoReserva").value = reserva.estado ?? "NUEVA";
 
-  // Recalcular precio
   calcularDesdeReserva(reserva);
 }
 
@@ -110,7 +103,7 @@ function calcularDesdeReserva(reserva) {
   document.getElementById("dias-vista").textContent = dias;
   document.getElementById("precio-vista").textContent = precioDia;
   document.getElementById("precio").textContent      = total;
-  document.getElementById("subtotal").textContent    = "S/ " + total;
+  document.getElementById("subtotal").textContent    = "$ " + total;
 }
 
 // ── BUSCAR CLIENTE ────────────────────────────────────────────────────

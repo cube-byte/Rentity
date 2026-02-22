@@ -9,4 +9,6 @@ public interface ComprobanteRepository extends JpaRepository<Comprobante, Long>{
 	
 	@Query("SELECT COALESCE(MAX(c.id),0) FROM Comprobante c")
 	long ultimoId();
+	
+	void deleteByPagoId(Long pagoId);
 }

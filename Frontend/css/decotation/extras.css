@@ -6,7 +6,7 @@
     border-radius: 10px;
 }
 .disponible-state{
-    background-color: #1b911b;
+    background-color: #57bb53;
 }
 
 .mantenimiento-state{
@@ -23,7 +23,7 @@
     background-color: #80cc7d;
 }
 .confirm-state{
-    background-color: #19d8df;
+    background-color: #5dadcc;
 }
 
 .pendiente-state{
@@ -31,7 +31,7 @@
 }
 
 .realizado-state{
-    background-color: #15c90f;
+    background-color: #71bd6f;
 }
 .proceso-state{
     background-color: #ffc710;

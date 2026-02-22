@@ -156,7 +156,7 @@ function pintarVehiculos(lista) {
 
     card.innerHTML = `
       <div class="car-image">
-        <img src="/Frontend/recursos/img/autos/car_${vehiculo.marca}_${vehiculo.model}.jpg"
+        <img src="/Frontend/recursos/img/autos/car_${vehiculo.marca}_${vehiculo.model}_${vehiculo.vehiculo}.jpg"
              onerror="this.src='/Frontend/recursos/img/autos/car_null.jpg'">
       </div>
 

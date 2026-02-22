@@ -61,12 +61,12 @@ table,th,td{
 }
 
 .btn-confirm{
-    background-color: #1da524;
+    background-color: #48a84d;
     color: white;
     font-weight: 600;
 }
 .btn-confirm:hover{
-    background-color: #378d3c;
+    background-color: #387e3c;
 }
 .btn-cancelx{
     background-color: #c42727;
@@ -132,4 +132,12 @@ table,th,td{
   border-radius: 6px;
   cursor: pointer;
 }
-
+.btn-view{
+background: rgb(134, 159, 182);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+    color: white;
+    font-weight: 600;
+}

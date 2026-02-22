@@ -183,14 +183,14 @@
 
                                 <div class="precio-calculo">
                                     <span class="detalle" style="display: flex;">
-                                        <p style="margin: 0px 5px;" id="dias-vista">0</p> días x S/   <p style="margin: 0px 5px;" id="precio-vista">0</p>  por día
+                                        <p style="margin: 0px 5px;" id="dias-vista">0</p> días x $   <p style="margin: 0px 5px;" id="precio-vista">0</p>  por día
                                     </span>
-                                    <p class="subtotal" id="subtotal">S/ 0</p>
+                                    <p class="subtotal" id="subtotal">$ 0</p>
                                 </div>
 
                                 <div class="precio-total">
                                     <span>Total a pagar</span>
-                                    <strong>S/ <span id="precio">0</span></strong>
+                                    <strong>$ <span id="precio">0</span></strong>
                                 </div>
 
                             </div>
@@ -245,6 +245,10 @@ const vistaDias = document.getElementById("dias-vista");
 const vistaTotal = document.getElementById("precio");
 const vistaPrecio = document.getElementById("precio-vista");
 
+const hoy = new Date().toISOString().split("T")[0];
+fechaInicio.min = hoy;
+fechaFin.min = hoy;
+
 fechaInicio.addEventListener("change", calcular);
 fechaFin.addEventListener("change", calcular);
 
@@ -257,6 +261,14 @@ function calcular() {
 
     const fInicio = new Date(inicio);
     const fFin = new Date(fin);
+
+    const hoyFecha = new Date(hoy);
+    if (fInicio < hoyFecha || fFin < hoyFecha) {
+        alert("No puedes seleccionar fechas pasadas");
+        fechaInicio.value = "";
+        fechaFin.value = "";
+        return;
+    }
 
     const diferenciaMs = fFin - fInicio;
     const dias = Math.ceil(diferenciaMs / 86400000);
@@ -275,7 +287,7 @@ function calcular() {
 
         const vistaSubTotal = document.getElementById("subtotal");
 
-        vistaSubTotal.textContent = "S/ " + total;
+        vistaSubTotal.textContent = "$ " + total;
 
     }
 }

@@ -40,11 +40,11 @@ function cargarVehiculosDetallado() {
       card.dataset.id = v.vehiculo;
 
       card.innerHTML = `
-        <img src='/Frontend/recursos/img/autos/car_${v.marca}_${v.model}.jpg'>
+        <img src='/Frontend/recursos/img/autos/car_${v.marca}_${v.model}_${v.vehiculo}.jpg'>
         <div class="info">
             <h3>${v.marca} ${v.model}</h3>
             <p>${v.year} • ${v.categoria ?? 'Vehículo'} • ${v.combustible}</p>
-            <span>S/ ${v.precio} por día</span>
+            <span>$ ${v.precio} por día</span>
             <small>${disponibles} disponibles</small>
         </div>
       `;

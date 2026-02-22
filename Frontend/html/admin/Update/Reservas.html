@@ -174,14 +174,14 @@
                             <div class="precio-box">
                                 <div class="precio-calculo">
                                     <span class="detalle" style="display: flex;">
-                                        <p style="margin: 0px 5px;" id="dias-vista">0</p> días x S/
+                                        <p style="margin: 0px 5px;" id="dias-vista">0</p> días x $
                                         <p style="margin: 0px 5px;" id="precio-vista">0</p> por día
                                     </span>
-                                    <p class="subtotal" id="subtotal">S/ 0</p>
+                                    <p class="subtotal" id="subtotal">$ 0</p>
                                 </div>
                                 <div class="precio-total">
                                     <span>Total a pagar</span>
-                                    <strong>S/ <span id="precio">0</span></strong>
+                                    <strong>$ <span id="precio">0</span></strong>
                                 </div>
                             </div>
 
@@ -216,9 +216,15 @@
             });
         }
 
+        // ── BLOQUEAR FECHAS PASADAS ──────────────────────────────
+const fechaInicio = document.getElementById("fechaInicio");
+const fechaFin    = document.getElementById("fechaFin");
+
+const hoy = new Date().toISOString().split("T")[0];
+fechaInicio.min = hoy;
+fechaFin.min    = hoy;
+
         // ── CÁLCULO DE PRECIO ─────────────────────────────────────────
-        const fechaInicio = document.getElementById("fechaInicio");
-        const fechaFin    = document.getElementById("fechaFin");
 
         fechaInicio.addEventListener("change", calcular);
         fechaFin.addEventListener("change", calcular);
@@ -227,6 +233,7 @@
             const inicio = fechaInicio.value;
             const fin    = fechaFin.value;
             if (!inicio || !fin) return;
+            
 
             const dias = Math.ceil((new Date(fin) - new Date(inicio)) / 86400000);
             if (dias < 0) {
@@ -239,7 +246,7 @@
 
             document.getElementById("dias-vista").textContent  = dias;
             document.getElementById("precio").textContent      = total;
-            document.getElementById("subtotal").textContent    = "S/ " + total;
+            document.getElementById("subtotal").textContent    = "$ " + total;
         }
     </script>
 

@@ -109,7 +109,6 @@
     <div class="card-logo" style="color: rgb(20, 52, 203); font-weight: 600;">VISA</div>
   </div>
 
-  <!-- FORM -->
   <form id="formPago">
 
     <label for="cardNumber">Número de tarjeta</label>
@@ -180,9 +179,9 @@
                     <div class="info-item"><span>Teléfono</span><span id="clienteTelefono">---</span></div>
 
                     <div class="total">
-                        <div><span>Subtotal</span><span id="subtotal">S/ 0.00</span></div>
-                        <div><span>IGV</span><span id="igv">S/ 0.00</span></div>
-                        <div class="total-final"><span>Total</span><span id="total">S/ 0.00</span></div>
+                        <div><span>Subtotal</span><span id="subtotal">$ 0.00</span></div>
+                        <div><span>IGV</span><span id="igv">$ 0.00</span></div>
+                        <div class="total-final"><span>Total</span><span id="total">$ 0.00</span></div>
                     </div>
                 </div>
         </section>
@@ -207,31 +206,53 @@
     <script src="/Frontend/ts/menu.js"></script>
     <script src="/Frontend/js/ConfirmarPago.js"></script>
 
-    <script>
-        const cardInput = document.getElementById("cardNumber");
+<script>
+    const cardInput = document.getElementById("cardNumber");
 
-        cardInput.addEventListener("input", (e) => {
+    cardInput.addEventListener("input", (e) => {
+    let value = e.target.value.replace(/\D/g, "");
+    value = value.substring(0, 16);
+    value = value.replace(/(.{4})/g, "$1 ").trim();
+    e.target.value = value;
+    });
 
-        let value = e.target.value.replace(/\D/g, "");
+    const expiryInput = document.getElementById("cardExpiry");
 
-        value = value.substring(0, 16);
+    expiryInput.addEventListener("input", (e) => {
+    let value = e.target.value.replace(/\D/g, "").substring(0, 4);
 
-        value = value.replace(/(.{4})/g, "$1 ").trim();
+    if (value.length >= 2) {
+        let mes = parseInt(value.substring(0, 2));
 
-        e.target.value = value;
-        });
+        if (mes < 1) mes = 1;
+        if (mes > 12) mes = 12;
 
-        const expiryInput = document.getElementById("cardExpiry");
+        value = mes.toString().padStart(2, "0") + value.substring(2);
+    }
 
-        expiryInput.addEventListener("input", (e) => {
-        let value = e.target.value.replace(/\D/g, "");
-        value = value.substring(0, 4);
+    if (value.length >= 3) {
+        value = value.slice(0, 2) + "/" + value.slice(2);
+    }
 
-        if (value.length >= 3) {
-            value = value.slice(0, 2) + "/" + value.slice(2);
-        }
-        e.target.value = value;
-        });
-    </script>
+    e.target.value = value;
+    });
+
+    expiryInput.addEventListener("blur", () => {
+    const value = expiryInput.value;
+    if (value.length !== 5) return;
+
+    const mes = parseInt(value.substring(0, 2));
+    const anio = parseInt("20" + value.substring(3, 5));
+
+    const hoy = new Date();
+    const mesActual = hoy.getMonth() + 1;
+    const anioActual = hoy.getFullYear();
+
+    if (anio < anioActual || (anio === anioActual && mes < mesActual)) {
+        alert("La tarjeta está vencida");
+        expiryInput.value = "";
+    }
+    });
+</script>
 </body>
 </html>

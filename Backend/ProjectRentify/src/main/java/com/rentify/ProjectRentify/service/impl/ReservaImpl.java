@@ -15,6 +15,7 @@ import com.rentify.ProjectRentify.entity.Reserva;
 import com.rentify.ProjectRentify.entity.Usuario;
 import com.rentify.ProjectRentify.entity.Vehiculo;
 import com.rentify.ProjectRentify.repository.AutoRepository;
+import com.rentify.ProjectRentify.repository.ComprobanteRepository;
 import com.rentify.ProjectRentify.repository.PagoRepository;
 import com.rentify.ProjectRentify.repository.ReservaRepository;
 import com.rentify.ProjectRentify.repository.UsuarioRepository;
@@ -33,6 +34,7 @@ public class ReservaImpl implements ReservaService{
     private final AutoRepository autoRepo;
     private final UsuarioRepository usuarioRepo;
     private final PagoRepository pagoRepo;
+    private final ComprobanteRepository comprobanteRepo;
     
 	
     @Override
@@ -128,6 +130,12 @@ public class ReservaImpl implements ReservaService{
         reserva.setPrecio_total(dto.getPrecio_total());
         reserva.setEstado(dto.getEstado());
 
+        if ("TERMINADA".equals(dto.getEstado())) {
+            Auto auto = reserva.getAuto();
+            auto.setEstado("DISPONIBLE");
+            autoRepo.save(auto);
+        }
+        
         return reservaRepo.save(reserva);
     }
 
@@ -149,14 +157,15 @@ public class ReservaImpl implements ReservaService{
         Reserva reserva = reservaRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Reserva no encontrada"));
 
-
-        pagoRepo.deleteByReservaId(id);
-
+        Pago pago = pagoRepo.findByReservaId(id);
+        if (pago != null) {
+            comprobanteRepo.deleteByPagoId(pago.getId());
+            pagoRepo.deleteByReservaId(id);
+        }
 
         Auto auto = reserva.getAuto();
         auto.setEstado("DISPONIBLE");
         autoRepo.save(auto);
-
 
         reservaRepo.deleteById(id);
     }

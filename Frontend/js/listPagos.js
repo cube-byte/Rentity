@@ -74,17 +74,30 @@ function renderPagos(lista) {
         <td>${usuario} ${pago.reserva.usuario.apellidos}</td>
         <td>${vehiculo}</td>
         <td>${placa}</td>
-        <td>S/ ${pago.monto}</td>
+        <td>$ ${pago.monto}</td>
         <td>${fechaNormal(pago.fecha)}</td>
         <td style="justify-items:center;">
             <div class="estado-text ${estadoClase(pago.estado)}">
-            <h5>${pago.estado}</h5>
+                <h5>${pago.estado}</h5>
             </div>
         </td>
         <td>
             <div class="buttons-table">
-                <a class="button-crud btn-confirm" href="/Frontend/html/admin/Update/Pagos.html?idPago=${pago.id}"> REALIZAR PAGO </a>
-                <a class="button-crud btn-cancelx" href="#" onclick='mostrarModalEliminar(${JSON.stringify(pago)})'> CANCELAR PAGO </a>
+                ${
+                    pago.estado.toUpperCase() === "COMPLETADO"
+                    ? `
+                    <a class="button-crud btn-view"
+                      href="/Frontend/html/admin/Comprobantes.html">
+                      VER COMPROBANTE
+                    </a>
+                    `
+                    : `
+                    <a class="button-crud btn-confirm"
+                      href="/Frontend/html/admin/Update/Pagos.html?idPago=${pago.id}">
+                      REALIZAR PAGO
+                    </a>
+                    `
+                }
             </div>
         </td>
     `;

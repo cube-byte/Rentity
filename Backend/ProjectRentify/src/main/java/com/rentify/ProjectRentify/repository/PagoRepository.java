@@ -7,4 +7,8 @@ import com.rentify.ProjectRentify.entity.Pago;
 
 public interface PagoRepository extends JpaRepository<Pago, Long>{
 
+	void deleteByReservaId(Long reservaId);
+	
+	Pago findByReservaId(Long reservaId);
+	
 }

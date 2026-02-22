@@ -49,4 +49,9 @@ public class PagoImpl implements PagoService{
                 .orElseThrow(() -> new RuntimeException("Pago no encontrado"));
     }
     
+    @Override
+    public Pago buscarPorReservaId(Long idReserva) {
+        return pagoRepo.findByReservaId(idReserva);
+    }
+    
 }

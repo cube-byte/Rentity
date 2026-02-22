@@ -46,6 +46,10 @@ public class ReservaImpl implements ReservaService{
     	
         Auto auto = autoRepo.findById(dto.getIdAuto())
                 .orElseThrow(() -> new RuntimeException("Auto no encontrado"));
+     // Validar que el auto esté disponible
+        if (!"DISPONIBLE".equals(auto.getEstado())) {
+            throw new RuntimeException("El auto no está disponible para reservar");
+        }
     	
     	
         BigDecimal precioBase = obtenerPrecioVehiculo(dto.getIdVehiculo());
@@ -73,6 +77,7 @@ public class ReservaImpl implements ReservaService{
         reserva.setEstado("NUEVA");
         
         auto.setEstado("OCUPADO");
+        autoRepo.save(auto); // <-- esta línea faltaba
 
         Reserva reservaGuardada = reservaRepo.save(reserva);
         
@@ -93,6 +98,10 @@ public class ReservaImpl implements ReservaService{
                 .orElseThrow(() -> new RuntimeException("Reserva no encontrado"));
     }
     
+    @Override
+    public List<Reserva> listarPorUsuario(Long idUsuario) {
+        return reservaRepo.findByUsuarioId(idUsuario);
+    }
     
     private Vehiculo obtenerVehiculo(Long id) {
         return vehiculoRepo.findById(id)
@@ -102,7 +111,10 @@ public class ReservaImpl implements ReservaService{
     private Auto obtenerAuto(Long id) {
         return autoRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Auto no encontrado"));
+        
     }
+    
+    
 
     private Usuario obtenerUsuario(Long id) {
         return usuarioRepo.findById(id)
@@ -114,8 +126,23 @@ public class ReservaImpl implements ReservaService{
         return vehiculo.getPrecio(); // suponiendo que tu entidad Vehiculo tiene getPrecio()
     }
     
-    
-    
+    @Override
+    @Transactional
+    public void cancelar(Long id) {
+        Reserva reserva = reservaRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Reserva no encontrada"));
+
+        // Primero eliminar el pago asociado
+        pagoRepo.deleteByReservaId(id);
+
+        // Liberar el auto
+        Auto auto = reserva.getAuto();
+        auto.setEstado("DISPONIBLE");
+        autoRepo.save(auto);
+
+        // Eliminar la reserva
+        reservaRepo.deleteById(id);
+    }
     
 
 }

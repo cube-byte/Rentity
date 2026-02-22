@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,5 +49,15 @@ public class ReservaController {
     @GetMapping("/usuario/{idUsuario}")
     public ResponseEntity<?> listarPorUsuario(@PathVariable Long idUsuario) {
         return ResponseEntity.ok(reservaSvc.listarPorUsuario(idUsuario));
+    }
+    
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> cancelar(@PathVariable Long id) {
+        try {
+            reservaSvc.cancelar(id);
+            return ResponseEntity.ok().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }

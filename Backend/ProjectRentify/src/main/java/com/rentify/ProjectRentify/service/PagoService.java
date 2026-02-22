@@ -13,5 +13,7 @@ public interface PagoService {
 	Pago completarPago(Long id, PagoConfirmarDTO dto);
 
 	Pago buscarPorId(Long id);
+	
+	Pago buscarPorReservaId(Long idReserva);
 
 }

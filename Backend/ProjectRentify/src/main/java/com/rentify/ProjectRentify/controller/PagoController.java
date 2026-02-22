@@ -43,4 +43,10 @@ public class PagoController {
         return ResponseEntity.ok(pagoSvc.buscarPorId(id));
     }
     
+    @GetMapping("/reserva/{idReserva}")
+    public ResponseEntity<?> buscarPorReserva(@PathVariable Long idReserva) {
+        Pago pago = pagoSvc.buscarPorReservaId(idReserva);
+        return ResponseEntity.ok(pago);
+    }
+    
 }

@@ -1,20 +1,42 @@
 <resources>
-    <string name="app_name">RentifyDemo</string>
+    <string name="app_name">RentifyDEMO</string>
 
-        <!-- Login -->
-        <string name="login_title">Continua y crea tu cuenta</string>
-        <string name="email_hint">Email Address</string>
-        <string name="password_hint">Password</string>
-        <string name="remember_me">Recordarme</string>
-        <string name="login_button">Registrarse</string>
+    <!-- Login -->
+    <string name="login_title">RENTITY</string>
+    <string name="login_subtitle">Tu próxima aventura comienza aquí</string>
+    <string name="email_hint">Correo electrónico</string>
+    <string name="password_hint">Contraseña</string>
+    <string name="login_button">INGRESAR</string>
+    <string name="no_account">¿No tienes cuenta?</string>
+    <string name="create_account">Crear cuenta</string>
 
-        <!-- Errores -->
-        <string name="error_email">Correo inválido</string>
-        <string name="error_password">Mínimo 6 caracteres</string>
-        <string name="valid_data">Datos válidos</string>
-        <string name="login">Iniciar Sesion</string>
-        <string name="register">Registrarse</string>
-        <string name="forgot_password">Forgot Password?</string>
-        <string name="subtitle">Registrate para disfrutar de la mejor experiencia de gestion</string>
+    <!-- Validaciones -->
+    <string name="error_email">Correo inválido</string>
+    <string name="error_password">Mínimo 6 caracteres</string>
+    <string name="login_success">Login correcto</string>
+
+
+    <string name="login_title2">Continua y crea tu cuenta</string>
+    <string name="email_hint2">Email Address</string>
+    <string name="password_hint2">Password</string>
+    <string name="remember_me">Recordarme</string>
+    <string name="register_button">Registrarse</string>
+
+    <!-- Errores -->
+    <string name="email_error">Correo inválido</string>
+    <string name="password_error">Mínimo 6 caracteres</string>
+
+    <string name="valid_data">Datos válidos</string>
+    <string name="login">Iniciar Sesion</string>
+    <string name="register">Registrarse</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="subtitle">Registrate para disfrutar de la mejor experiencia de gestion</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="cerrar_sesion">Cerrar sesión</string>
+    <string name="mis_reservas">Mis Reservas</string>
+    <string name="buscar_vehiculo">Buscar vehículo</string>
+
 
 </resources>

@@ -85,7 +85,7 @@ function confirmarPago() {
   })
   .then(() => {
     alert("Pago completado con éxito");
-    window.location.href = "/Frontend/html/admin/Update/Pagos.html";
+    window.location.href = "/Frontend/html/admin/Pagos.html";
   })
   .catch(err => {
     console.error(err);

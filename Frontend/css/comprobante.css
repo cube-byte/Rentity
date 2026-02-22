@@ -1,0 +1,385 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.body-comprobante {
+background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 16px;
+}
+
+/* ── Card ─────────────────────────────── */
+.card {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Brand strip ──────────────────────── */
+.brand-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding: 18px 32px;
+  background: #fff;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.brand-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-icon img {
+  width: 55px;
+  height: 55px;
+}
+
+.brand-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #373a37;
+  letter-spacing: 0.04em;
+}
+
+.brand-name em {
+  color: #4e8750;
+  font-style: normal;
+}
+
+/* ── Header ───────────────────────────── */
+.header {
+  background: #373a37;
+  padding: 26px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-left small {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #888;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.header-code {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+
+.badge {
+  background: rgba(78, 135, 80, 0.15);
+  border: 1px solid rgba(78, 135, 80, 0.4);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6ab56d;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.badge-dot {
+  width: 7px;
+  height: 7px;
+  background: #6ab56d;
+  border-radius: 50%;
+  animation: blink 2s infinite;
+}
+
+/* ── Body ─────────────────────────────── */
+.body {
+  padding: 8px 32px 28px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Section ──────────────────────────── */
+.section {
+  padding: 20px 0;
+  border-bottom: 1px solid #efefef;
+}
+
+.section:last-of-type {
+  border-bottom: none;
+}
+
+.section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #4e8750;
+  margin-bottom: 14px;
+}
+
+/* ── Client rows ──────────────────────── */
+.row-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.row-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.row-key {
+  font-size: 13px;
+  color: #999;
+  flex-shrink: 0;
+}
+
+.row-val {
+  font-size: 13px;
+  font-weight: 600;
+  color: #373a37;
+  text-align: right;
+}
+
+/* ── Vehicle ──────────────────────────── */
+.vehicle-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.vehicle-icon {
+    width: 164px;
+        height: 80px;
+  background: #edf5ee;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.vehicle-icon img {
+  width: 100%;
+}
+
+.vehicle-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #373a37;
+  margin-bottom: 4px;
+}
+
+.vehicle-meta {
+  font-size: 12px;
+  color: #999;
+}
+
+.vehicle-meta strong {
+  color: #555;
+  font-weight: 600;
+}
+
+/* ── Dates ────────────────────────────── */
+.dates-grid {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.date-item small {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #bbb;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.date-item span {
+  font-size: 13px;
+  font-weight: 600;
+  color: #373a37;
+}
+
+.date-arrow {
+  width: 26px;
+  height: 26px;
+  background: #4e8750;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 12px auto 0;
+}
+
+.date-arrow svg {
+  width: 12px;
+  height: 12px;
+  fill: #fff;
+}
+
+/* ── Total ────────────────────────────── */
+.total-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f5f5f5;
+  border-radius: 10px;
+  padding: 16px 18px;
+}
+
+.total-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #999;
+}
+
+.total-amount {
+  font-size: 26px;
+  font-weight: 700;
+  color: #373a37;
+}
+
+.total-amount sup {
+  font-size: 13px;
+  font-weight: 600;
+  color: #4e8750;
+  vertical-align: super;
+  margin-right: 2px;
+}
+
+/* ── Payment date ─────────────────────── */
+.payment-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #edf5ee;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-top: 12px;
+}
+
+.payment-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #4e8750;
+}
+
+.payment-val {
+  font-size: 12px;
+  font-weight: 600;
+  color: #373a37;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pulse {
+  width: 7px;
+  height: 7px;
+  background: #4e8750;
+  border-radius: 50%;
+  animation: blink 2s infinite;
+}
+
+/* ── Button ───────────────────────────── */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  margin-top: 22px;
+  padding: 15px;
+  background: #4e8750;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, opacity 0.2s;
+}
+
+.btn:hover {
+  background: #3d6e3f;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn.loading {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.btn svg {
+  width: 16px;
+  height: 16px;
+  fill: #fff;
+}
+
+/* ── Footer ───────────────────────────── */
+.footer {
+  padding: 14px 32px;
+  border-top: 1px solid #efefef;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer small {
+  font-size: 10px;
+  color: #ccc;
+}
+
+.footer strong {
+  font-size: 12px;
+  font-weight: 700;
+  color: #4e8750;
+  letter-spacing: 0.06em;
+}
+
+/* ── Animations ───────────────────────── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+/* ── Responsive ───────────────────────── */
+@media (max-width: 480px) {
+  .header  { padding: 22px 24px; }
+  .body    { padding: 8px 24px 24px; }
+  .footer  { padding: 14px 24px; }
+  .brand-strip { padding: 14px 24px; }
+  .dates-grid { grid-template-columns: 1fr; }
+  .date-arrow { transform: rotate(90deg); margin: 0; }
+}

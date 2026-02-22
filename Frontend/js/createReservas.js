@@ -49,9 +49,9 @@ function crearReserva() {
     body: JSON.stringify(reserva)
   })
   .then(res => res.json())
-  .then(data => {
+  .then(() => {
     alert("Reserva creada");
-    console.log(data);
+    window.location.href = "/Frontend/html/admin/Reservas.html";
   })
   .catch(err => console.error("Error:", err));
 }
@@ -97,10 +97,15 @@ document.getElementById('buscarCliente').addEventListener('keydown', async (e) =
 document.getElementById('btn-cerrar-sesion').addEventListener('click', (e) => {
   e.preventDefault();
   localStorage.removeItem('rentify_usuario');
-  window.location.href = '../../html/login.html';
+  window.location.href = '/Frontend/html/login.html';
 });
 
 // ── PERFIL ────────────────────────────────────
 const _u = JSON.parse(localStorage.getItem('rentify_usuario') || '{}');
 if (_u.email) document.getElementById('perfilEmail').textContent = _u.email;
 if (_u.rol)   document.getElementById('perfilRol').textContent   = _u.rol;
+
+// ── CANCELAR ─────────────────────────────────
+document.getElementById('btnCancelar').addEventListener('click', () => {
+  window.location.href = '/Frontend/html/admin/Reservas.html';
+});

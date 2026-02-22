@@ -3,6 +3,7 @@ package com.rentify.ProjectRentify.service;
 import java.util.List;
 
 import com.rentify.ProjectRentify.dto.ReservaCreateDTO;
+import com.rentify.ProjectRentify.dto.ReservaDTO;
 import com.rentify.ProjectRentify.entity.Reserva;
 
 public interface ReservaService {
@@ -12,6 +13,8 @@ public interface ReservaService {
     Reserva guardar(ReservaCreateDTO dto);
 
     Reserva buscarPorId(Long id);
+    
+    Reserva actualizar(Long id, ReservaDTO dto);
     
     List<Reserva> listarPorUsuario(Long idUsuario);
     

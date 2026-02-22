@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>En desarrollo</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #0f2717, #5c8165, #7d9486);
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+        }
+
+        /* Botón volver */
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 18px;
+            border-radius: 8px;
+            border: none;
+            background-color: rgba(255,255,255,0.15);
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            backdrop-filter: blur(6px);
+            transition: 0.2s ease;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            background-color: rgba(255,255,255,0.3);
+            transform: translateY(-1px);
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 6px solid rgba(255,255,255,0.2);
+            border-top: 6px solid #ffffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        h1 {
+            margin: 10px 0;
+            font-size: 24px;
+        }
+
+        p {
+            opacity: 0.85;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="/Frontend/html/admin/Dashboard.html" class="back-button">⬅ Volver</a>
+
+    <div class="container">
+        <div class="loader"></div>
+        <h1>🚧 Esta web está en desarrollo</h1>
+        <p>Se añadirá próximamente</p>
+    </div>
+
+</body>
+</html>

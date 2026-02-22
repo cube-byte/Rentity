@@ -5,10 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.rentify.ProjectRentify.dto.VehiculoCreateDTO;
 import com.rentify.ProjectRentify.dto.VehiculoUpdateDTO;
 import com.rentify.ProjectRentify.entity.Vehiculo;
@@ -21,17 +19,14 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class VehiculoImpl implements VehiculoService{
 	
-    // obtiene la ruta base del proyecto
     private final Path rutaBase = Paths.get(System.getProperty("user.dir"))
-            .getParent()   // sale de RentifyProyect
-            .getParent();  // sale de Backend
+            .getParent()
+            .getParent();
 
-    // ruta final hacia Frontend
     private final Path RUTA_IMAGENES =
             rutaBase.resolve("Frontend/recursos/img/autos");
 
     private final VehiculoRepository repoVehiculo;
-	
 	
     @Override
     public List<Vehiculo> listar() {
@@ -41,34 +36,37 @@ public class VehiculoImpl implements VehiculoService{
     @Override
     public Vehiculo guardar(VehiculoCreateDTO dto, MultipartFile imagen) throws IOException {
 
-    	Vehiculo vehiculo = new Vehiculo();
-
-    	vehiculo.setMarca(dto.getMarca());
-    	vehiculo.setModel(dto.getModel());
-    	vehiculo.setVersion(dto.getVersion());
-    	vehiculo.setYear(dto.getYear());
-    	vehiculo.setCategoria(dto.getCategoria());
-    	vehiculo.setCarroceria(dto.getCarroceria());
-    	vehiculo.setCombustible(dto.getCombustible());
-    	vehiculo.setDescripcion(dto.getDescripcion());
-    	vehiculo.setPrecio(dto.getPrecio());
-    	vehiculo.setEstado("DISPONIBLE");
+        Vehiculo vehiculo = new Vehiculo();
+        vehiculo.setMarca(dto.getMarca());
+        vehiculo.setModel(dto.getModel());
+        vehiculo.setVersion(dto.getVersion());
+        vehiculo.setYear(dto.getYear());
+        vehiculo.setCategoria(dto.getCategoria());
+        vehiculo.setCarroceria(dto.getCarroceria());
+        vehiculo.setCombustible(dto.getCombustible());
+        vehiculo.setDescripcion(dto.getDescripcion());
+        vehiculo.setPrecio(dto.getPrecio());
+        vehiculo.setEstado("DISPONIBLE");
+        
+        Vehiculo guardado = repoVehiculo.save(vehiculo);
 
         if (imagen != null && !imagen.isEmpty()) {
 
             String nombreArchivo = "car_" +
                     dto.getMarca().toLowerCase().replace(" ", "") + "_" +
-                    dto.getModel().toLowerCase().replace(" ", "") + ".jpg";
+                    dto.getModel().toLowerCase().replace(" ", "") + "_" +
+                    guardado.getVehiculo() + ".jpg";
 
             Files.createDirectories(RUTA_IMAGENES);
             Path ruta = RUTA_IMAGENES.resolve(nombreArchivo);
-            
             imagen.transferTo(ruta.toFile());
+            guardado.setImagen("/Frontend/recursos/img/autos/" + nombreArchivo);
 
-            vehiculo.setImagen("/Frontend/recursos/img/autos/" + nombreArchivo);
+            
+            return repoVehiculo.save(guardado);
         }
 
-        return repoVehiculo.save(vehiculo);
+        return guardado;
     }
     
     @Override
@@ -81,23 +79,23 @@ public class VehiculoImpl implements VehiculoService{
     public Vehiculo actualizar(Long id, VehiculoUpdateDTO dto, MultipartFile imagen) throws IOException {
 
         Vehiculo vehiculo = buscarPorId(id);
-
-    	vehiculo.setMarca(dto.getMarca());
-    	vehiculo.setModel(dto.getModel());
-    	vehiculo.setVersion(dto.getVersion());
-    	vehiculo.setYear(dto.getYear());
-    	vehiculo.setCategoria(dto.getCategoria());
-    	vehiculo.setCarroceria(dto.getCarroceria());
-    	vehiculo.setCombustible(dto.getCombustible());
-    	vehiculo.setDescripcion(dto.getDescripcion());
-    	vehiculo.setPrecio(dto.getPrecio());
-    	vehiculo.setEstado(dto.getEstado());
+        vehiculo.setMarca(dto.getMarca());
+        vehiculo.setModel(dto.getModel());
+        vehiculo.setVersion(dto.getVersion());
+        vehiculo.setYear(dto.getYear());
+        vehiculo.setCategoria(dto.getCategoria());
+        vehiculo.setCarroceria(dto.getCarroceria());
+        vehiculo.setCombustible(dto.getCombustible());
+        vehiculo.setDescripcion(dto.getDescripcion());
+        vehiculo.setPrecio(dto.getPrecio());
+        vehiculo.setEstado(dto.getEstado());
 
         if (imagen != null && !imagen.isEmpty()) {
 
             String nombreArchivo = "car_" +
-            		vehiculo.getMarca().toLowerCase().replace(" ", "") + "_" +
-            		vehiculo.getModel().toLowerCase().replace(" ", "") + ".jpg";
+                    vehiculo.getMarca().toLowerCase().replace(" ", "") + "_" +
+                    vehiculo.getModel().toLowerCase().replace(" ", "") + "_" +
+                    vehiculo.getVehiculo() + ".jpg";
 
             Path ruta = RUTA_IMAGENES.resolve(nombreArchivo);
             

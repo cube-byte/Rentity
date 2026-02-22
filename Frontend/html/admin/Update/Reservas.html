@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Reserva</title>
+    <title>Editar Reserva</title>
     <link rel="stylesheet" href="/Frontend/css/admin/layout.css">
     <link rel="stylesheet" href="/Frontend/css/admin/layout_2.css">
     <link rel="stylesheet" href="/Frontend/css/admin/Reserva_create.css">
-
 </head>
 <body>
     <nav class="navegador">
@@ -44,8 +43,8 @@
                     </div>
                     <ul class="submenu">
                         <a href="/Frontend/html/admin/Reservas.html"><li>Reservas</li></a>
-                        <a href="/Frontend/html/admin/Pagos.html"><li>Pagos</li></a>
-                        <a href="/Frontend/html/admin/Comprobantes.html"><li>Comprobantes</li></a>
+                        <a href="#"><li>Pagos</li></a>
+                        <a href="#"><li>Comprobantes</li></a>
                     </ul>
                 </li>
                 <li class="menu-item">
@@ -64,12 +63,6 @@
                         Website
                     </li>
                 </a>
-                <a href="/Frontend/html/admin/Configuracion.html">
-                    <li class="li-menu">
-                        <svg class="nav_icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#000000" viewBox="0 0 256 256"><path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Zm88-29.84q.06-2.16,0-4.32l14.92-18.64a8,8,0,0,0,1.48-7.06,107.21,107.21,0,0,0-10.88-26.25,8,8,0,0,0-6-3.93l-23.72-2.64q-1.48-1.56-3-3L186,40.54a8,8,0,0,0-3.94-6,107.71,107.71,0,0,0-26.25-10.87,8,8,0,0,0-7.06,1.49L130.16,40Q128,40,125.84,40L107.2,25.11a8,8,0,0,0-7.06-1.48A107.6,107.6,0,0,0,73.89,34.51a8,8,0,0,0-3.93,6L67.32,64.27q-1.56,1.49-3,3L40.54,70a8,8,0,0,0-6,3.94,107.71,107.71,0,0,0-10.87,26.25,8,8,0,0,0,1.49,7.06L40,125.84Q40,128,40,130.16L25.11,148.8a8,8,0,0,0-1.48,7.06,107.21,107.21,0,0,0,10.88,26.25,8,8,0,0,0,6,3.93l23.72,2.64q1.49,1.56,3,3L70,215.46a8,8,0,0,0,3.94,6,107.71,107.71,0,0,0,26.25,10.87,8,8,0,0,0,7.06-1.49L125.84,216q2.16.06,4.32,0l18.64,14.92a8,8,0,0,0,7.06,1.48,107.21,107.21,0,0,0,26.25-10.88,8,8,0,0,0,3.93-6l2.64-23.72q1.56-1.48,3-3L215.46,186a8,8,0,0,0,6-3.94,107.71,107.71,0,0,0,10.87-26.25,8,8,0,0,0-1.49-7.06Zm-16.1-6.5a73.93,73.93,0,0,1,0,8.68,8,8,0,0,0,1.74,5.48l14.19,17.73a91.57,91.57,0,0,1-6.23,15L187,173.11a8,8,0,0,0-5.1,2.64,74.11,74.11,0,0,1-6.14,6.14,8,8,0,0,0-2.64,5.1l-2.51,22.58a91.32,91.32,0,0,1-15,6.23l-17.74-14.19a8,8,0,0,0-5-1.75h-.48a73.93,73.93,0,0,1-8.68,0,8,8,0,0,0-5.48,1.74L100.45,215.8a91.57,91.57,0,0,1-15-6.23L82.89,187a8,8,0,0,0-2.64-5.1,74.11,74.11,0,0,1-6.14-6.14,8,8,0,0,0-5.1-2.64L46.43,170.6a91.32,91.32,0,0,1-6.23-15l14.19-17.74a8,8,0,0,0,1.74-5.48,73.93,73.93,0,0,1,0-8.68,8,8,0,0,0-1.74-5.48L40.2,100.45a91.57,91.57,0,0,1,6.23-15L69,82.89a8,8,0,0,0,5.1-2.64,74.11,74.11,0,0,1,6.14-6.14A8,8,0,0,0,82.89,69L85.4,46.43a91.32,91.32,0,0,1,15-6.23l17.74,14.19a8,8,0,0,0,5.48,1.74,73.93,73.93,0,0,1,8.68,0,8,8,0,0,0,5.48-1.74L155.55,40.2a91.57,91.57,0,0,1,15,6.23L173.11,69a8,8,0,0,0,2.64,5.1,74.11,74.11,0,0,1,6.14,6.14,8,8,0,0,0,5.1,2.64l22.58,2.51a91.32,91.32,0,0,1,6.23,15l-14.19,17.74A8,8,0,0,0,199.87,123.66Z"></path></svg>
-                        Configuracion
-                    </li>
-                </a>
                 <a href="#" id="btn-cerrar-sesion">
                     <li class="li-menu">
                         <svg class="nav_icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#000000" viewBox="0 0 256 256"><path d="M120,216a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V40a8,8,0,0,1,8-8h64a8,8,0,0,1,0,16H56V208h56A8,8,0,0,1,120,216Zm109.66-93.66-40-40a8,8,0,0,0-11.32,11.32L204.69,120H112a8,8,0,0,0,0,16h92.69l-26.35,26.34a8,8,0,0,0,11.32,11.32l40-40A8,8,0,0,0,229.66,122.34Z"></path></svg>
@@ -79,6 +72,7 @@
             </ul>
         </div>
     </nav>
+
     <div class="container">
         <section class="container-top">
             <div class="perfil">
@@ -100,25 +94,22 @@
                 <h2>/</h2>
                 <h2 class="sub-guia">Reservas</h2>
                 <h2>/</h2>
-                <h2 class="sub-guia">Crear</h2>
+                <h2 class="sub-guia">Editar</h2>
             </div>
             <div class="title">
-                <h1>Crear Nueva Reserva</h1>
+                <h1>Editar Reserva <span id="tituloId" style="color:#888; font-size:0.8em;"></span></h1>
             </div>
             <div class="create-section">
                 <form style="display: flex;flex-direction: column;">
                     <div class="from">
-
                         <div class="form-body">
-                            <div class="cliente_select-box">
 
+                            <!-- DATOS CLIENTE -->
+                            <div class="cliente_select-box">
                                 <h2 class="h2-box">Datos Cliente</h2>
                                 <div class="buscar-cliente">
-                                    <label></label>
                                     <input type="text" id="buscarCliente" placeholder="Ingrese ID del Cliente">
-                                    <small class="hint">
-                                        Al añadir la id del cliente, muestra datos en los inputs de abajo (Hacer funcion)
-                                    </small>
+                                    <small class="hint">Presioná Enter para buscar el cliente por ID</small>
                                 </div>
                                 <div class="cliente-box">
                                     <div class="nombre">
@@ -140,28 +131,20 @@
                                 </div>
                             </div>
 
+                            <!-- VEHICULO -->
                             <div class="vehiculo-box">
-
                                 <h2 class="h2-box">Vehiculo Seleccionado</h2>
                                 <div class="vehiculo-selector" id="vehiculoSelector">
                                     <div class="vehiculo-seleccionado" id="vehiculoSeleccionado">
                                         Selecciona un vehículo
                                     </div>
-                                    <div class="vehiculo-opciones" id="vehiculoOpciones">
-
-                                        <!--<div class="vehiculo-opcion" data-id="1">
-                                                <img src="../../../recursos/img/autos/car_toyota_corolla.jpg">
-                                                <div class="info">
-                                                    <h3>Toyota Corolla</h3>
-                                                    <p>2024 • SUV • Auto</p>
-                                                    <span>S/ 100 por día</span>
-                                                </div>
-                                        </div>-->
-                                    </div>
+                                    <div class="vehiculo-opciones" id="vehiculoOpciones"></div>
                                 </div>
                                 <input type="hidden" id="vehiculoId">
+                                <input type="hidden" id="autoId">
                             </div>
 
+                            <!-- FECHAS -->
                             <div class="fecha-box">
                                 <h2 class="h2-box">Selecciona las Fechas</h2>
                                 <div class="fechas-reserva">
@@ -174,115 +157,94 @@
                                         <input type="date" id="fechaFin">
                                     </div>
                                 </div>
-                                <small class="hint-fechas">
-                                    Selecciona el rango de días para calcular el costo total.
-                                </small>
                             </div>
 
-                            <div class="precio-box">
+                            <!-- ESTADO -->
+                            <div class="fecha-box">
+                                <h2 class="h2-box">Estado de la Reserva</h2>
+                                <select id="estadoReserva" style="padding: 8px; border-radius: 6px; border: 1px solid #ccc; font-size: 1em;">
+                                    <option value="NUEVA">NUEVA</option>
+                                    <option value="CONFIRMADA">CONFIRMADA</option>
+                                    <option value="REALIZADA">REALIZADA</option>
+                                    <option value="TERMINADA">TERMINADA</option>
+                                </select>
+                            </div>
 
+                            <!-- PRECIO -->
+                            <div class="precio-box">
                                 <div class="precio-calculo">
                                     <span class="detalle" style="display: flex;">
-                                        <p style="margin: 0px 5px;" id="dias-vista">0</p> días x S/   <p style="margin: 0px 5px;" id="precio-vista">0</p>  por día
+                                        <p style="margin: 0px 5px;" id="dias-vista">0</p> días x S/
+                                        <p style="margin: 0px 5px;" id="precio-vista">0</p> por día
                                     </span>
                                     <p class="subtotal" id="subtotal">S/ 0</p>
                                 </div>
-
                                 <div class="precio-total">
                                     <span>Total a pagar</span>
                                     <strong>S/ <span id="precio">0</span></strong>
                                 </div>
-
                             </div>
+
                         </div>
                         <div class="button-box">
-                            <button type="button" id="btnCancelar" class="btn btn-cancelar">
-                                Cancelar
-                            </button>
-
-                            <button type="button" id="btnCrear" class="btn btn-primario">
-                                Crear reserva
-                            </button>
+                            <button type="button" id="btnCancelar" class="btn btn-cancelar">Cancelar</button>
+                            <button type="button" id="btnGuardar" class="btn btn-primario">Guardar cambios</button>
                         </div>
+                    </div>
                 </form>
             </div>
         </section>
     </div>
-    
 
-<script>
-    const selector = document.getElementById("vehiculoSelector");
-    const seleccionado = selector.querySelector(".vehiculo-seleccionado");
-    const opciones = selector.querySelector(".vehiculo-opciones");
-    const hidden = document.getElementById("vehiculoId");
+    <script>
+        // ── SELECTOR DE VEHICULO (mismo lógica que crear) ─────────────
+        const selector    = document.getElementById("vehiculoSelector");
+        const seleccionado = selector.querySelector(".vehiculo-seleccionado");
+        const opciones    = selector.querySelector(".vehiculo-opciones");
 
-    seleccionado.addEventListener("click", () => {
-    opciones.style.display =
-        opciones.style.display === "block" ? "none" : "block";
-    });
+        seleccionado.addEventListener("click", () => {
+            opciones.style.display = opciones.style.display === "block" ? "none" : "block";
+        });
 
-    selector.querySelectorAll(".vehiculo-opcion").forEach(op => {
-    op.addEventListener("click", () => {
+        function bindOpciones() {
+            selector.querySelectorAll(".vehiculo-opcion").forEach(op => {
+                op.addEventListener("click", () => {
+                    seleccionado.innerHTML = `<div class="vehiculo-card"><div class="vehiculo_rederizar-img">${op.innerHTML}</div></div>`;
+                    document.getElementById("vehiculoId").value = op.dataset.id;
+                    opciones.style.display = "none";
+                });
+            });
+        }
 
-        seleccionado.innerHTML = `
-        <div class="vehiculo-card">
-            <div class="vehiculo_rederizar-img">
-                ${op.innerHTML}
-            </div>  
-        </div>
-        `;
+        // ── CÁLCULO DE PRECIO ─────────────────────────────────────────
+        const fechaInicio = document.getElementById("fechaInicio");
+        const fechaFin    = document.getElementById("fechaFin");
 
-        hidden.value = op.dataset.id;
-        opciones.style.display = "none";
-    });
-    });
-</script>
-<script>
+        fechaInicio.addEventListener("change", calcular);
+        fechaFin.addEventListener("change", calcular);
 
-const fechaInicio = document.getElementById("fechaInicio");
-const fechaFin = document.getElementById("fechaFin");
-const vistaDias = document.getElementById("dias-vista");
-const vistaTotal = document.getElementById("precio");
-const vistaPrecio = document.getElementById("precio-vista");
+        function calcular() {
+            const inicio = fechaInicio.value;
+            const fin    = fechaFin.value;
+            if (!inicio || !fin) return;
 
-fechaInicio.addEventListener("change", calcular);
-fechaFin.addEventListener("change", calcular);
+            const dias = Math.ceil((new Date(fin) - new Date(inicio)) / 86400000);
+            if (dias < 0) {
+                alert("No se puede poner fechas negativas");
+                fechaFin.value = '';
+                return;
+            }
+            const precioDia = parseFloat(document.getElementById("precio-vista").textContent) || 0;
+            const total = dias * precioDia;
 
-function calcular() {
+            document.getElementById("dias-vista").textContent  = dias;
+            document.getElementById("precio").textContent      = total;
+            document.getElementById("subtotal").textContent    = "S/ " + total;
+        }
+    </script>
 
-    const inicio = fechaInicio.value;
-    const fin = fechaFin.value;
-
-    if (!inicio || !fin) return;
-
-    const fInicio = new Date(inicio);
-    const fFin = new Date(fin);
-
-    const diferenciaMs = fFin - fInicio;
-    const dias = Math.ceil(diferenciaMs / 86400000);
-
-    if(dias < 0){
-        alert("No se puede poner fechas negativas")
-        fechaFin.value = '';
-    }else{
-        
-        const precioDia = parseFloat(vistaPrecio.textContent);
-
-        const total = dias * precioDia;
-
-        vistaDias.textContent = dias;
-        vistaTotal.textContent = total;
-
-        const vistaSubTotal = document.getElementById("subtotal");
-
-        vistaSubTotal.textContent = "S/ " + total;
-
-    }
-}
-
-</script>
     <script src="/Frontend/ts/menu.js"></script>
     <script src="/Frontend/js/extras/cargar_vehiculosDetallados.js"></script>
-    <script src="/Frontend/js/createReservas.js"></script>
+    <script src="/Frontend/js/editReservas.js"></script>
 </body>
 </html>

@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.rentify.ProjectRentify.dto.ReservaCreateDTO;
+import com.rentify.ProjectRentify.dto.ReservaDTO;
 import com.rentify.ProjectRentify.entity.Auto;
 import com.rentify.ProjectRentify.entity.Pago;
 import com.rentify.ProjectRentify.entity.Reserva;
@@ -46,7 +47,7 @@ public class ReservaImpl implements ReservaService{
     	
         Auto auto = autoRepo.findById(dto.getIdAuto())
                 .orElseThrow(() -> new RuntimeException("Auto no encontrado"));
-     // Validar que el auto esté disponible
+
         if (!"DISPONIBLE".equals(auto.getEstado())) {
             throw new RuntimeException("El auto no está disponible para reservar");
         }
@@ -77,7 +78,7 @@ public class ReservaImpl implements ReservaService{
         reserva.setEstado("NUEVA");
         
         auto.setEstado("OCUPADO");
-        autoRepo.save(auto); // <-- esta línea faltaba
+        autoRepo.save(auto);
 
         Reserva reservaGuardada = reservaRepo.save(reserva);
         
@@ -114,16 +115,32 @@ public class ReservaImpl implements ReservaService{
         
     }
     
-    
+    @Override
+    @Transactional
+    public Reserva actualizar(Long id, ReservaDTO dto) {
+        Reserva reserva = buscarPorId(id);
 
+        reserva.setUsuario(obtenerUsuario(dto.getIdUsuario()));
+        reserva.setVehiculo(obtenerVehiculo(dto.getIdVehiculo()));
+        reserva.setAuto(obtenerAuto(dto.getIdAuto()));
+        reserva.setFecha_inicio(dto.getFecha_inicio());
+        reserva.setFecha_fin(dto.getFecha_fin());
+        reserva.setPrecio_total(dto.getPrecio_total());
+        reserva.setEstado(dto.getEstado());
+
+        return reservaRepo.save(reserva);
+    }
+
+    
+    
     private Usuario obtenerUsuario(Long id) {
         return usuarioRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
     }
     
     private BigDecimal obtenerPrecioVehiculo(Long idVehiculo) {
-        Vehiculo vehiculo = obtenerVehiculo(idVehiculo); // reutilizamos la función anterior
-        return vehiculo.getPrecio(); // suponiendo que tu entidad Vehiculo tiene getPrecio()
+        Vehiculo vehiculo = obtenerVehiculo(idVehiculo);
+        return vehiculo.getPrecio();
     }
     
     @Override
@@ -132,15 +149,15 @@ public class ReservaImpl implements ReservaService{
         Reserva reserva = reservaRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Reserva no encontrada"));
 
-        // Primero eliminar el pago asociado
+
         pagoRepo.deleteByReservaId(id);
 
-        // Liberar el auto
+
         Auto auto = reserva.getAuto();
         auto.setEstado("DISPONIBLE");
         autoRepo.save(auto);
 
-        // Eliminar la reserva
+
         reservaRepo.deleteById(id);
     }
     

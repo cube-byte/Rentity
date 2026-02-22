@@ -33,6 +33,7 @@ function crearAuto() {
   })
   .then(() => {
     alert("Auto creado correctamente");
+    window.location.href = "/Frontend/html/admin/Autos.html";
   })
   .catch(err => {
     console.error(err);
@@ -44,7 +45,7 @@ function crearAuto() {
 document.getElementById('btn-cerrar-sesion').addEventListener('click', (e) => {
     e.preventDefault();
     localStorage.removeItem('rentify_usuario');
-    window.location.href = '../../html/login.html';
+    window.location.href = '/Frontend/html/login.html';
 });
 
 // ── PERFIL ────────────────────────────────────

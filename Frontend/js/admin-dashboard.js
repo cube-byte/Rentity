@@ -46,40 +46,20 @@ async function cargarEstadisticasAdmin() {
 // ── CONTADORES RESERVAS ───────────────────────────────────
 async function cargarContadoresReservas() {
     try {
-        // Pedimos todas las reservas (sin paginación o página grande)
-        // para contar estados en el frontend mientras no haya endpoint específico
-        const res = await fetch(`${API_RESERVAS}?page=0&size=1000`);
+        const res = await fetch('http://localhost:9090/api/v12/reservas');
+        if (!res.ok) throw new Error('Error');
 
-        if (!res.ok) {
-            // Si el backend aún no está listo, usamos el campo del dashboard
-            const resDash = await fetch(`${API_URL}/dashboard`);
-            if (resDash.ok) {
-                const data = await resDash.json();
-                setText('totalReservas', data.reservasActivas ?? 0);
-            }
-            return;
-        }
+        const reservas = await res.json();
 
-        const data     = await res.json();
-        const reservas = data.content ?? [];
-
-        // Contamos reservas "activas": PENDIENTE, APROBADA o EN_CURSO
         const activas = reservas.filter(r =>
-            ['PENDIENTE', 'APROBADA', 'EN_CURSO', 'NUEVA', 'CONFIRMADA'].includes(r.estado)
+            ['NUEVA', 'CONFIRMADA', 'REALIZADA'].includes(r.estado)
         ).length;
 
         setText('totalReservas', activas);
 
     } catch (err) {
         console.error('Error reservas:', err);
-        // Fallback: intentar con el endpoint del dashboard
-        try {
-            const resDash = await fetch(`${API_URL}/dashboard`);
-            if (resDash.ok) {
-                const data = await resDash.json();
-                setText('totalReservas', data.reservasActivas ?? 0);
-            }
-        } catch (_) { /* silencioso */ }
+        setText('totalReservas', 0);
     }
 }
 

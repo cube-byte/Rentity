@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121212">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="32dp">
+
+
+        <LinearLayout
+            android:id="@+id/headerExito"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="#1C1C1C"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingTop="60dp"
+            android:paddingBottom="32dp"
+            android:paddingHorizontal="24dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="¡Pago Exitoso!"
+                android:textColor="#FFFFFF"
+                android:textSize="26sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Tu reserva ha sido confirmada"
+                android:textColor="#888888"
+                android:textSize="14sp"/>
+
+            <View
+                android:layout_width="40dp"
+                android:layout_height="3dp"
+                android:layout_marginTop="16dp"
+                android:background="#F5A623"/>
+
+        </LinearLayout>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardResumenExito"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="24dp"
+            app:cardBackgroundColor="#1C1C1C"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp"
+            app:layout_constraintTop_toBottomOf="@id/headerExito"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Resumen de la reserva"
+                    android:textColor="#F5A623"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="16dp"/>
+
+                <!-- Auto -->
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Vehículo" android:textColor="#888888" android:textSize="11sp"/>
+                <TextView android:id="@+id/tvExitoAuto" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:text="—"
+                    android:textColor="#FFFFFF" android:textSize="16sp" android:textStyle="bold"
+                    android:layout_marginBottom="14dp"/>
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="N° de Reserva" android:textColor="#888888" android:textSize="11sp"/>
+                <TextView android:id="@+id/tvExitoReservaId" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:text="—"
+                    android:textColor="#FFFFFF" android:textSize="16sp" android:textStyle="bold"
+                    android:layout_marginBottom="14dp"/>
+
+                <View android:layout_width="match_parent" android:layout_height="1dp"
+                    android:background="#2C2C2C" android:layout_marginBottom="14dp"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="14dp">
+
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="📅 Inicio" android:textColor="#888888" android:textSize="11sp"/>
+                        <TextView android:id="@+id/tvExitoFechaInicio" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:text="—"
+                            android:textColor="#FFFFFF" android:textSize="14sp" android:textStyle="bold"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="📅 Fin" android:textColor="#888888" android:textSize="11sp"/>
+                        <TextView android:id="@+id/tvExitoFechaFin" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:text="—"
+                            android:textColor="#FFFFFF" android:textSize="14sp" android:textStyle="bold"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View android:layout_width="match_parent" android:layout_height="1dp"
+                    android:background="#2C2C2C" android:layout_marginBottom="14dp"/>
+
+                <!-- Total -->
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="💰 Total pagado" android:textColor="#888888" android:textSize="11sp"/>
+                <TextView android:id="@+id/tvExitoMonto" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:text="—"
+                    android:textColor="#F5A623" android:textSize="26sp" android:textStyle="bold"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/btnIrInicio"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="24dp"
+            android:text="Ir al inicio"
+            android:textColor="#121212"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:backgroundTint="#F5A623"
+            android:paddingVertical="14dp"
+            app:layout_constraintTop_toBottomOf="@id/cardResumenExito"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

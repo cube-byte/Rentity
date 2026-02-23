@@ -24,4 +24,3 @@ Sistema web para gestión de alquiler de vehículos desarrollado con JavaScript 
 ![HTML](https://img.shields.io/badge/HTML-Frontend-red?logo=html5)
 ![CSS](https://img.shields.io/badge/CSS-Styles-blue?logo=css3)
 ![JavaScript](https://img.shields.io/badge/JavaScript-Frontend-yellow?logo=javascript)
-![TypeScript](https://img.shields.io/badge/TypeScript-Frontend-blue?logo=typescript)
